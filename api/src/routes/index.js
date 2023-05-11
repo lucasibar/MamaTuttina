@@ -7,9 +7,8 @@ const router = Router();
 
 router.use(morgan('tiny'))
 
-router.use('/dogs', razaRoutes)
-router.use('/temperaments', temperamentoRoutes)
-router.use('/search', searchRoutes)
+router.use('/dias', diasRoutes)
+
 
 
 module.exports = router;

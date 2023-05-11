@@ -2,18 +2,16 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-
-  sequelize.define('Temperamento', {
-    id: {
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false
-    },
-    name: {
+  sequelize.define('Recetas', {
+    nombre: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+      unique: true,
+    },
+    descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
@@ -21,3 +19,4 @@ module.exports = (sequelize) => {
     updatedAt: false
   });
 };
+
