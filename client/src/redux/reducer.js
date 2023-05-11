@@ -1,53 +1,17 @@
 import { 
-    CREAR_PRODUCTO,
-    PRODUCTOS,
-    AUMENTAR,
-    RESTAR
+  GET_DAYS
   } from './actions'
   const initialState = {
-    productos: [],
+    dias: ['Lunes', 'Martes', "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" ],
   };
   
   const rootReducer = (state = initialState, action) => {
   switch(action.type) {
-      case CREAR_PRODUCTO:
-        let productosRespuest= [...state.productos, action.payload]
+      case GET_DAYS:
         return {
           ...state,
-          productos: productosRespuest       
+          dias: action.payload       
       }
-      case PRODUCTOS:
-        if(action.payload.length===0) break
-        return {
-          ...state,
-          productos: [...action.payload],
-          
-      }
-      case AUMENTAR:
-        return {
-            ...state,
-            productos: state.productos.map(p=> {
-                if(p.texto===action.payload){
-                    p.cantidad++
-                    return p
-                }
-                return p
-            })
-          
-      }
-      case RESTAR:
-        return {
-            ...state,
-            productos: state.productos.map(p=> {
-                if(p.texto===action.payload && p.cantidad>0){
-                    p.cantidad--
-                    return p
-                }
-                return p
-            })
-          
-      }
-
   default: return state
   };
   };

@@ -1,13 +1,12 @@
 const { Router } = require('express');
-const razaRoutes = require ('./razaRoutes')
-const temperamentoRoutes = require ('./temperamentoRoutes')
-const searchRoutes = require ('./searchRoutes')
+const daysRoutes = require ('./daysRoutes')
 var morgan = require('morgan')
+
 const router = Router();
 
 router.use(morgan('tiny'))
 
-router.use('/dias', diasRoutes)
+router.use('/days', daysRoutes)
 
 
 

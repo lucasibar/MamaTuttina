@@ -2,23 +2,20 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-  sequelize.define('Dias', {
-    diaSemana: {
+  sequelize.define('Days', {
+    day: {
       type: DataTypes.ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'),
       allowNull: false,
       unique: true,
     },
-    almuerzoId: {
+    lunchId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
-    cenaId: {
+    dinnerId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     extraId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     }
   },
   {
