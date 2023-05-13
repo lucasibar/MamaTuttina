@@ -3,10 +3,15 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Days', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     day: {
-      type: DataTypes.ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'),
+      type:DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      // unique: true,
     },
     lunchId: {
       type: DataTypes.INTEGER,
@@ -15,6 +20,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     extraId: {
+      type: DataTypes.INTEGER,
+    },
+    totalKcal: {
       type: DataTypes.INTEGER,
     }
   },

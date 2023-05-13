@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'react-router-dom'
 import {getDays} from '../redux/actions'
 
@@ -9,15 +9,22 @@ function Home() {
   useEffect(()=>{
     dispatch(getDays())
   },[dispatch])
+  const allDays = useSelector(state=> state.days)
+  
+  const clickOnDay= (id)=>{
+
+  }
+  
   return (
     <>
     <h1>que onda way</h1>
-    {/* {semana.map(dia=>)}
-      <button>{data.dia}</button>
-      <Link>{data.almuerzo}</Link>
-      <Link>{data.cena}</Link>
-      <Link>{data.extra}</Link> */}
-      
+   {allDays?.map(d=>(
+    <div>
+      <button onClick={clickOnDay(d.id)}>{d.day}</button>
+      {/* <div id={d.id} style={{display: }}>
+      </div> */}
+    </div>
+   ))}
     </>
   )
 }

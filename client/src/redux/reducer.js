@@ -2,7 +2,7 @@ import {
   GET_DAYS
   } from './actions'
   const initialState = {
-    dias: ['Lunes', 'Martes', "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" ],
+    days: [],
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ import {
       case GET_DAYS:
         return {
           ...state,
-          dias: action.payload       
+          days: action.payload       
       }
   default: return state
   };

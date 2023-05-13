@@ -3,15 +3,19 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Recipes', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    category:  {
+      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos')
+    }
   },
   {
     timestamps: false,
