@@ -36,14 +36,14 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Days , Recipes, Ingredients, RecipesIngredients } = sequelize.models;
 
-Days.belongsTo(Recipes, { as: 'lunch  ', foreignKey: 'lunchId' });
+Days.belongsTo(Recipes, { as: 'lunch', foreignKey: 'lunchId' });
 Days.belongsTo(Recipes, { as: 'dinner', foreignKey: 'dinnerId' });
 Days.belongsTo(Recipes, { as: 'extra', foreignKey: 'extraId' });
 Recipes.hasMany(Days, { foreignKey: 'lunchId' });
 Recipes.hasMany(Days, { foreignKey: 'dinnerId' });
 Recipes.hasMany(Days, { foreignKey: 'extraId' });
 
-Ingredients.belongsToMany(Recipes, { through: RecipesIngredients });
+Ingredients.belongsToMany(Recipes, { through: RecipesIngredients, foreignKey: 'ingredient_name'  });
 Recipes.belongsToMany(Ingredients, { through: RecipesIngredients });
 
 module.exports = {

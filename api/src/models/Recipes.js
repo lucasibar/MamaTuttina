@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+// const {Days, Recipes, Ingredients } = require("../db");
 
 
 module.exports = (sequelize) => {

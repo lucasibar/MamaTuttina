@@ -13,15 +13,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       // unique: true,
     },
-    lunchId: {
-      type: DataTypes.INTEGER,
-    },
-    dinnerId: {
-      type: DataTypes.INTEGER,
-    },
-    extraId: {
-      type: DataTypes.INTEGER,
-    },
     totalKcal: {
       type: DataTypes.INTEGER,
     }
