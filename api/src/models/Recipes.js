@@ -16,7 +16,23 @@ module.exports = (sequelize) => {
     },
     category:  {
       type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos')
-    }
+    // },
+    // kcal_totales: {
+    //   type: DataTypes.VIRTUAL,
+    //   get: async function() {
+    //     const ingredients = await this.getIngredients();
+    //     // const totalCalories = ingredients.reduce((sum, ingredient) => {
+    //     //   const caloriesPer100g = ingredient.kcla100gr; 
+    //     //   const amount = ingredient.RecetaIngrediente.amount;
+    //     //   const calories = caloriesPer100g * amount / 100;
+    //     //   return sum + calories;
+    //     // }, 0);
+    //     // return totalCalories;
+        
+    //     return ingredients;
+    //   }
+     }
+  
   },
   {
     timestamps: false,

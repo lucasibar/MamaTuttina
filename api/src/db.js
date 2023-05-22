@@ -34,7 +34,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Days , Recipes, Ingredients, RecipesIngredients } = sequelize.models;
+const { Days , Recipes, Ingredients, RecipesIngredients} = sequelize.models;
 
 Days.belongsTo(Recipes, { as: 'lunch', foreignKey: 'lunchId' });
 Days.belongsTo(Recipes, { as: 'dinner', foreignKey: 'dinnerId' });
@@ -43,7 +43,8 @@ Recipes.hasMany(Days, { foreignKey: 'lunchId' });
 Recipes.hasMany(Days, { foreignKey: 'dinnerId' });
 Recipes.hasMany(Days, { foreignKey: 'extraId' });
 
-Ingredients.belongsToMany(Recipes, { through: RecipesIngredients, foreignKey: 'ingredient_name'  });
+
+Ingredients.belongsToMany(Recipes, { through: RecipesIngredients });
 Recipes.belongsToMany(Ingredients, { through: RecipesIngredients });
 
 module.exports = {

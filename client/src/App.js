@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route , Switch} from "react-router-dom";
-import Encuesta from './componentes/Encuesta';
+// import Encuesta from './componentes/Encuesta';
 import Home from './componentes/Home';
 
 function App() {

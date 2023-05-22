@@ -1,10 +1,54 @@
-// const { Days} = require("../../db");
+const {Days, Recipes, Ingredients, RecipesIngredients } = require("../../../db");
 
-// const getDays = async function (id) {   
-//   const daysBDD = await Days.findAll()
-//   const days = daysBDD.map(d=> d.toJSON())
-//   return days
-// }
+const getDays = async function () {   
+    const semana = await Days.findAll({
+      include: [
+        { model: Recipes, 
+          as: 'lunch',
+          include: [
+            { 
+              model: Ingredients,
+                        attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
 
-// module.exports = { getDays };
+              through: { 
+                model: RecipesIngredients,
+                attributes: ['amount']
+              }
+            }
+          ] 
+        },
+        { model: Recipes, 
+          as: 'dinner',
+          include: [
+            { 
+              model: Ingredients,
+                        attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
+
+              through: { 
+                model: RecipesIngredients,
+                attributes: ['amount']
+              }
+            }
+          ] 
+        },
+        { model: Recipes, 
+          as: 'extra',
+          include: [
+            { 
+              model: Ingredients,
+              attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
+              through: { 
+                model: RecipesIngredients,
+                attributes: ['amount']
+              }
+            }
+          ] 
+        }
+      ]
+    })
+
+  return semana
+}
+
+module.exports = { getDays };
   

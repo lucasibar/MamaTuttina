@@ -29,7 +29,7 @@ dataloadRoutes.get("/", async (req, res) => {
       where:{name: "Pollo con pure"},
       include: {
         model: Ingredients,
-        through: {attributes: ['amount','ingredient_name']}
+        through: {attributes: ['amount']}
       }
     })
 
@@ -43,7 +43,7 @@ dataloadRoutes.get("/", async (req, res) => {
       where:{name: "Ensalada Cesar"},
       include: {
         model: Ingredients,
-        through: {attributes: ['amount','ingredient_name']}
+        through: {attributes: ['amount']}
       }
     })
 
@@ -55,7 +55,7 @@ dataloadRoutes.get("/", async (req, res) => {
       where:{name: "Leche galletitas"},
       include: {
         model: Ingredients,
-        through: {attributes: ['amount','ingredient_name']}
+        through: {attributes: ['amount']}
       }
     })
 
@@ -77,7 +77,7 @@ console.log(PolloConPureFinal, Lunes)
       ]
     })
 
-    res.status(200).json('Se cargaron todos los datos como para empezar el front');
+    res.status(200).json(LunesFinal);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
