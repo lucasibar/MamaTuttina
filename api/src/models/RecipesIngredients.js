@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     amount: {
-      type:DataTypes.STRING,
+      type:DataTypes.INTEGER,
     }
   },
   {

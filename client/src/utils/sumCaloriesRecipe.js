@@ -6,9 +6,7 @@ export default function sumCaloriesRecipe(recipe){
             const gramsIngredient = ingredient.RecipesIngredients.amount || 0
             return caloriesPerGramIngrerdient * gramsIngredient
         }).reduce((acc, cal)=> acc+cal , 0)
-    }else totalKcal = 0
-    
-    console.log(totalKcal, 'UTILS VIENDO COMO ES LA CUENTA DE CADA RECETA')      
+    }else totalKcal = 0  
     
     return totalKcal
 } 

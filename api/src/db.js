@@ -34,7 +34,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Days , Recipes, Ingredients, RecipesIngredients} = sequelize.models;
+const { Days , Recipes, Ingredients, RecipesIngredients, DaysIngredients} = sequelize.models;
 
 Days.belongsTo(Recipes, { as: 'lunch', foreignKey: 'lunchId' });
 Days.belongsTo(Recipes, { as: 'dinner', foreignKey: 'dinnerId' });
@@ -42,6 +42,14 @@ Days.belongsTo(Recipes, { as: 'extra', foreignKey: 'extraId' });
 Recipes.hasMany(Days, { foreignKey: 'lunchId' });
 Recipes.hasMany(Days, { foreignKey: 'dinnerId' });
 Recipes.hasMany(Days, { foreignKey: 'extraId' });
+
+Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'lunchIngredients', foreignKey: 'lunchDayId' });
+Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'dinnerIngredients', foreignKey: 'dinnerDayId' });
+Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'extraIngredients', foreignKey: 'extraDayId' });
+
+Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'lunchDays', foreignKey: 'lunchIngredientId' });
+Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'dinnerDays', foreignKey: 'dinnerIngredientId' });
+Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'extraDays', foreignKey: 'extraIngredientId' });
 
 
 Ingredients.belongsToMany(Recipes, { through: RecipesIngredients });

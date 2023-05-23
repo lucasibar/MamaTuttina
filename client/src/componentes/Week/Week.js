@@ -15,7 +15,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 
-export default function Day({day}) {
+export default function Week({day}) {
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);

@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {getDays} from '../redux/actions'
-import Day from './Week/Day';
-// import NavBar from './NavBar';
+import Week from './Week/Week';
+
 
 function Home() {
  
@@ -14,9 +14,9 @@ function Home() {
   
   return (
     <>
-    {/* <NavBar/> */}
+
    {fullWeek?.map(d=>(
-    <Day day={d} key={d.day}/>
+    <Week day={d} key={d.day}/>
    ))}
     </>
   )

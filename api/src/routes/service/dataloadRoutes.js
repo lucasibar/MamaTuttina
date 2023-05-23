@@ -3,7 +3,7 @@ const {Days, Recipes, Ingredients } = require("../../db");
 
 const dataloadRoutes = Router();
 
-const dias = [ {day: "Lunes"}, {day: "Martes"}, {day: "Miercoles"}, {day: "Jueves"}, {day: "Viernes"}, {day: "Sabado"}, {day: "Domingo"}] 
+const dias = [ {day: 'Monday'}, {day: 'Tuesday'}, {day: 'Wednesday'}, {day: 'Thursday'}, {day: 'Friday'}, {day: 'Saturday'}, {day: 'Sunday'}] 
 const recetas = [ {name: "Pollo con pure", category: "Carne"},{name: "Ensalada Cesar", category: "Carne"},{name: "Leche galletitas", category: "Lacteo"}]
 const ingredientes = [{name: 'pollo', kcla100gr: 80}, {name: 'pure', kcla100gr: 50}, {name: 'lechuga', kcla100gr: 30}, {name: 'salsa cesar', kcla100gr: 120}, {name: 'leche', kcla100gr: 95}, {name: 'galletitas', kcla100gr: 1200}]
 
@@ -13,7 +13,7 @@ dataloadRoutes.get("/", async (req, res) => {
     await Ingredients.bulkCreate(ingredientes)
     await Recipes.bulkCreate(recetas)
 
-    const Lunes = await Days.findOne({where:{day: "Lunes"}})
+    const Lunes = await Days.findOne({where:{day: 'Monday'}})
     const PolloConPure = await Recipes.findOne({where:{name: "Pollo con pure"}})
     const EnsaladaCesar = await Recipes.findOne({where:{name: "Ensalada Cesar"}})
     const LecheGalletitas = await Recipes.findOne({where:{name: "Leche galletitas"}})
@@ -64,12 +64,13 @@ console.log(PolloConPureFinal, Lunes)
     await Lunes.setLunch(PolloConPureFinal);
     await Lunes.setDinner(EnsaladaCesarFinal);
     await Lunes.setExtra(LecheGalletitasFinal);
-
+    await Lunes.addLunchIngredients(pollo);
+    await Lunes.addLunchIngredients(pure);
 
 
 
     const LunesFinal = await Days.findOne({
-      where: { day: "Lunes" },
+      where: { day: 'Monday' },
       include: [
         { model: Recipes, as: 'lunch'},
         { model: Recipes, as: 'dinner'},

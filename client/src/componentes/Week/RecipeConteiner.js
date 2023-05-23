@@ -5,10 +5,10 @@ import sumCaloriesRecipe from '../../utils/sumCaloriesRecipe'
 
 
 export default function RecipeConteiner({lunch, dinner, extra, sumCalories}) {
-  const caloriesLunch = sumCaloriesRecipe(lunch)
-  const caloriesDinner = sumCaloriesRecipe(dinner)
-  const caloriesExtra = sumCaloriesRecipe(extra)
   
+  const caloriesLunch = lunch? sumCaloriesRecipe(lunch): 0 
+  const caloriesDinner = dinner? sumCaloriesRecipe(dinner):0
+  const caloriesExtra = extra? sumCaloriesRecipe(extra) : 0
   useEffect(()=>{
     sumCalories('lunch', caloriesLunch)
     sumCalories('dinner', caloriesDinner)
@@ -17,9 +17,9 @@ export default function RecipeConteiner({lunch, dinner, extra, sumCalories}) {
 
   return (
     <>
-      <Recipe recipe={lunch}/>
-      <Recipe recipe={dinner}/>
-      <Recipe recipe={extra}/>
+      {lunch? <Recipe recipe={lunch} kclaRecipe={caloriesLunch}/>: <><h1>agregar almuerzo</h1> <br/></>}
+      {lunch? <Recipe recipe={dinner} kclaRecipe={caloriesDinner}/>: <><h1>agregar almuerzo</h1> <br/></>}
+      {lunch? <Recipe recipe={extra} kclaRecipe={caloriesExtra}/>: <><h1>agregar almuerzo</h1> <br/></>}
     </>
   );
 }

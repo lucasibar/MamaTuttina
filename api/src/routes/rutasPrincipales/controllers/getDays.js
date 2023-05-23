@@ -2,6 +2,7 @@ const {Days, Recipes, Ingredients, RecipesIngredients } = require("../../../db")
 
 const getDays = async function () {   
     const semana = await Days.findAll({
+      order: [['id', 'ASC']],
       include: [
         { model: Recipes, 
           as: 'lunch',
