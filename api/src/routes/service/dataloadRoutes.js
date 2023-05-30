@@ -64,7 +64,7 @@ dataloadRoutes.get("/", async (req, res) => {
     //AGREGO UN LUNCH DINNER Y EXTRA AL LUNES. con recipes e ingredientes
     const almuerzo1 = await Lunches.create()
     await almuerzo1.addRecipes(PolloConPureFinal)
-    await almuerzo1.addIngredients(leche)
+    await almuerzo1.addIngredients([leche, lechuga])
     await almuerzo1.setDay(Lunes);
 
     const cena1= await Dinners.create()

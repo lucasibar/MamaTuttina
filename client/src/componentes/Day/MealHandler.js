@@ -6,13 +6,15 @@ function MealHandler({mealName, meal}) {
   const [recipesMeal, setRecipes]= useState([])
   const [ingredientsMeal, setIngredients]= useState([])
   const [kCalTotal, setKCalTotal] =useState(0)
-console.log("LINEA 9 MEALHANDLER ", recipesMeal,ingredientsMeal )
+  console.log("LINEA 9 MEALHANDLER ", recipesMeal,ingredientsMeal )
+
+
   useEffect(()=>{
     if(meal){
       const recipes = meal.Recipes
       const ingredients = meal.Ingredients
-      setRecipes(...recipes)
-      setIngredients(...ingredients)
+      recipes && setRecipes(...recipes)
+      ingredients?.length>0 && setIngredients(...ingredients)
       
       //calculo todas las calorias que tiene la parte de recetas de esta comida
       const kCalRecipes = recipes?.map((recipe, index)=>{
