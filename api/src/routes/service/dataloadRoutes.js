@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {Days, Recipes, Ingredients } = require("../../db");
+const {Days, Recipes, Ingredients, Lunches, Dinners, Extras } = require("../../db");
 
 const dataloadRoutes = Router();
 
@@ -14,6 +14,7 @@ dataloadRoutes.get("/", async (req, res) => {
     await Recipes.bulkCreate(recetas)
 
     const Lunes = await Days.findOne({where:{day: 'Monday'}})
+    const Martes = await Days.findOne({where:{day: 'Tuesday'}})
     const PolloConPure = await Recipes.findOne({where:{name: "Pollo con pure"}})
     const EnsaladaCesar = await Recipes.findOne({where:{name: "Ensalada Cesar"}})
     const LecheGalletitas = await Recipes.findOne({where:{name: "Leche galletitas"}})
@@ -58,27 +59,72 @@ dataloadRoutes.get("/", async (req, res) => {
         through: {attributes: ['amount']}
       }
     })
+    
 
-console.log(PolloConPureFinal, Lunes)
-    //RELLENAMOS EL PRIMER DIA (LUNES) CON LAS TRES RECETAS CREADAS EN EL PASO ANTERIOR
-    await Lunes.setLunch(PolloConPureFinal);
-    await Lunes.setDinner(EnsaladaCesarFinal);
-    await Lunes.setExtra(LecheGalletitasFinal);
-    await Lunes.addLunchIngredients(pollo);
-    await Lunes.addLunchIngredients(pure);
+    //AGREGO UN LUNCH DINNER Y EXTRA AL LUNES. con recipes e ingredientes
+    const almuerzo1 = await Lunches.create()
+    await almuerzo1.addRecipes(PolloConPureFinal)
+    await almuerzo1.addIngredients(leche)
+    await almuerzo1.setDay(Lunes);
+
+    const cena1= await Dinners.create()
+    await cena1.addRecipes([EnsaladaCesarFinal, PolloConPureFinal])
+    await cena1.setDay(Lunes);
+
+    const extra1= await Extras.create()
+    await extra1.addRecipes(LecheGalletitasFinal)
+    await extra1.setDay(Lunes);
 
 
-
-    const LunesFinal = await Days.findOne({
-      where: { day: 'Monday' },
+const LunesFinal = await Days.findOne({
+  where: { day: 'Monday' },
+  include: [
+    {
+      model: Lunches,
       include: [
-        { model: Recipes, as: 'lunch'},
-        { model: Recipes, as: 'dinner'},
-        { model: Recipes, as: 'extra'},
+        {
+          model: Recipes,
+          include: [
+            { model: Ingredients, through: { attributes: ['amount'] } }
+          ]
+        },
+        {
+          model: Ingredients, through: { attributes: ['amount'] }
+        }
       ]
-    })
+    },
+    {
+      model: Dinners,
+      include: [
+        {
+          model: Recipes,
+          include: [
+            { model: Ingredients, through: { attributes: ['amount'] } }
+          ]
+        },
+        {
+          model: Ingredients, through: { attributes: ['amount'] }
+        }
+      ]
+    },
+    {
+      model: Extras,
+      include: [
+        {
+          model: Recipes,
+          include: [
+            { model: Ingredients, through: { attributes: ['amount'] } }
+          ]
+        },
+        {
+          model: Ingredients, through: { attributes: ['amount'] }
+        }
+      ]
+    }
+  ]
+});
 
-    res.status(200).json(LunesFinal);
+res.status(200).json(LunesFinal);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }

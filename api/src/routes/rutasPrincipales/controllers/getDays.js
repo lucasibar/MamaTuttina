@@ -1,55 +1,55 @@
-const {Days, Recipes, Ingredients, RecipesIngredients } = require("../../../db");
+const {Days, Recipes, Ingredients, Lunches, Dinners, Extras } = require("../../../db");
 
 const getDays = async function () {   
     const semana = await Days.findAll({
       order: [['id', 'ASC']],
       include: [
-        { model: Recipes, 
-          as: 'lunch',
+        {
+          model: Lunches,
           include: [
-            { 
-              model: Ingredients,
-                        attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
-
-              through: { 
-                model: RecipesIngredients,
-                attributes: ['amount']
-              }
+            {
+              model: Recipes,
+              include: [
+                { model: Ingredients, through: { attributes: ['amount'] } }
+              ]
+            },
+            {
+              model: Ingredients, through: { attributes: ['amount'] }
             }
-          ] 
+          ]
         },
-        { model: Recipes, 
-          as: 'dinner',
+        {
+          model: Dinners,
           include: [
-            { 
-              model: Ingredients,
-                        attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
-
-              through: { 
-                model: RecipesIngredients,
-                attributes: ['amount']
-              }
+            {
+              model: Recipes,
+              include: [
+                { model: Ingredients, through: { attributes: ['amount'] } }
+              ]
+            },
+            {
+              model: Ingredients, through: { attributes: ['amount'] }
             }
-          ] 
+          ]
         },
-        { model: Recipes, 
-          as: 'extra',
+        {
+          model: Extras,
           include: [
-            { 
-              model: Ingredients,
-              attributes: { exclude: ['lunchId', 'dinnerId', 'extraId', 'carbs', 'proteins', 'fats'] },
-              through: { 
-                model: RecipesIngredients,
-                attributes: ['amount']
-              }
+            {
+              model: Recipes,
+              include: [
+                { model: Ingredients, through: { attributes: ['amount'] } }
+              ]
+            },
+            {
+              model: Ingredients, through: { attributes: ['amount'] }
             }
-          ] 
+          ]
         }
       ]
-    })
+    });
 
   return semana
 }
 
 module.exports = { getDays };
-  

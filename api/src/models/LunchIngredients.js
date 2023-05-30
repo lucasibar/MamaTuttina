@@ -2,14 +2,17 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-  sequelize.define('DaysIngredients', {
+  sequelize.define('LunchIngredients', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
     amount: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.INTEGER
+    },
+    unit: {
+      type:DataTypes.INTEGER
     }
   },
   {

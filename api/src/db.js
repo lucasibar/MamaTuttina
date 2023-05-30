@@ -34,26 +34,54 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Days , Recipes, Ingredients, RecipesIngredients, DaysIngredients} = sequelize.models;
+const { 
+  Days,
+  Recipes,
+  Ingredients,
+  Lunches,
+  Dinners,
+  LunchRecipes, 
+  DinnerRecipes,  
+  ExtraRecipes, 
+  RecipeIngredients,  
+  LunchIngredients, 
+  DinnerIngredients,  
+  ExtraIngredients, 
+  Extras
+} = sequelize.models;
 
-Days.belongsTo(Recipes, { as: 'lunch', foreignKey: 'lunchId' });
-Days.belongsTo(Recipes, { as: 'dinner', foreignKey: 'dinnerId' });
-Days.belongsTo(Recipes, { as: 'extra', foreignKey: 'extraId' });
-Recipes.hasMany(Days, { foreignKey: 'lunchId' });
-Recipes.hasMany(Days, { foreignKey: 'dinnerId' });
-Recipes.hasMany(Days, { foreignKey: 'extraId' });
-
-Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'lunchIngredients', foreignKey: 'lunchDayId' });
-Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'dinnerIngredients', foreignKey: 'dinnerDayId' });
-Days.belongsToMany(Ingredients, { through: DaysIngredients, as: 'extraIngredients', foreignKey: 'extraDayId' });
-
-Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'lunchDays', foreignKey: 'lunchIngredientId' });
-Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'dinnerDays', foreignKey: 'dinnerIngredientId' });
-Ingredients.belongsToMany(Days, { through: DaysIngredients, as: 'extraDays', foreignKey: 'extraIngredientId' });
+Days.hasOne(Lunches);
+Lunches.belongsTo(Days);
+Days.hasOne(Dinners);
+Dinners.belongsTo(Days);
+Days.hasOne(Extras);
+Extras.belongsTo(Days);
 
 
-Ingredients.belongsToMany(Recipes, { through: RecipesIngredients });
-Recipes.belongsToMany(Ingredients, { through: RecipesIngredients });
+Lunches.belongsToMany(Recipes, {through: 'LunchRecipes' });
+Recipes.belongsToMany(Lunches, {through: 'LunchRecipes' });
+
+Dinners.belongsToMany(Recipes, {through: 'DinnerRecipes' });
+Recipes.belongsToMany(Dinners, {through: 'DinnerRecipes' });
+
+Extras.belongsToMany(Recipes, {through: 'ExtraRecipes' });
+Recipes.belongsToMany(Extras, {through: 'ExtraRecipes' });
+
+
+
+Recipes.belongsToMany(Ingredients, { through: 'RecipeIngredients' });
+Ingredients.belongsToMany(Recipes, { through: 'RecipeIngredients' });
+
+
+
+Lunches.belongsToMany(Ingredients, {through: 'LunchIngredients' });
+Ingredients.belongsToMany(Lunches, {through: 'LunchIngredients' });
+
+Dinners.belongsToMany(Ingredients, {through: 'DinnerIngredients' });
+Ingredients.belongsToMany(Dinners, {through: 'DinnerIngredients' });
+
+Extras.belongsToMany(Ingredients, {through: 'ExtraIngredients' });
+Ingredients.belongsToMany(Extras, {through: 'ExtraIngredients' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
