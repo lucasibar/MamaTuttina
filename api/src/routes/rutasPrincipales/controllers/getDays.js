@@ -4,50 +4,44 @@ const getDays = async function () {
     const semana = await Days.findAll({
       order: [['id', 'ASC']],
       include: [
-        {
-          model: Lunches,
-          include: [
             {
-              model: Recipes,
+              model: Lunches,
               include: [
-                { model: Ingredients, through: { attributes: ['amount'] } }
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
               ]
             },
             {
-              model: Ingredients, through: { attributes: ['amount'] }
-            }
-          ]
-        },
-        {
-          model: Dinners,
-          include: [
-            {
-              model: Recipes,
+              model: Dinners,
               include: [
-                { model: Ingredients, through: { attributes: ['amount'] } }
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
               ]
             },
             {
-              model: Ingredients, through: { attributes: ['amount'] }
-            }
-          ]
-        },
-        {
-          model: Extras,
-          include: [
-            {
-              model: Recipes,
+              model: Extras,
               include: [
-                { model: Ingredients, through: { attributes: ['amount'] } }
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
               ]
-            },
-            {
-              model: Ingredients, through: { attributes: ['amount'] }
             }
           ]
-        }
-      ]
-    });
+        });
 
   return semana
 }

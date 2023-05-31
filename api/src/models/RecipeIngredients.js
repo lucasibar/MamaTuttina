@@ -10,6 +10,9 @@ module.exports = (sequelize) => {
     },
     amount: {
       type:DataTypes.INTEGER
+    },
+    unit: {
+      type:DataTypes.STRING
     }
   },
   {

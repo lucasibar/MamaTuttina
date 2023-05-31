@@ -40,14 +40,10 @@ const {
   Ingredients,
   Lunches,
   Dinners,
-  LunchRecipes, 
-  DinnerRecipes,  
-  ExtraRecipes, 
-  RecipeIngredients,  
-  LunchIngredients, 
-  DinnerIngredients,  
-  ExtraIngredients, 
-  Extras
+  Extras,
+  MealRecipes,
+  MealIngredients,
+  RecipeIngredients
 } = sequelize.models;
 
 Days.hasOne(Lunches);
@@ -58,14 +54,14 @@ Days.hasOne(Extras);
 Extras.belongsTo(Days);
 
 
-Lunches.belongsToMany(Recipes, {through: 'LunchRecipes' });
-Recipes.belongsToMany(Lunches, {through: 'LunchRecipes' });
+Lunches.belongsToMany(Recipes, {through: 'MealRecipes' });
+Recipes.belongsToMany(Lunches, {through: 'MealRecipes' });
 
-Dinners.belongsToMany(Recipes, {through: 'DinnerRecipes' });
-Recipes.belongsToMany(Dinners, {through: 'DinnerRecipes' });
+Dinners.belongsToMany(Recipes, {through: 'MealRecipes' });
+Recipes.belongsToMany(Dinners, {through: 'MealRecipes' });
 
-Extras.belongsToMany(Recipes, {through: 'ExtraRecipes' });
-Recipes.belongsToMany(Extras, {through: 'ExtraRecipes' });
+Extras.belongsToMany(Recipes, {through: 'MealRecipes' });
+Recipes.belongsToMany(Extras, {through: 'MealRecipes' });
 
 
 
@@ -74,14 +70,14 @@ Ingredients.belongsToMany(Recipes, { through: 'RecipeIngredients' });
 
 
 
-Lunches.belongsToMany(Ingredients, {through: 'LunchIngredients' });
-Ingredients.belongsToMany(Lunches, {through: 'LunchIngredients' });
+Lunches.belongsToMany(Ingredients, {through: 'MealIngredients' });
+Ingredients.belongsToMany(Lunches, {through: 'MealIngredients' });
 
-Dinners.belongsToMany(Ingredients, {through: 'DinnerIngredients' });
-Ingredients.belongsToMany(Dinners, {through: 'DinnerIngredients' });
+Dinners.belongsToMany(Ingredients, {through: 'MealIngredients' });
+Ingredients.belongsToMany(Dinners, {through: 'MealIngredients' });
 
-Extras.belongsToMany(Ingredients, {through: 'ExtraIngredients' });
-Ingredients.belongsToMany(Extras, {through: 'ExtraIngredients' });
+Extras.belongsToMany(Ingredients, {through: 'MealIngredients' });
+Ingredients.belongsToMany(Extras, {through: 'MealIngredients' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

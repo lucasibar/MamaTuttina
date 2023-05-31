@@ -22,7 +22,7 @@ function App() {
       <Home />
     </Route>
     <Route 
-    exact path="/day/:id"
+    exact path="/day/:id?"
       component ={Day}
     />
 

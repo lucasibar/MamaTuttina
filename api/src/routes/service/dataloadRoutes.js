@@ -22,107 +22,110 @@ dataloadRoutes.get("/", async (req, res) => {
 
 
     //CREACION DE TRES RECETAS CON SUS RESPECTIVOS INGREDIENTE Y CANTIDADES SEGUN RECETA
-    await PolloConPure.addIngredient(pollo, {
-      through: {amount: 200}})
-    await PolloConPure.addIngredient(pure, {
-      through: {amount: 300}})
+    await PolloConPure.addIngredient(pollo, { through: { amount: 200, unit: 'grs' } })
+    await PolloConPure.addIngredient(pure, { through: { amount: 150, unit: 'grs' } })
     const PolloConPureFinal = await Recipes.findOne({
       where:{name: "Pollo con pure"},
       include: {
-        model: Ingredients,
-        through: {attributes: ['amount']}
+        model: Ingredients,    
+        through: { attributes: ['amount', 'unit'] }
       }
     })
 
-    await EnsaladaCesar.addIngredient(lechuga, {
-      through: {amount: 500}})
-    await EnsaladaCesar.addIngredient(salsaCesar, {
-      through: {amount: 150}})
-    await EnsaladaCesar.addIngredient(pollo, {
-      through: {amount: 150}})
+    await EnsaladaCesar.addIngredient(lechuga, { through: { amount: 200, unit: 'grs' } })
+    await EnsaladaCesar.addIngredient(salsaCesar, { through: { amount: 2, unit: 'cucharadas' } })
+    await EnsaladaCesar.addIngredient(pollo, { through: { amount: 200, unit: 'grs' } })
     const EnsaladaCesarFinal = await Recipes.findOne({
       where:{name: "Ensalada Cesar"},
       include: {
-        model: Ingredients,
-        through: {attributes: ['amount']}
+        model: Ingredients,    
+        through: { attributes: ['amount', 'unit'] }
       }
     })
 
-    await LecheGalletitas.addIngredient(leche, {
-      through: {amount: 300}})
-    await LecheGalletitas.addIngredient(galletitas, {
-      through: {amount: 186}})
+    await LecheGalletitas.addIngredient(leche, { through: { amount: 200, unit: 'grs' } })
+    await LecheGalletitas.addIngredient(galletitas, { through: { amount: 200, unit: 'grs' } })
     const LecheGalletitasFinal = await Recipes.findOne({
       where:{name: "Leche galletitas"},
       include: {
         model: Ingredients,
-        through: {attributes: ['amount']}
+        through: { attributes: ['amount', 'unit'] }
       }
     })
     
 
     //AGREGO UN LUNCH DINNER Y EXTRA AL LUNES. con recipes e ingredientes
     const almuerzo1 = await Lunches.create()
-    await almuerzo1.addRecipes(PolloConPureFinal)
-    await almuerzo1.addIngredients([leche, lechuga])
-    await almuerzo1.setDay(Lunes);
+    await almuerzo1.addRecipe(PolloConPureFinal)
+    await almuerzo1.addIngredients(lechuga)
 
+    const verBDD = await Lunches.findAll({
+      include: [
+        {
+          model: Ingredients,
+          through: { attributes: ['amount', 'unit'] }
+        },
+        {
+          model: Recipes,
+          include: {
+            model: Ingredients,
+            through: { attributes: ['amount', 'unit'] }
+          }
+        }
+      ]
+    });
     const cena1= await Dinners.create()
-    await cena1.addRecipes([EnsaladaCesarFinal, PolloConPureFinal])
-    await cena1.setDay(Lunes);
+    await cena1.addRecipes(EnsaladaCesarFinal, PolloConPureFinal)
 
     const extra1= await Extras.create()
     await extra1.addRecipes(LecheGalletitasFinal)
-    await extra1.setDay(Lunes);
+
+    await Lunes.setLunch(almuerzo1);
+    await Lunes.setDinner(cena1);
+    await Lunes.setExtra(extra1);
 
 
-const LunesFinal = await Days.findOne({
-  where: { day: 'Monday' },
-  include: [
-    {
-      model: Lunches,
+    const LunesFinal = await Days.findOne({
+      where: { day: 'Monday' },
       include: [
-        {
-          model: Recipes,
-          include: [
-            { model: Ingredients, through: { attributes: ['amount'] } }
+            {
+              model: Lunches,
+              include: [
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
+              ]
+            },
+            {
+              model: Dinners,
+              include: [
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
+              ]
+            },
+            {
+              model: Extras,
+              include: [
+                {
+                  model: Recipes,
+                  include: [
+                    { model: Ingredients }
+                  ]
+                },
+                { model: Ingredients }
+              ]
+            }
           ]
-        },
-        {
-          model: Ingredients, through: { attributes: ['amount'] }
-        }
-      ]
-    },
-    {
-      model: Dinners,
-      include: [
-        {
-          model: Recipes,
-          include: [
-            { model: Ingredients, through: { attributes: ['amount'] } }
-          ]
-        },
-        {
-          model: Ingredients, through: { attributes: ['amount'] }
-        }
-      ]
-    },
-    {
-      model: Extras,
-      include: [
-        {
-          model: Recipes,
-          include: [
-            { model: Ingredients, through: { attributes: ['amount'] } }
-          ]
-        },
-        {
-          model: Ingredients, through: { attributes: ['amount'] }
-        }
-      ]
-    }
-  ]
-});
+        });
 
 res.status(200).json(LunesFinal);
   } catch (error) {
