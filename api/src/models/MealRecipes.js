@@ -4,9 +4,9 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   sequelize.define('MealRecipes', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
     amount: {
       type:DataTypes.INTEGER

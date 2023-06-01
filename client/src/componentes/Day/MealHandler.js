@@ -1,77 +1,78 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import './MealHandler.css'
 
 
 function MealHandler({mealName, meal}) {
-  const [recipesMeal, setRecipes]= useState([])
-  const [ingredientsMeal, setIngredients]= useState([])
-  const [kCalTotal, setKCalTotal] =useState(0)
-  console.log("LINEA 9 MEALHANDLER ", recipesMeal,ingredientsMeal )
+const [activeAdd, setActiveAdd]= useState(false)
+const [food, setFood]= useState({
+  ingredient:'',
+  amount: 0,
+  unit: 'grs'
+})
 
+const inputController = ()=> setActiveAdd(!activeAdd)
+const handlefood =(e)=>{
+  setFood(state=>({
+      ...state,
+      [e.target.name]: e.target.value
+  }))
+}
 
-  useEffect(()=>{
-    if(meal){
-      const recipes = meal.Recipes
-      const ingredients = meal.Ingredients
-      recipes && setRecipes(...recipes)
-      ingredients?.length>0 && setIngredients(...ingredients)
-      
-      //calculo todas las calorias que tiene la parte de recetas de esta comida
-      const kCalRecipes = recipes?.map((recipe, index)=>{
-        const kCalRecipe = recipe.Ingredients.reduce((acc, ingredient)=> {
-          let kcalGramIngredient = ingredient.kcla100gr / 100 
-          let gramsIngredient = ingredient.RecipeIngredients.amount
-          let kcalIngredientPerRecipe = kcalGramIngredient * gramsIngredient
-          return acc+kcalIngredientPerRecipe
-        },0)
-        return kCalRecipe
-      }).reduce((acc, kCalRecipe)=>acc+kCalRecipe,0)
-    
-      //calculo todas las calorias que tiene la parte de ingredientes relacionados directamente con esta comida
-      const kCalIngredients = ingredients?.reduce((acc, ingredient)=> {
-        let kcalGramIngredient = ingredient.kcla100gr / 100 
-        let gramsIngredient = 0
-        if(mealName==='Almuerzo') gramsIngredient = ingredient.RecipeIngredients?.amount
-        if(mealName==='Cena') gramsIngredient = ingredient.DinnerIngredients?.amount
-        if(mealName==='Extra') gramsIngredient = ingredient.ExtraIngredients?.amount
-        let kcalIngredientPerRecipe = kcalGramIngredient * gramsIngredient ||0
-        return acc+kcalIngredientPerRecipe
-      },0)
-      setKCalTotal(kCalRecipes + kCalIngredients)
-    }else{
-      setKCalTotal(0)
-    }
+const handleAddFood = async (e)=>{
+  e.preventDefault() 
+  const body={
+    ingredient: food.ingredient,
+    amount:food.amount,
+    unit:food.unit
+  }
+  body.idMeal = meal.id
+  await axios.post(`http://localhost:3001/meal/addingredient`, body)
 
-  },[meal, mealName, recipesMeal, ingredientsMeal])
-
+  setActiveAdd(false)
+}
   return (
     <>
       <div className='meal'>
         <p >{mealName}</p>
-        <p >{kCalTotal}</p>
+        <p >800</p>
       </div>
       
-      <div>
-      {/* {recipesMeal?.map((recipe, index)=>(
-        <div className='meal' key={index}>
-          <p>{recipe.name}</p>
-          <p>{recipe.name}</p>
-        </div>
-        
-      ))} */}
-      {/* {ingredientsMeal?.map((ingredient, index) => (
-        <div className='meal' key={index}>
-          <h1>{ingredient.name}</h1>
-          <p>{ingredient.name}</p>
-        </div>
-      ))}  */}
-
+      <div >
+      {meal? meal.Recipes?.map((recipe, i)=>(<p key={i}>{recipe.name}</p>)): null}
+      {meal? meal.Ingredients?.map((ingredient, i)=>(<p key={i}>{ingredient.name}</p>)): null}
       </div>
 
       <div className='handlers'>
-        <button>Añadir alimento</button>
+        <button onClick={inputController}>Añadir ingrediente</button>
         <button>generar receta</button>
       </div>
+
+      {activeAdd? 
+      <form onSubmit={handleAddFood}>
+        <input 
+          type='text' 
+          name='ingredient' 
+          value={food.ingredient} 
+          placeholder= {food.ingredient} 
+          onChange={handlefood}/>
+        <input 
+          type='text' 
+          name='amount'
+          value={food.amount}
+          placeholder= {food.amount} 
+          onChange={handlefood}/>
+        <input 
+          type='text' 
+          name='unit' 
+          value={food.unit} 
+          placeholder= {food.unit} 
+          onChange={handlefood}/>
+        
+        <button type='submit'>+</button>
+      </form>
+      :null
+      }
     </>
   )
 }

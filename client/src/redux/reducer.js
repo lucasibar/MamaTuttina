@@ -3,7 +3,8 @@ import {
   } from './actions'
   const initialState = {
     fullWeek: [],
-    actualDay:{}
+    actualDay:{},
+    objective: 2000
   };
   
   const rootReducer = (state = initialState, action) => {
