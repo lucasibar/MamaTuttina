@@ -1,31 +1,74 @@
-const { MealIngredients, Ingredients, Lunches, Dinners, Extras } = require("../../../db");
+const {MealIngredients, Ingredients, Dinners} = require("../../../db");
 
 const addMeal = async function ({ idMeal, ingredient, amount, unit }) { 
   try {
-    let meal = null;
-  
-    const lunch = await Lunches.findOne({ where: { id: idMeal } });
-    if (lunch) meal = lunch;
+    const foundIngredient = await Ingredients.findOne({ where: { name: ingredient } });
+    console.log(foundIngredient)
 
-    const dinner = await Dinners.findOne({ where: { id: idMeal } });
-    if (dinner) meal = dinner;
-    
-    const extra = await Extras.findOne({ where: { id: idMeal } });
-    if (extra) meal = extra;
-
-
-    if (meal) {
-      const [foundIngredient, created] = await Ingredients.findOrCreate({ where: { name: ingredient } });
-   
-      const respuesta = await meal.getIngredients();
-      await meal.addIngredient(foundIngredient)
-      return foundIngredient;
-    } else {
-      throw new Error('Meal not found');
+    const lunch = await Dinners.findByPk(idMeal);
+    if (!lunch) {
+      throw new Error("Lunch not found");
     }
+
+    const ingredientBDD = await Ingredients.findOne({
+      where:{
+        name:ingredient
+      }
+    });
+    if (!ingredientBDD) {
+      throw new Error("Ingredient not found");
+    }
+
+    await MealIngredients.create({
+      through:{
+      LunchId: lunch.id,
+      IngredientId: ingredientBDD.id,
+      amount,
+      unit
+      }
+    })
+    await lunch.addIngredients(ingredientBDD, { through: { amount, unit } });
+
+    return "AL FIN SE TERMINO";
   } catch (error) {
     throw new Error('Failed to connect to the database or API');
   }
 }
 
 module.exports = { addMeal };
+
+
+// const { MealIngredients, Lunches, Ingredients, Dinners, sequelize } = require("../../../db");
+
+// const addMeal = async ({ idMeal, ingredient, amount, unit }) => {
+//   const transaction = await sequelize.transaction();
+
+//   try {
+//     const lunch = await Lunches.findByPk(idMeal, { transaction });
+//     if (!lunch) {
+//       throw new Error("Lunch not found");
+//     }
+
+//     const foundIngredient = await Ingredients.findOne({
+//       where: { name: ingredient },
+//       transaction
+//     });
+      
+//     if (!foundIngredient) {
+//       throw new Error("Ingredient not found");
+//     }
+
+//     await lunch.addIngredients(foundIngredient, { through: { amount, unit }, transaction });
+
+//     await transaction.commit();
+
+//     return "Ingredients added to lunch successfully";
+//   } catch (error) {
+//     await transaction.rollback();
+//     throw new Error("Failed to connect to the database or API");
+//   }
+// };
+
+// module.exports = { addMeal };
+
+

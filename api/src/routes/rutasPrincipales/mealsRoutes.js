@@ -8,7 +8,4 @@ mealsRoutes.post('/addingredient', async (req, res)=>{
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
-
-
-
 module.exports = mealsRoutes;

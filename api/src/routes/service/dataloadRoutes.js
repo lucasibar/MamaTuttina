@@ -57,6 +57,8 @@ dataloadRoutes.get("/", async (req, res) => {
     //AGREGO UN LUNCH DINNER Y EXTRA AL LUNES. con recipes e ingredientes
     const almuerzo1 = await Lunches.create()
     await almuerzo1.addRecipe(PolloConPureFinal)
+    await almuerzo1.addRecipe(LecheGalletitasFinal)
+
     await almuerzo1.addIngredients(lechuga)
 
     const verBDD = await Lunches.findAll({
@@ -78,7 +80,7 @@ dataloadRoutes.get("/", async (req, res) => {
     await cena1.addRecipes(EnsaladaCesarFinal, PolloConPureFinal)
 
     const extra1= await Extras.create()
-    await extra1.addRecipes(LecheGalletitasFinal)
+    await extra1.addIngredients(leche)
 
     await Lunes.setLunch(almuerzo1);
     await Lunes.setDinner(cena1);

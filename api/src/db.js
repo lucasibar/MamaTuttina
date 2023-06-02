@@ -70,16 +70,17 @@ Ingredients.belongsToMany(Recipes, { through: 'RecipeIngredients' });
 
 
 
-Lunches.belongsToMany(Ingredients, {through: 'MealIngredients' });
+Lunches.belongsToMany(Ingredients, {through: 'MealIngredients'});
 Ingredients.belongsToMany(Lunches, {through: 'MealIngredients' });
 
 Dinners.belongsToMany(Ingredients, {through: 'MealIngredients' });
-Ingredients.belongsToMany(Dinners, {through: 'MealIngredients' });
+Ingredients.belongsToMany(Dinners, {through: 'MealIngredients'});
 
 Extras.belongsToMany(Ingredients, {through: 'MealIngredients' });
-Ingredients.belongsToMany(Extras, {through: 'MealIngredients' });
+Ingredients.belongsToMany(Extras, {through: 'MealIngredients'  });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+
 };
