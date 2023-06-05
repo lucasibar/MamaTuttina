@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {Days, Recipes, Ingredients, Lunches, Dinners, Extras } = require("../../db");
+const {Days, Recipes, Ingredients, DinnerRecipes, LunchRecipes, ExtraIngredients, DinnerIngredients} = require("../../db");
 
 const dataloadRoutes = Router();
 
@@ -13,7 +13,6 @@ dataloadRoutes.get("/", async (req, res) => {
     await Ingredients.bulkCreate(ingredientes)
     await Recipes.bulkCreate(recetas)
 
-    const Lunes = await Days.findOne({where:{day: 'Monday'}})
     const Martes = await Days.findOne({where:{day: 'Tuesday'}})
     const PolloConPure = await Recipes.findOne({where:{name: "Pollo con pure"}})
     const EnsaladaCesar = await Recipes.findOne({where:{name: "Ensalada Cesar"}})
@@ -30,7 +29,8 @@ dataloadRoutes.get("/", async (req, res) => {
         model: Ingredients,    
         through: { attributes: ['amount', 'unit'] }
       }
-    })
+    }) 
+    
 
     await EnsaladaCesar.addIngredient(lechuga, { through: { amount: 200, unit: 'grs' } })
     await EnsaladaCesar.addIngredient(salsaCesar, { through: { amount: 2, unit: 'cucharadas' } })
@@ -52,84 +52,113 @@ dataloadRoutes.get("/", async (req, res) => {
         through: { attributes: ['amount', 'unit'] }
       }
     })
+
+    //AGREGO UN DINNER  recetas(x2) e Ingredients AL MARTES
+    await DinnerRecipes.create({
+      RecipeId: PolloConPureFinal.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'plato'
+    })
+    await DinnerRecipes.create({
+      RecipeId: LecheGalletitasFinal.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'vaso'
+    })
+
+    await DinnerIngredients.create({
+      IngredientId: lechuga.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'vaso'
+    })
+
+    //AGREGO UN LUNCH   Ingredients(x2) AL MARTES
+    await LunchRecipes.create({
+      RecipeId: EnsaladaCesar.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'plato'
+    })
+   
+    //AGREGO UN EXRTA  recetas(x2) e Ingredients AL MARTES
+    await ExtraIngredients.create({
+      IngredientId: galletitas.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'gramos'
+    })
+    await ExtraIngredients.create({
+      IngredientId: leche.id,
+      DayId: Martes.id,
+      amount:1,
+      unit:'vaso'
+    })
+
     
 
-    //AGREGO UN LUNCH DINNER Y EXTRA AL LUNES. con recipes e ingredientes
-    const almuerzo1 = await Lunches.create()
-    await almuerzo1.addRecipe(PolloConPureFinal)
-    await almuerzo1.addRecipe(LecheGalletitasFinal)
-
-    await almuerzo1.addIngredients(lechuga)
-
-    const verBDD = await Lunches.findAll({
+    const MartesFinal = await Days.findAll({
+      where: {},
       include: [
+
+        // TRAIGO LAS RECETAS CON SUS TRES RESPECTIVAS ELACIONES LUNCH DINNER EXTRAS
         {
-          model: Ingredients,
-          through: { attributes: ['amount', 'unit'] }
+          model: Recipes,
+          as: 'lunchRecipes',
+          through: { attributes: ['amount', 'unit'] },
+          include: [
+            {
+              model: Ingredients,
+              through: { attributes: ['amount', 'unit'] },
+            },
+          ],
         },
         {
           model: Recipes,
-          include: {
-            model: Ingredients,
-            through: { attributes: ['amount', 'unit'] }
-          }
+          as: 'dinnerRecipes',
+          through: { attributes: ['amount', 'unit'] },
+          include: [
+            {
+              model: Ingredients,
+              through: { attributes: ['amount', 'unit'] },
+            },
+          ],
+        },
+        {
+          model: Recipes,
+          as: 'extraRecipes',
+          through: { attributes: ['amount', 'unit'] },
+          include: [
+            {
+              model: Ingredients,
+              through: { attributes: ['amount', 'unit'] },
+            },
+          ],
+        },
+
+        
+        // TRAIGO LAS RECETAS CON SUS TRES RESPECTIVAS ELACIONES LUNCH DINNER EXTRAS
+        {
+          model: Ingredients,
+          as: 'lunchIngredients',
+          through: { attributes: ['amount', 'unit'] },
+        },   
+        {
+          model: Ingredients,
+          as: 'dinnerIngredients',
+          through: { attributes: ['amount', 'unit'] },
+        },   
+        {
+          model: Ingredients,
+          as: 'extraIngredients',
+          through: { attributes: ['amount', 'unit'] },
         }
-      ]
+      ],
+      order: [['id', 'DESC']],
+      limit: 7,
     });
-    const cena1= await Dinners.create()
-    await cena1.addRecipes(EnsaladaCesarFinal, PolloConPureFinal)
-
-    const extra1= await Extras.create()
-    await extra1.addIngredients(leche)
-
-    await Lunes.setLunch(almuerzo1);
-    await Lunes.setDinner(cena1);
-    await Lunes.setExtra(extra1);
-
-
-    const LunesFinal = await Days.findOne({
-      where: { day: 'Monday' },
-      include: [
-            {
-              model: Lunches,
-              include: [
-                {
-                  model: Recipes,
-                  include: [
-                    { model: Ingredients }
-                  ]
-                },
-                { model: Ingredients }
-              ]
-            },
-            {
-              model: Dinners,
-              include: [
-                {
-                  model: Recipes,
-                  include: [
-                    { model: Ingredients }
-                  ]
-                },
-                { model: Ingredients }
-              ]
-            },
-            {
-              model: Extras,
-              include: [
-                {
-                  model: Recipes,
-                  include: [
-                    { model: Ingredients }
-                  ]
-                },
-                { model: Ingredients }
-              ]
-            }
-          ]
-        });
-
-res.status(200).json(LunesFinal);
+res.status(200).json(MartesFinal);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }

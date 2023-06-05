@@ -2,9 +2,8 @@ const {MealIngredients, Ingredients, Dinners} = require("../../../db");
 
 const addMeal = async function ({ idMeal, ingredient, amount, unit }) { 
   try {
-    const foundIngredient = await Ingredients.findOne({ where: { name: ingredient } });
-    console.log(foundIngredient)
-
+    // const foundIngredient = await Ingredients.findOne({ where: { name: ingredient } });
+    
     const lunch = await Dinners.findByPk(idMeal);
     if (!lunch) {
       throw new Error("Lunch not found");
@@ -18,17 +17,17 @@ const addMeal = async function ({ idMeal, ingredient, amount, unit }) {
     if (!ingredientBDD) {
       throw new Error("Ingredient not found");
     }
-
-    await MealIngredients.create({
-      through:{
-      LunchId: lunch.id,
-      IngredientId: ingredientBDD.id,
-      amount,
-      unit
-      }
-    })
-    await lunch.addIngredients(ingredientBDD, { through: { amount, unit } });
-
+    console.log(ingredientBDD)
+    await ingredientBDD.addIngredients(lunch, { through: { amount, unit } });
+    // const union = await MealIngredients.findOrCreate({
+    //   through:{
+    //     DinnerId: lunch.id,
+    //     IngredientId: ingredientBDD.id,
+    //     amount,
+    //     unit
+    //   }
+    // })
+    
     return "AL FIN SE TERMINO";
   } catch (error) {
     throw new Error('Failed to connect to the database or API');
