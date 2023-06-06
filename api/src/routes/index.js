@@ -11,7 +11,7 @@ const router = Router();
 router.use('/dataload', dataloadRoutes)
 
 
-// router.use('/days', daysRoutes)
+router.use('/days', daysRoutes)
 // router.use('/recipes', recipesRoutes)
 // router.use('/meal', mealsRoutes)
 

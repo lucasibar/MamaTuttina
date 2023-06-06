@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const { getDays } = require('./controllers/getDays')
+const { getWeek } = require('./controllers/getWeek')
 
 
 const daysRoutes = Router();
 
-daysRoutes.get('/', async (req, res)=>{
-    try{res.status(200).json(await getDays())}
+daysRoutes.get('/week', async (req, res)=>{
+    try{res.status(200).json(await getWeek())}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 

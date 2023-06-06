@@ -5,7 +5,7 @@ const dataloadRoutes = Router();
 
 const dias = [ {day: 'Monday'}, {day: 'Tuesday'}, {day: 'Wednesday'}, {day: 'Thursday'}, {day: 'Friday'}, {day: 'Saturday'}, {day: 'Sunday'}] 
 const recetas = [ {name: "Pollo con pure", category: "Carne"},{name: "Ensalada Cesar", category: "Carne"},{name: "Leche galletitas", category: "Lacteo"}]
-const ingredientes = [{name: 'pollo', kcla100gr: 80}, {name: 'pure', kcla100gr: 50}, {name: 'lechuga', kcla100gr: 30}, {name: 'salsa cesar', kcla100gr: 120}, {name: 'leche', kcla100gr: 95}, {name: 'galletitas', kcla100gr: 1200}]
+const ingredientes = [{name: 'pollo', kcal100gr: 80}, {name: 'pure', kcal100gr: 50}, {name: 'lechuga', kcal100gr: 30}, {name: 'salsa cesar', kcal100gr: 120}, {name: 'leche', kcal100gr: 95}, {name: 'galletitas', kcal100gr: 1200}]
 
 dataloadRoutes.get("/", async (req, res) => {
   try {

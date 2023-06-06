@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       // allowNull: false,
     },
-    kcla100gr:{
+    kcal100gr:{
      type: DataTypes.INTEGER
     },
     carbs:{
