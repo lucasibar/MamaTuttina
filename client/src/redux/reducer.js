@@ -4,7 +4,9 @@ import {
   const initialState = {
     fullWeek: [],
     actualDay:{},
-    objective: 2000
+    objective: 2000,
+    recipes:[],
+    ingredients:[]
   };
 
   const rootReducer = (state = initialState, action) => {

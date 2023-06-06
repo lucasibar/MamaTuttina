@@ -1,63 +1,107 @@
-import React, {useState} from 'react'
-import { useSelector } from 'react-redux';
-import axios from 'axios'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 
-function InputFoodHandler(props) {
-//    const actualDay = useSelector(state=> state.actualDay)
-//    console.log(actualDay)
+const style = {
+  position: 'absolute',
+  top: '30%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3
+};
 
-//    const [food, setFood]= useState({
-//     ingredient:'',
-//     amount: 0,
-//     unit: 'grs'
-//   })
-//    const handlefood =(e)=>{
-//     setFood(state=>({
-//         ...state,
-//         [e.target.name]: e.target.value
-//     }))
-//   }
-//   const handleAddFood = async (e)=>{
-//       e.preventDefault() 
-// console.log("aca vendria la funcion para mandar a la base de datos")
-      // const body={
-      //   ingredient: food.ingredient,
-      //   amount:food.amount,
-      //   unit:food.unit
-      // }
-      // body.idMeal = meal.id
-      // await axios.post(`http://localhost:3001/meal/addingredient`, body)
-   //}
-   
-   return (
-    <>
-    <h1>QUE ONDAAAA</h1>
-     {/* <form onSubmit={handleAddFood}>
-        <input 
-          type='text' 
-          name='ingredient' 
-          value={food.ingredient} 
-          placeholder= {food.ingredient} 
-          onChange={handlefood}/>
-        <input 
-          type='text' 
-          name='amount'
-          value={food.amount}
-          placeholder= {food.amount} 
-          onChange={handlefood}/>
-        <input 
-          type='text' 
-          name='unit' 
-          value={food.unit} 
-          placeholder= {food.unit} 
-          onChange={handlefood}/>
-        
-        <button type='submit'>+</button>
-      </form>
-      */}
-       </> 
-   )
+
+
+
+
+export default function InputFoodHandler() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button onClick={handleOpen}>Agregar alimento</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box sx={{ ...style, width: 200 }}>
+          <h2 id="parent-modal-title">Alimento</h2>
+          <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={[1, 2]}
+          sx={{ width: 195, mb:'20px'}}
+          renderInput={(params) => <TextField {...params} label="Receta - Ingrediente" />}
+          />          
+          <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={[1, 2]}
+          sx={{ width: 60, mb:'20px'}}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
+          />
+          <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={[1, 2]}
+          sx={{ width: 60, mb:'20px'}}
+          renderInput={(params) => <TextField {...params} label="Movie" />}
+          />
+        {/* <ChildModal /> */}
+        </Box>
+      </Modal>
+    </div>
+  );
 }
 
-export default InputFoodHandler;
+
+
+
+
+function ChildModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Button onClick={handleOpen}>Open Child Modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 200 }}>
+          <h2 id="child-modal-title">Text in a child modal</h2>
+          <p id="child-modal-description">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          </p>
+          <Button onClick={handleClose}>Close Child Modal</Button>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+}

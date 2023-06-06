@@ -1,4 +1,4 @@
-.kcalCircle{
+/* .kcalCircle{
   display:flex;
   width: 55px;
   height: 55px;
@@ -8,11 +8,11 @@
   border-color: #007bff;
   justify-content: center;
   align-items: center;
-}
+} */
 .subtitle{
   display: block;
 }
-.protCircle{
+/* .protCircle{
   display:flex;
   width: 35px;
   height: 35px;
@@ -44,7 +44,8 @@
   border-color: #9d00ff;
   justify-content: center;
   align-items: center;
-}
+}*/
 .macrosCircles{
   display:flex;
-}
+  justify-content:space-between ;
+} 

@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 function MealHandler({mealName, mealRecipes, mealIngredients}) {
 const [activeAdd, setActiveAdd]= useState(false)
 
-
+console.log(mealIngredients)
   return (
     <>
 
@@ -20,9 +20,8 @@ const [activeAdd, setActiveAdd]= useState(false)
       <RecipesList mealRecipes={mealRecipes}/>
       <IngredientsList mealIngredients={mealIngredients}/>
       <div className='handlers'>
-        <Button onClick={()=> setActiveAdd(!activeAdd)}>Añadir ingrediente</Button>
+        <InputFoodHandler />
       </div>
-      {activeAdd? <InputFoodHandler />: null}
     </>
   )
 }

@@ -1,19 +1,19 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
-function Exercise() {
+
+function Exercise(props) {
  
    return (
-
-<div>
-<h1>blabla</h1>
-    {/* <div className='meal'>
+    <div>
+    <div className='meal'>
     <p >Ejercicio</p>
     <p >kcal quemadas</p>
     </div>
     <div className='handlers'>
     <button>Añadir ejercicio</button>
     <button>generar rutina</button>
-    </div> */}
+    </div>
     </div>
    )
 }

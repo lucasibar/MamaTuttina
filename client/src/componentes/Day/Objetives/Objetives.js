@@ -9,15 +9,15 @@ export default function Objetives() {
         <h6 className='subtitle'>kilo calorias</h6>
         </div>
         <div className='protCircle'> 
-        <h3 className='subtitle'>2000</h3>
+        <h3 className='subtitle'>20%</h3>
         <h6 className='subtitle'>kilo calorias</h6>
         </div>
         <div className='carbCircle'> 
-        <h3 className='subtitle'>2000</h3>
+        <h3 className='subtitle'>50%</h3>
         <h6 className='subtitle'>kilo calorias</h6>
         </div>
         <div className='fatCircle'> 
-        <h3 className='subtitle'>2000</h3>
+        <h3 className='subtitle'>%30</h3>
         <h6 className='subtitle'>kilo calorias</h6>
         </div>
     </div>

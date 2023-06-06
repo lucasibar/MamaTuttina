@@ -5,6 +5,7 @@ import MealHandler from './MealHandler/MealHandler'
 
 function DayHandlers(props) {
    const actualDay = useSelector(state=> state.actualDay)
+   console.log(actualDay.lunchIngredients, actualDay.dinnerIngredients, actualDay.extraIngredients )
    return (
     <>
       <MealHandler mealName='Almuerzo' mealRecipes={actualDay.lunchRecipes}  mealIngredients={actualDay.lunchIngredients} />

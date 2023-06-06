@@ -11,9 +11,9 @@ function RecipesList({mealRecipes}) {
         return(
           <div key={i} className='recipe'>
           <p >{recipe.name}</p>
-          <p>kcal {recipe.Ingredients.reduce((acc, ingredient)=>{
+          <p>{recipe.Ingredients.reduce((acc, ingredient)=>{
             return (ingredient.kcal100gr/100) * (ingredient.RecipeIngredients.amount)
-          },0)}</p>
+          },0)} kcal  </p>
           </div>
         )
       })}
