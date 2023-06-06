@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react';
+import './Objetives.css'
 
-
-function Objectives(props) {
-    const objective  = useSelector(state=> state.objective)
-    const [objectives, setObjective]= useState(0)
-
-    useEffect(()=>{
-        setObjective(objective)
-      },[objective])
-   return (
-    <div className='objetives'>
-    <div className='objetivesAnalisis' >
-    <p>{objectives} kcal</p>
-    <hr/>
-    <p>Consumido</p>
-    <hr/>
-    <p>Restante</p>
+export default function Objetives() {
+  return (
+    <div className='macrosCircles'>
+        <div className='kcalCircle'> 
+        <h3 className='subtitle'>2000</h3>
+        <h6 className='subtitle'>kilo calorias</h6>
+        </div>
+        <div className='protCircle'> 
+        <h3 className='subtitle'>2000</h3>
+        <h6 className='subtitle'>kilo calorias</h6>
+        </div>
+        <div className='carbCircle'> 
+        <h3 className='subtitle'>2000</h3>
+        <h6 className='subtitle'>kilo calorias</h6>
+        </div>
+        <div className='fatCircle'> 
+        <h3 className='subtitle'>2000</h3>
+        <h6 className='subtitle'>kilo calorias</h6>
+        </div>
     </div>
-  </div>
-   )
-}
 
-export default Objectives;
+  );
+}

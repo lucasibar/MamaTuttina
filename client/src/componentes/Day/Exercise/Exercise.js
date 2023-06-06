@@ -1,18 +1,19 @@
 import React from 'react'
 
-
-function Exercise(props) {
+function Exercise() {
  
    return (
-    <div>
-    <div className='meal'>
+
+<div>
+<h1>blabla</h1>
+    {/* <div className='meal'>
     <p >Ejercicio</p>
     <p >kcal quemadas</p>
     </div>
     <div className='handlers'>
     <button>Añadir ejercicio</button>
     <button>generar rutina</button>
-    </div>
+    </div> */}
     </div>
    )
 }

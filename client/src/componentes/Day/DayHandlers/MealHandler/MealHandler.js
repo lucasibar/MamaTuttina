@@ -22,7 +22,7 @@ const [activeAdd, setActiveAdd]= useState(false)
       <div className='handlers'>
         <Button onClick={()=> setActiveAdd(!activeAdd)}>Añadir ingrediente</Button>
       </div>
-      {/* {activeAdd? <InputFoodHandler />: null} */}
+      {activeAdd? <InputFoodHandler />: null}
     </>
   )
 }

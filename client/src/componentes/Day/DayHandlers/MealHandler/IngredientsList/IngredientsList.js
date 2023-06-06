@@ -9,7 +9,7 @@ function IngredientsList({mealIngredients}) {
       return(
         <div key={i} className='ingredient'>
         <p >{ingredient.name}</p>
-        <p>kcal = {(ingredient.kcal100gr/100) * (ingredient.amountIngredientDay.amount)}</p>
+        <p>kcal {(ingredient.kcal100gr/100) * (ingredient.amountIngredientDay.amount)}</p>
         </div>
       )
     })}
