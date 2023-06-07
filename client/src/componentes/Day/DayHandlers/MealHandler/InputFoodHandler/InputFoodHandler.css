@@ -1,0 +1,9 @@
+
+.formpost{
+  display: flex;
+  width: 100%;
+  background-color: white;
+  justify-content:space-around;
+  padding: 0px;
+  margin-top: 15px;
+}

@@ -1,17 +1,21 @@
-import { useState } from 'react'
 import IngredientsList from './IngredientsList/IngredientsList'
 import RecipesList from './RecipesList/RecipesList'
 import InputFoodHandler from './InputFoodHandler/InputFoodHandler'
 import './MealHandler.css'
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import{useState, useEffect} from 'react'
 
 
 
-function MealHandler({mealName, mealRecipes, mealIngredients}) {
-const [activeAdd, setActiveAdd]= useState(false)
+function MealHandler({dayId, mealName, mealRecipes, mealIngredients}) {
+  const [meal, setMeal] = useState('')
 
-console.log(mealIngredients)
+  useEffect(()=>{
+    if(mealName==='Almuerzo')setMeal({meal:'lunch'})
+    if(mealName==='Cena')setMeal({meal:'dinner'})
+    if(mealName==='Extra')setMeal({meal:'extra'})
+  },[mealName])
+  
   return (
     <>
 
@@ -20,7 +24,7 @@ console.log(mealIngredients)
       <RecipesList mealRecipes={mealRecipes}/>
       <IngredientsList mealIngredients={mealIngredients}/>
       <div className='handlers'>
-        <InputFoodHandler />
+        <InputFoodHandler dayId={dayId} meal={meal} mealRecipes={mealRecipes} mealIngredients={mealIngredients}/>
       </div>
     </>
   )
