@@ -3,12 +3,12 @@ import Week from './componentes/Week/Week';
 import Day from './componentes/Day/Day';
 import { Route , Switch} from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import {getWeek, getRecipes, getIngredients, getObjetives} from './redux/actions'
+import {getRecipes, getIngredients, getObjetives} from './redux/actions'
 
 function App() {
   let dispatch = useDispatch() 
   useEffect(()=>{
-    dispatch(getWeek())
+    // dispatch(getWeek())
     dispatch(getRecipes())
     dispatch(getIngredients())
     dispatch(getObjetives())

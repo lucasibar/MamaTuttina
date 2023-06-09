@@ -5,13 +5,14 @@
   box-shadow:0px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
 }
-.mealTitle{
-  margin-left: 5px;
-}
-.fondoSombra{
-  z-index: 100;
-  position: absolute;
-  width:  100vw;
-  height:  100vw;
-  background-color: 007bff;
+
+.ingredient{
+  display: flex;
+  width: 100%;
+  color:black;
+  font-weight: 100;
+  background-color: white;
+  box-shadow:0px 2px 4px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  padding: 0px;
 }

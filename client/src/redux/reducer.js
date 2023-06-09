@@ -2,7 +2,8 @@ import {
   GET_DAYS,
   GET_RECIPES,
   GET_INGREDIENTS,
-  GET_OBJETIVES
+  GET_OBJETIVES,
+  POST_FOOD
   } from './actions'
   const initialState = {
     fullWeek: [],
@@ -36,6 +37,12 @@ import {
         ...state,
         objetives: action.payload
     }
+    case POST_FOOD:
+      return {
+        ...state,
+        fullWeek: action.payload,
+    }
+
   
 
   default: return state

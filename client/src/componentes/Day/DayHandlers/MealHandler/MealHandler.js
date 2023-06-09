@@ -11,15 +11,15 @@ function MealHandler({dayId, mealName, mealRecipes, mealIngredients}) {
   const [meal, setMeal] = useState('')
 
   useEffect(()=>{
-    if(mealName==='Almuerzo')setMeal({meal:'lunch'})
-    if(mealName==='Cena')setMeal({meal:'dinner'})
-    if(mealName==='Extra')setMeal({meal:'extra'})
+    if(mealName==='Almuerzo')setMeal('lunch')
+    if(mealName==='Cena')setMeal('dinner')
+    if(mealName==='Extra')setMeal('extra')
   },[mealName])
   
   return (
     <>
 
-      <h4 className='mealTitle'>{mealName}</h4>
+      <div className='ingredient'><h4>{mealName}</h4></div>
 
       <RecipesList mealRecipes={mealRecipes}/>
       <IngredientsList mealIngredients={mealIngredients}/>

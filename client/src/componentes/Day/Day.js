@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import './Day.css'
 import DayPagination from './DayPagination/DayPagination';
@@ -9,7 +9,13 @@ import {getWeek} from '../../redux/actions'
 
 
 function Day(props) {
-  const actualDay = useSelector(state=> state.actualDay)
+  const stateActualDay = useSelector(state=> state.actualDay)
+  const [actualDay, setActualDay]= useState([])
+  useEffect(()=>{
+    setActualDay(stateActualDay)
+  },[stateActualDay])
+  
+  
   let dispatch = useDispatch() 
   useEffect(()=>{
     dispatch(getWeek())

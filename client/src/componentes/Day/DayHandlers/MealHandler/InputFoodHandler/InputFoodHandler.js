@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -7,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import './InputFoodHandler.css'
 import Swal from 'sweetalert2';
-import axios from 'axios'
+import { addFoodDay } from '../../../../../redux/actions'
 
 
 const style = {
@@ -27,20 +28,27 @@ const style = {
 
 
 
-export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredients}) {
+export default function InputFoodHandler({dayId, meal}) {
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true)
   const handleClose = () =>setOpen(false)
+  
+  
+  const mealRecipes= useSelector( state=> state.recipes)
+  const mealIngredients= useSelector( state=> state.ingredients)
 
   const [foodsList, setFoodsList] = useState([]);
-  const amountsList = ['Option 3', 'Option 4'];
-  const unitsList = ['Option 5', 'Option 6'];
+  const amountsList = ["1"," 5", "10", "50", "100", "250", "500"];
+  const unitsList = ['taza', 'gramos', 'platos', 'unidades', 'kilogramos', 'litros', 'mililitros'];
+
+  const [recipes, setRecipes] = useState([]);
  
   useEffect(()=>{
     if(mealRecipes && mealIngredients){
       let mealRecipes1 = mealRecipes.map(i=> i.name) 
       let mealIngredients1 = mealIngredients.map(i=> i.name) 
-
+      setRecipes(mealRecipes1)
       setFoodsList(mealRecipes1.concat(mealIngredients1) )
     }
   },[mealIngredients, mealRecipes])
@@ -50,6 +58,8 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
   const [amount, setAmount] = useState('');
   const [unit, setUnit] = useState('');
 
+
+  let dispatch = useDispatch() 
   const addFood = async () =>{
     setOpen(false)
     await Swal.fire({position: 'top-end', icon: 'success', title: 'Your work has been saved', showConfirmButton: false, timer: 1500})
@@ -58,10 +68,11 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
       amount,
       unit,
       dayId,
-      meal
+      meal,
+      recipe: false
     }
-    await axios.post(`http://localhost:3001/meal`, postFood)
-
+    if(recipes.includes(food)) postFood.recipe = true
+    dispatch(addFoodDay(postFood))
     setOpen(true)
   }
 

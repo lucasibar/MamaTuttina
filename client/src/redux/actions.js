@@ -3,6 +3,8 @@ export const GET_DAYS= "GET_DAYS"
 export const GET_RECIPES= "GET_RECIPES" 
 export const GET_INGREDIENTS= "GET_INGREDIENTS" 
 export const GET_OBJETIVES= "GET_OBJETIVES" 
+export const POST_FOOD= "POST_FOOD" 
+
 
 export const getWeek = () => dispatch => {
   return axios.get(`http://localhost:3001/days/week`)
@@ -26,5 +28,11 @@ export const getObjetives = () => dispatch => {
   return axios.get(`http://localhost:3001/objetives`)
     .then(data => {
       dispatch({type: GET_OBJETIVES, payload: data.data})
+    })
+}
+export const addFoodDay = (postFood) => dispatch => {
+  return axios.post(`http://localhost:3001/meal`, postFood)
+  .then(data=>{
+        dispatch({type: POST_FOOD, payload: data.data})
     })
 }
