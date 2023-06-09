@@ -32,16 +32,16 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
   const handleOpen = () => setOpen(true)
   const handleClose = () =>setOpen(false)
 
-  const [options, setOptions] = useState([]);
-  const options1 = ['Option 3', 'Option 4'];
-  const options2 = ['Option 5', 'Option 6'];
+  const [foodsList, setFoodsList] = useState([]);
+  const amountsList = ['Option 3', 'Option 4'];
+  const unitsList = ['Option 5', 'Option 6'];
  
   useEffect(()=>{
     if(mealRecipes && mealIngredients){
       let mealRecipes1 = mealRecipes.map(i=> i.name) 
       let mealIngredients1 = mealIngredients.map(i=> i.name) 
 
-      setOptions(mealRecipes1.concat(mealIngredients1) )
+      setFoodsList(mealRecipes1.concat(mealIngredients1) )
     }
   },[mealIngredients, mealRecipes])
 
@@ -49,7 +49,6 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
   const [food, setFood] = useState('');
   const [amount, setAmount] = useState('');
   const [unit, setUnit] = useState('');
-  
 
   const addFood = async () =>{
     setOpen(false)
@@ -78,7 +77,7 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
           id="combo-box-demo"
           value={food}
           onChange={(event, newValue) => setFood(newValue)}
-          options={options}
+          options={foodsList}
           sx={{ width: 250 }}
           renderInput={(params) => <TextField {...params} label="Receta-Ingrediente" />}
           /> 
@@ -89,7 +88,7 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
               id="combo-box-demo"
               value={amount}
               onChange={(event, newValue) => setAmount(newValue)}
-              options={options1}
+              options={amountsList}
               sx={{ width: 115 }}
               renderInput={(params) => <TextField {...params} label="Cantidad" />}
               /> 
@@ -99,7 +98,7 @@ export default function InputFoodHandler({dayId, meal, mealRecipes, mealIngredie
               id="combo-box-demo"
               value={unit}
               onChange={(event, newValue) => setUnit(newValue)}
-              options={options2}
+              options={unitsList}
               sx={{ width: 115 }}
               renderInput={(params) => <TextField {...params} label="Unidad" />}
               /> 
