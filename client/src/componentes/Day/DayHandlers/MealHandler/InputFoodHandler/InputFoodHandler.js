@@ -10,7 +10,6 @@ import './InputFoodHandler.css'
 import Swal from 'sweetalert2';
 import { addFoodDay } from '../../../../../redux/actions'
 
-
 const style = {
   position: 'absolute',
   top: '30%',
@@ -24,9 +23,6 @@ const style = {
   px: 4,
   pb: 3
 };
-
-
-
 
 export default function InputFoodHandler({dayId, meal}) {
 

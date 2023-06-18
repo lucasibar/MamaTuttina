@@ -9,17 +9,12 @@ import {getWeek} from '../../redux/actions'
 
 
 function Day(props) {
-  const stateActualDay = useSelector(state=> state.actualDay)
-  const [actualDay, setActualDay]= useState([])
-  useEffect(()=>{
-    setActualDay(stateActualDay)
-  },[stateActualDay])
-  
-  
+  const actualDay = useSelector(state=> state.actualDay)
+ 
   let dispatch = useDispatch() 
   useEffect(()=>{
     dispatch(getWeek())
-  },[dispatch])
+  },[dispatch, actualDay])
   
   return (
     <div style={{ backgroundColor: '#f2f2f2', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%',   overflow: 'auto'}}>
