@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import Week from './componentes/Week/Week';
 import Day from './componentes/Day/Day';
+import Purchase from './componentes/Purchase/Purchase';
 import { Route , Switch} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {getRecipes, getIngredients, getObjetives} from './redux/actions'
@@ -24,6 +25,10 @@ function App() {
     <Route 
     exact path="/day"
     component ={Day}
+    />  
+    <Route 
+    exact path="/purchase"
+    component ={Purchase}
     />  
   </Switch>   
   </div>
