@@ -1,25 +1,25 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Week from './componentes/Week/Week';
 import Day from './componentes/Day/Day';
 import Purchase from './componentes/Purchase/Purchase';
+import Home from './componentes/Home';
 import { Route , Switch} from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import {getRecipes, getIngredients, getObjetives} from './redux/actions'
 
 function App() {
-  let dispatch = useDispatch() 
-  useEffect(()=>{
-    // dispatch(getWeek())
-    dispatch(getRecipes())
-    dispatch(getIngredients())
-    dispatch(getObjetives())
-  },[dispatch])
-  
   return (
   <div className="App">
   <Switch>
     <Route 
     exact path="/"
+      component ={Home}
+    />
+    {/* 
+    <Route 
+    exact path="/"
+      component ={Survey}
+    /> */}
+    <Route 
+    exact path="/week"
       component ={Week}
     />
     <Route 

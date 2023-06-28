@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { putRecipePurchases } from '../../../redux/actions'
+// import { putRecipePurchases } from '../../../redux/actions'
 
 const style = {
   position: 'absolute',
@@ -58,19 +58,7 @@ export default function HandleRecipe({meal}) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 function RecipeSelector( { recipes } ) {
-    let dispatch = useDispatch() 
-
     const [recipeList, setRecipeList] = useState([])
     const [selectedRecipe, setSelectedRecipe]= useState('')
 
@@ -90,7 +78,7 @@ function RecipeSelector( { recipes } ) {
         renderInput={(params) => <TextField {...params} label="Recetas" />}
         /> 
 
-        <Button onClick={()=>dispatch(putRecipePurchases(selectedRecipe, ))}>ACEPTAR</Button>
+        {/* <Button onClick={()=>dispatch(putRecipePurchases(selectedRecipe, ))}>ACEPTAR</Button> */}
         </>
     );
   }

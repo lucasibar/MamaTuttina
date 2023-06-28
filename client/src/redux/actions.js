@@ -1,11 +1,17 @@
 import axios from 'axios'
+export const SET_INITIAL_STATE= "SET_INITIAL_STATE"
 export const GET_DAYS= "GET_DAYS"
 export const GET_RECIPES= "GET_RECIPES" 
 export const GET_INGREDIENTS= "GET_INGREDIENTS" 
 export const GET_OBJETIVES= "GET_OBJETIVES" 
 export const POST_FOOD= "POST_FOOD" 
 
-
+export const setInitialState = () => dispatch => {
+  return axios.get(`http://localhost:3001/setInitialState`)
+    .then(data => {
+      dispatch({type: SET_INITIAL_STATE, payload: data.data})
+    })
+}
 export const getWeek = () => dispatch => {
   return axios.get(`http://localhost:3001/days/week`)
     .then(data => {
@@ -21,6 +27,7 @@ export const getRecipes = () => dispatch => {
 export const getIngredients = () => dispatch => {
   return axios.get(`http://localhost:3001/ingredients`)
     .then(data => {
+      console.log(data.data)
       dispatch({type: GET_INGREDIENTS, payload: data.data})
     })
 }

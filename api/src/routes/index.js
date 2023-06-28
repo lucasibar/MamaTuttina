@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const dataloadRoutes = require ('./service/dataloadRoutes')
+const setInitialStateRoutes = require ('./rutasPrincipales/setInitialStateRoutes')
 const daysRoutes = require ('./rutasPrincipales/daysRoutes')
 const recipesRoutes = require ('./rutasPrincipales/recipesRoutes')
 const mealRoutes = require ('./rutasPrincipales/mealRoutes')
@@ -12,7 +13,7 @@ const objetivesRoutes = require ('./rutasPrincipales/objetivesRoutes')
 const router = Router();
 router.use('/dataload', dataloadRoutes)
 
-
+router.use('/setInitialState', setInitialStateRoutes)
 router.use('/days', daysRoutes)
 router.use('/meal', mealRoutes)
 router.use('/recipes', recipesRoutes)
