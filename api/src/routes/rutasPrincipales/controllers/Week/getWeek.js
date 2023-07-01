@@ -1,4 +1,4 @@
-const {Days, Recipes, Ingredients, Lunches, Dinners, Extras } = require("../../../db");
+const {Days, Recipes, Ingredients, Lunches, Dinners, Extras } = require("../../../../db");
 
 const getWeek = async function () {   
   const LastWeek = await Days.findAll({

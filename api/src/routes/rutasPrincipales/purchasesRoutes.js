@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { getListsPurchases } = require('./controllers/getListsPurchases')
-const { addListsPurchases } = require('./controllers/addListsPurchases')
+const { getListsPurchases } = require('./controllers/Purchases/getListsPurchases')
+const { addListsPurchases } = require('./controllers/Purchases/addListsPurchases')
 
 
 const purchasesRoutes = Router();

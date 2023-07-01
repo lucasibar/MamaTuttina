@@ -1,4 +1,4 @@
-const { PurchaseLists } = require("../../../db");
+const { PurchaseLists } = require("../../../../db");
 
 const getListsPurchases = async function () {   
   const listsPurchases = await PurchaseLists.findAll({

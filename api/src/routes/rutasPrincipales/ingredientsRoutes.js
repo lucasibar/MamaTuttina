@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getIngredients } = require('./controllers/getIngredients')
+const { getIngredients } = require('./controllers/Ingredients/getIngredients')
 const ingredientsRoutes = Router();
 
 ingredientsRoutes.get('/', async (req, res)=>{

@@ -1,4 +1,4 @@
-const { PurchaseLists, Ingredients, PurchaseListIngredients } = require("../../../db");
+const { PurchaseLists, Ingredients, PurchaseListIngredients } = require("../../../../db");
 
 const addListsPurchases = async function ({ name, ingredients }) {
   try {

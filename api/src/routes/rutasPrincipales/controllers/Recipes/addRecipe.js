@@ -1,4 +1,4 @@
-const { Recipes, LunchRecipes, ExtraRecipes, DinnerRecipes} = require("../../../db");
+const { Recipes, LunchRecipes, ExtraRecipes, DinnerRecipes} = require("../../../../db");
 
 const addRecipe = async function ({ food, amount, unit, dayId, meal}) { 
 

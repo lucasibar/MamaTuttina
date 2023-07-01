@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getWeek } = require('./controllers/getWeek')
+const { getWeek } = require('./controllers/Week/getWeek')
 
 
 const objetivesRoutes = Router();

@@ -1,4 +1,4 @@
-const {Days, Recipes, Ingredients } = require("../../../db");
+const {Days, Recipes, Ingredients } = require("../../../../db");
 
 const getRecipes = async function () {   
   const RecipeList = await Recipes.findAll({
