@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 
 module.exports = (sequelize) => {
-  sequelize.define('Ingredients', {
+  sequelize.define('PurchaseLists', {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
@@ -11,22 +11,6 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      // allowNull: false,
-    },
-    kcal100gr:{
-     type: DataTypes.INTEGER
-    },
-    carbs:{
-     type: DataTypes.INTEGER
-    },
-    proteins:{
-     type: DataTypes.INTEGER
-    },
-    fats:{
-     type: DataTypes.INTEGER
-    },
-    category: {
-      type: DataTypes.STRING
       // allowNull: false,
     }
   },

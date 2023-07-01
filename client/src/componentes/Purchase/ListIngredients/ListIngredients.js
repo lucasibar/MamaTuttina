@@ -13,7 +13,7 @@ import './ListIngredients.css'
 
 
 
-export default function Purchase() {
+export default function ListIngredients() {
   let dispatch = useDispatch()
 
   useEffect(()=>{
@@ -23,30 +23,22 @@ export default function Purchase() {
   const ingredients = useSelector(state=> state.ingredients)
 
   return (
-    <>
-
-        {ingredients?.map(ingredient=>
-            <ListItem
-                key={ingredient.id}
-                secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                    {/* <ControlPointIcon color='primary'/> */}
-                        <div className='amountItem'>
-                            {false ? <span>-</span> : <DeleteOutlineIcon fontSize="small" />}
-                            <span>1</span>
-                            <span>+</span>
-                        </div>
-                    </IconButton>
-                }
-            >
-                <ListItemAvatar>
-                    <Avatar><FolderIcon /></Avatar>
-                </ListItemAvatar>
-
-                <ListItemText primary={ingredient.name} />
-            
-            </ListItem>
+    <div>
+        {ingredients?.map((ingredient, index)=>
+        <div key={index} className='ingredientItem'>
+          <ListItemAvatar>
+              <Avatar><FolderIcon /></Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={ingredient.name} />
+          {/* <ControlPointIcon color='primary'/> */}
+          <div className='amountItem'>
+              {true ? <button>-</button> : <DeleteOutlineIcon fontSize="small" />}
+              <button>1</button>
+              <button>+</button>
+          </div>
+        </div>
         )}
-    </>
+    </div>
+
   );
 }

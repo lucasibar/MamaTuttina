@@ -5,6 +5,16 @@ export const GET_RECIPES= "GET_RECIPES"
 export const GET_INGREDIENTS= "GET_INGREDIENTS" 
 export const GET_OBJETIVES= "GET_OBJETIVES" 
 export const POST_FOOD= "POST_FOOD" 
+export const LISTS_PURCHASES= "LISTS_PURCHASES" 
+
+export const getListsPurchases = () => dispatch => {
+  return axios.get(`http://localhost:3001/purchases`)
+    .then(data => {
+      dispatch({type: LISTS_PURCHASES, payload: data.data})
+    })
+}
+
+
 
 export const setInitialState = () => dispatch => {
   return axios.get(`http://localhost:3001/setInitialState`)

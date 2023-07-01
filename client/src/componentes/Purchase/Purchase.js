@@ -6,14 +6,14 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { getIngredients } from '../../redux/actions';
+import { getListsPurchases } from '../../redux/actions';
 import ListIngredients from './ListIngredients/ListIngredients'
 
 export default function Purchase() {
   let dispatch = useDispatch()
 
   useEffect(()=>{
-    // dispatch(getIngredients())
+    dispatch(getListsPurchases())
   },[dispatch])
 
 
@@ -32,11 +32,9 @@ export default function Purchase() {
           </TabList>
         </Box>
 
-        
         <TabPanel value="1">
           <ListIngredients/>
         </TabPanel>
-
 
         <TabPanel value="2">Item Two</TabPanel>
         <TabPanel value="3">Item Three</TabPanel>

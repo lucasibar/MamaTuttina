@@ -44,8 +44,13 @@ const {
   DinnerIngredients,
   ExtraRecipes,
   ExtraIngredients,
-  RecipeIngredients
+  RecipeIngredients,
+  PurchaseListIngredients,
+  PurchaseLists
 } = sequelize.models;
+
+PurchaseLists.belongsToMany(Ingredients, {through: 'PurchaseListIngredients'});
+Ingredients.belongsToMany(PurchaseLists, {through: 'PurchaseListIngredients'});
 
 Days.belongsToMany(Recipes, {through: 'LunchRecipes', as: 'lunchRecipes'});
 Recipes.belongsToMany(Days, {through: 'LunchRecipes', as: 'lunchDays'});

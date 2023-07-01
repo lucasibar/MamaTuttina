@@ -4,7 +4,8 @@ import {
   GET_INGREDIENTS,
   GET_OBJETIVES,
   POST_FOOD,
-  SET_INITIAL_STATE
+  SET_INITIAL_STATE,
+  LISTS_PURCHASES
   } from './actions'
   const initialState = {
     dataAlreadyLoad:false,
@@ -18,6 +19,16 @@ import {
 
   const rootReducer = (state = initialState, action) => {
   switch(action.type) {
+    case LISTS_PURCHASES:
+      return {
+        ...state,
+        dataAlreadyLoad: true,
+        actualDay: action.payload.day,
+        ingredients: action.payload.ingredients,
+        recipes: action.payload.recipes
+    }
+
+
     case SET_INITIAL_STATE:
       return {
         ...state,

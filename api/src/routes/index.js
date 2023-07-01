@@ -6,6 +6,7 @@ const recipesRoutes = require ('./rutasPrincipales/recipesRoutes')
 const mealRoutes = require ('./rutasPrincipales/mealRoutes')
 const ingredientsRoutes = require ('./rutasPrincipales/ingredientsRoutes')
 const objetivesRoutes = require ('./rutasPrincipales/objetivesRoutes')
+const purchasesRoutes = require ('./rutasPrincipales/purchasesRoutes')
 
 // var morgan = require('morgan')
 // router.use(morgan('tiny'))
@@ -13,11 +14,12 @@ const objetivesRoutes = require ('./rutasPrincipales/objetivesRoutes')
 const router = Router();
 router.use('/dataload', dataloadRoutes)
 
-router.use('/setInitialState', setInitialStateRoutes)
 router.use('/days', daysRoutes)
 router.use('/meal', mealRoutes)
 router.use('/recipes', recipesRoutes)
 router.use('/ingredients', ingredientsRoutes)
 router.use('/objetives', objetivesRoutes)
+router.use('/setInitialState', setInitialStateRoutes)
+router.use('/purchases', purchasesRoutes)
 
 module.exports = router;
