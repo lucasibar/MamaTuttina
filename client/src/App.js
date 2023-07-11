@@ -30,6 +30,10 @@ function App() {
     exact path="/purchase"
     component ={Purchase}
     />  
+    {/* <Route 
+    exact path="/purchase"
+    component ={Purchase}
+    />   */}
   </Switch>   
   </div>
   )

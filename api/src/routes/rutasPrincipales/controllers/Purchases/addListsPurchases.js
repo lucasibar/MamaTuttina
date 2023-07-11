@@ -3,23 +3,30 @@ const { PurchaseLists, Ingredients, PurchaseListIngredients } = require("../../.
 const addListsPurchases = async function ({ name, ingredients }) {
   try {
     const [listsPurcheses, created] = await PurchaseLists.findOrCreate({
-      where: {name: name}
+      where: {name: name},
+      inclues:[{
+        model: Ingredients,
+        attributes: ['name'],
+        through:  { attributes: ['amount'] }
+        }
+      ]
     });
-    if
 
     for (const name in ingredients) {
-      console.log(name)
-      const ingredient = await Ingredients.findOne({
-        where:{name}
-      })
-      const [ amountIngredient, created ] = await PurchaseListIngredients.findOrCreate({
+      const ingredient = await Ingredients.findOne({where:{name}})
+
+      const [setAmount, created] = await PurchaseListIngredients.findOrCreate({
         where:{
           PurchaseListId: listsPurcheses.id,
           IngredientId: ingredient.id
-        }})
+        }
+      })
+
+      setAmount.amount = ingredients[name]
+      await setAmount.save()
     }
-    // console.log(respons)
-    return "created";
+
+    return { name, ingredients };
 
   } catch (error) {
     throw new Error('Failed to connect to the database');

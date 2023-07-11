@@ -1,15 +1,15 @@
-const { PurchaseLists } = require("../../../../db");
+const { Ingredients, PurchaseLists } = require("../../../../db");
 
 const getListsPurchases = async function () {   
   const listsPurchases = await PurchaseLists.findAll({
     include: [
-        {
-          model: Ingredients,
-          through: { attributes: ['amount'] }
-        }
+      { 
+        model: Ingredients,
+        attributes: ['name'],
+        through:  { attributes: ['amount'] }
+      }
     ]
   });
-
   return listsPurchases
 }
 

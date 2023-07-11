@@ -10,10 +10,12 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { getIngredients } from '../../../redux/actions';
 import './ListIngredients.css'
+import IngredientItem from './IngredientItem/IngredientItem'
 
 
 
-export default function ListIngredients() {
+export default function ListIngredients({ingredientsAmountsList, listID}) {
+
   let dispatch = useDispatch()
 
   useEffect(()=>{
@@ -25,18 +27,13 @@ export default function ListIngredients() {
   return (
     <div>
         {ingredients?.map((ingredient, index)=>
-        <div key={index} className='ingredientItem'>
-          <ListItemAvatar>
-              <Avatar><FolderIcon /></Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={ingredient.name} />
-          {/* <ControlPointIcon color='primary'/> */}
-          <div className='amountItem'>
-              {true ? <button>-</button> : <DeleteOutlineIcon fontSize="small" />}
-              <button>1</button>
-              <button>+</button>
-          </div>
-        </div>
+          <IngredientItem 
+          key={index}
+          amountIngredient={ingredientsAmountsList.filter(ing=> ing.name=== ingredient.name)[0]} 
+          name={ingredient.name}
+          ingredientID={ingredient.id}
+          listID={listID}
+          />
         )}
     </div>
 
