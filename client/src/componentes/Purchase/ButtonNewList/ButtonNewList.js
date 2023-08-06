@@ -1,17 +1,11 @@
 import React from 'react';
-import { useDispatch} from 'react-redux';
-import {  newPurchaseList } from '../../../redux/actions';
+
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 
 export default function Purchase() {
-  let dispatch = useDispatch()
-  
-  const createNewPurchaseList = (e) =>{
-    dispatch(newPurchaseList())
-  }
 
   return (
-            <ControlPointIcon color='primary' sx={{ mt: "10px"}} onClick={createNewPurchaseList}/>
+            <ControlPointIcon color='primary' sx={{ mt: "10px"}} />
   );
 }
 

@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import HandleRecipe from './HandleRecipe/HandleRecipe'
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {getWeek} from '../../redux/actions'
 import './Week.css'
 
@@ -18,50 +19,7 @@ export default function Week() {
     dispatch(getWeek())
   },[dispatch])
 
-
-  let week = [ 
-    {day:'Lunes',
-    dayId:1,
-    lunchCategory:'Legumbre',
-    dinnerCategory:'Carne',
-    extraCategory:'Lacteo'  
-    }, 
-    {day:'Martes',
-    dayId:2,
-    lunchCategory:'Pasta',
-    dinnerCategory:'Pescado',
-    extraCategory:'Panificado'  
-    }, 
-    {day:'Miercoles',
-    dayId:3,
-    lunchCategory:'Carne',
-    dinnerCategory:'Arroz',
-    extraCategory:'Fruta'  
-    }, 
-    {day:'Jueves',
-    dayId:4,
-    lunchCategory:'Legumbre',
-    dinnerCategory:'Pescado',
-    extraCategory:'Lacteo'  
-    }, 
-    {day:'Viernes',
-    dayId:5,
-    lunchCategory:'Arroz',
-    dinnerCategory:'Carne',
-    extraCategory:'Permitidos'  
-    }, 
-    {day:'Sabado',
-    dayId:6,
-    lunchCategory:'Pescado',
-    dinnerCategory:'Pollo',
-    extraCategory:'Panificado'  
-    }, 
-    {day:'Domingo',
-    dayId:7,
-    lunchCategory:'Pasta',
-    dinnerCategory:'Carne',
-    extraCategory:'Permitidos'  
-    }]
+  const week = useSelector(state=> state.week)
 
   return (
     <div>

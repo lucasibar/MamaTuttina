@@ -6,25 +6,36 @@ export const GET_INGREDIENTS= "GET_INGREDIENTS"
 export const GET_OBJETIVES= "GET_OBJETIVES" 
 export const POST_FOOD= "POST_FOOD" 
 export const LISTS_PURCHASES= "LISTS_PURCHASES" 
-export const CHANGE_AMOUNT_INGREDIENT_PURCHASES= "CHANGE_AMOUNT_INGREDIENT_PURCHASES" 
-export const NEW_LISTS_PURCHASES= "NEW_LISTS_PURCHASES" 
+// export const CHANGE_AMOUNT_INGREDIENT_PURCHASES= "CHANGE_AMOUNT_INGREDIENT_PURCHASES" 
+export const CHANGE_AMOUNT= "CHANGE_AMOUNT" 
 
 
 //PURCHASES CRUD
-export const newPurchaseList = () => {
-  return {type: NEW_LISTS_PURCHASES}
+export const changeAmount = (listID, nameIngredient, amount) => {
+  return {type: CHANGE_AMOUNT, payload: {listID, nameIngredient, amount}}
 }
 
-export const putListIngredient = (changes) => dispatch => {
-  return axios.put(`http://localhost:3001/purchases`, changes)
-    .then(data => {
-      dispatch({type: CHANGE_AMOUNT_INGREDIENT_PURCHASES, payload: data.data})
-    })
-}
+// export const putListIngredient = (changes) => dispatch => {
+//   return axios.put(`http://localhost:3001/purchases`, changes)
+//     .then(data => {
+//       dispatch({type: CHANGE_AMOUNT_INGREDIENT_PURCHASES, payload: data.data})
+//     })
+// }
 export const getListsPurchases = () => dispatch => {
   return axios.get(`http://localhost:3001/purchases`)
     .then(data => {
-      dispatch({type: LISTS_PURCHASES, payload: data.data})
+      dispatch({type: LISTS_PURCHASES, payload: [
+          {
+            id: "blabla",
+            name: "Nombre de lista",
+            ingredients: {"pollo": 100, "lechuga": 435}
+          },
+          {
+            id: "terotero",
+            name: "Compras",
+            ingredients: {"pollo": 100, "lechuga": 435}
+          }
+        ]})
     })
 }
 

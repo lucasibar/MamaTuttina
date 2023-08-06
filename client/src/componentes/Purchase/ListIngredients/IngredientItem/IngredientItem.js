@@ -8,45 +8,37 @@ import IconButton from "@mui/material/IconButton";
 import FolderIcon from "@mui/icons-material/Folder";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { putListIngredient } from '../../../../redux/actions';
+// import { putListIngredient } from '../../../../redux/actions';
+import './IngredientItem.css'
+import { changeAmount } from '../../../../redux/actions';
+
+export default function IngredientItem({ name, ingredientAmount, listID }) {
+let dispatch = useDispatch()
+
+let [amount, setAmount] = useState(0)
+useEffect(()=>{
+    setAmount(ingredientAmount)
+},[ingredientAmount])
+
+
+useEffect(() => {
+    return () => {
+      dispatch(changeAmount(listID, name, amount));
+    };
+  }, [dispatch, listID, name, amount]);
 
 
 
-
-export default function IngredientItem({ amountIngredient, name, listID, ingredientID }) {
-// let dispatch = useDispatch()
-// let [amount, setAmount] = useState(0)
-// useEffect(()=>{
-//     if(amountIngredient!==undefined) setAmount(amountIngredient.PurchaseListIngredients.amount)
-// },[amountIngredient])
-
-// useEffect(()=>{
-//     return function (){
-//         if(amount!==amountIngredient.PurchaseListIngredients.amount){
-//             let changes = {
-//                 listID,
-//                 ingredientName: name,
-//                 ingredientID,
-//                 amount
-//             }
-        
-//             dispatch(putListIngredient(changes))
-//         }
-//     }
-//   },[dispatch, amount, amountIngredient, ingredientID, listID, name])
-
-
-
-// const handleDecrement = async (e)=>{
-//     setAmount(prevAmount => prevAmount - 1);
-// }
-// const handleIncrement = async (e)=>{
-//     setAmount(prevAmount => prevAmount + 1);
-// }
+const handleDecrement = async (e)=>{
+    setAmount(prevAmount => prevAmount - 1);
+}
+const handleIncrement = async (e)=>{
+    setAmount(prevAmount => prevAmount + 1);
+}
 
   return (
 <div className='ingredientItem'>
-    {/* <ListItemAvatar>
+    <ListItemAvatar>
 
         <Avatar><FolderIcon /></Avatar>
     </ListItemAvatar>
@@ -61,11 +53,22 @@ export default function IngredientItem({ amountIngredient, name, listID, ingredi
         </div>:
 
         <ControlPointIcon color='primary' onClick={handleIncrement}/>
-    } */}
+    }
     </div>
 
   );
 }
 
 
-
+    //[
+      //   {
+      //     id: "blabla",
+      //     name: "Nombre de lista"
+      //     ingredients: [{name: "pollo", amount: 250}, {name: "lechuga", amount: 100} ]
+      //   },
+      //   {
+      //     id: "terotero",
+      //     name: "Compras"
+      //     ingredients:[{name: "cebolla", amount: 1}, {name: "tomate", amount: 2} ]
+      //   }
+      // ]
