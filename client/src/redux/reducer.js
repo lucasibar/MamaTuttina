@@ -6,62 +6,20 @@ import {
   POST_FOOD,
   SET_INITIAL_STATE,
   LISTS_PURCHASES,
-  CHANGE_AMOUNT
+  CHANGE_AMOUNT,
+  GET_DAY
   } from './actions'
 
 
-
-  let week = [ 
-    {day:'Lunes',
-    dayId:1,
-    lunchCategory:'Legumbre',
-    dinnerCategory:'Carne',
-    extraCategory:'Lacteo'  
-    }, 
-    {day:'Martes',
-    dayId:2,
-    lunchCategory:'Pasta',
-    dinnerCategory:'Pescado',
-    extraCategory:'Panificado'  
-    }, 
-    {day:'Miercoles',
-    dayId:3,
-    lunchCategory:'Carne',
-    dinnerCategory:'Arroz',
-    extraCategory:'Fruta'  
-    }, 
-    {day:'Jueves',
-    dayId:4,
-    lunchCategory:'Legumbre',
-    dinnerCategory:'Pescado',
-    extraCategory:'Lacteo'  
-    }, 
-    {day:'Viernes',
-    dayId:5,
-    lunchCategory:'Arroz',
-    dinnerCategory:'Carne',
-    extraCategory:'Permitidos'  
-    }, 
-    {day:'Sabado',
-    dayId:6,
-    lunchCategory:'Pescado',
-    dinnerCategory:'Pollo',
-    extraCategory:'Panificado'  
-    }, 
-    {day:'Domingo',
-    dayId:7,
-    lunchCategory:'Pasta',
-    dinnerCategory:'Carne',
-    extraCategory:'Permitidos'  
-    }]
+  import {
+    organizarmeLoMio,
+    recetas,
+    week
+    } from './db'
+  
 
 
-
-
-
-
-
-
+  
   const initialState = {
     dataAlreadyLoad:false,   
     fullWeek: [],
@@ -71,15 +29,33 @@ import {
     ingredients:[],
     purchases:[],
     newPurchaseList:[],
-
+    day: {},
     week:week
   };
 
   const rootReducer = (state = initialState, action) => {
-  switch(action.type) {
+    switch(action.type) {
+      case GET_INGREDIENTS:
+        return {
+          ...state,
+          ingredients: action.payload
+      }
+      case GET_DAY:
+        return {
+          ...state,
+          day: action.payload
+      }
+      
+      
+      
+      
+      
+      
 
 
 
+
+      
     case CHANGE_AMOUNT:
       const [listID, nameIngredient, amount] = action.payload
       const changeAmounts = state.purchases.map(list=>{
@@ -138,11 +114,6 @@ import {
       return {
         ...state,
         recipes: action.payload
-    }
-    case GET_INGREDIENTS:
-      return {
-        ...state,
-        ingredients: action.payload
     }
     case GET_OBJETIVES:
       return {

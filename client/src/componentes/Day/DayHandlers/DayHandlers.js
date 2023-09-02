@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import MealHandler from './MealHandler/MealHandler'
 
 
-function DayHandlers() {
+function DayHandlers({day}) {
    const actualDay = useSelector(state=> state.actualDay)
+
    return (
     <>
-      <MealHandler mealName='Almuerzo' dayId={actualDay?.id || 0} mealRecipes={actualDay?.lunchRecipes}  mealIngredients={actualDay?.lunchIngredients} />
-      <MealHandler mealName='Cena' dayId={actualDay?.id || 0} mealRecipes={actualDay?.dinnerRecipes}  mealIngredients={actualDay?.dinnerIngredients} />
-      <MealHandler mealName='Extra' dayId={actualDay?.id || 0} mealRecipes={actualDay?.extraRecipes}  mealIngredients={actualDay?.extraIngredients} />
+      <MealHandler mealName='Almuerzo' recipes={day.lunchRecipes} ingredients={day.lunchIngredients}/>
+      <MealHandler mealName='Cena' recipes={day.dinnerRecipes} ingredients={day.dinnerIngredients}/>
+      <MealHandler mealName='Extra' recipes={day.extraRecipes} ingredients={day.extraIngredients}/>
     </>
    )
 }

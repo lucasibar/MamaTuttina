@@ -7,7 +7,7 @@ import{useState, useEffect} from 'react'
 
 
 
-function MealHandler({dayId, mealName, mealRecipes, mealIngredients}) {
+function MealHandler({dayId, mealName, mealRecipes, mealIngredients, recipes, ingredients}) {
   const [meal, setMeal] = useState('')
 
   useEffect(()=>{
@@ -19,12 +19,15 @@ function MealHandler({dayId, mealName, mealRecipes, mealIngredients}) {
   return (
     <>
 
-      <div className='ingredient'><h4>{mealName}</h4></div>
+      <div className='ingredient'>
+      <h4>{mealName}</h4>
+      <h4> 723 kcal</h4>
+      </div>
 
-      <RecipesList mealRecipes={mealRecipes}/>
-      <IngredientsList mealIngredients={mealIngredients}/>
+      <RecipesList recipes={recipes? recipes:[]}/>
+      <IngredientsList ingredients={ingredients?ingredients:[]}/>
       <div className='handlers'>
-        <InputFoodHandler dayId={dayId} meal={meal} mealRecipes={mealRecipes} mealIngredients={mealIngredients}/>
+        <InputFoodHandler recipes={recipes} ingredients={ingredients} dayId={dayId} meal={meal} mealRecipes={mealRecipes} mealIngredients={mealIngredients}/>
       </div>
     </>
   )

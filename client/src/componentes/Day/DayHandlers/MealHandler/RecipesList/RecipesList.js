@@ -2,18 +2,15 @@ import React from 'react'
 import './RecipesList.css'
 
 
-function RecipesList({mealRecipes}) {
-
-
+function RecipesList({recipes}) {
    return (
     <>
-      {mealRecipes?.map((recipe, i)=>{
+      {recipes?.map((recipe, i)=>{
         return(
           <div key={i} className='recipe'>
           <p >{recipe.name}</p>
-          <p>{recipe.Ingredients.reduce((acc, ingredient)=>{
-            return (ingredient.kcal100gr/100) * (ingredient.RecipeIngredients.amount)
-          },0)} kcal  </p>
+          <p >{recipe.portions} </p>{/* aca tendrian que ir las personitas */}
+          
           </div>
         )
       })}

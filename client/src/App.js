@@ -10,9 +10,9 @@ function App() {
   <div className="App">
   <Switch>
     <Route 
-    exact path="/"
-      component ={Home}
-    />
+    exact path="/day"
+    component ={Day}
+    />  
     {/* 
     <Route 
     exact path="/"
@@ -23,10 +23,6 @@ function App() {
       component ={Week}
     />
     <Route 
-    exact path="/day"
-    component ={Day}
-    />  
-    <Route 
     exact path="/purchase"
     component ={Purchase}
     />  
@@ -34,6 +30,10 @@ function App() {
     exact path="/purchase"
     component ={Purchase}
     />   */}
+    <Route 
+    exact path="/"
+      component ={Home}
+    />
   </Switch>   
   </div>
   )

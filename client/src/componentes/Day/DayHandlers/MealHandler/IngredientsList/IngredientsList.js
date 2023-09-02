@@ -1,24 +1,16 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './IngredientsList.css'
 
 
 
-function IngredientsList({mealIngredients}) {
-const [ enableBotons, setEnableBotons ]= useState(false)
+function IngredientsList({ingredients}) {
   return (
     <>
-    {mealIngredients?.map((ingredient, i)=>{
+    {ingredients?.map((ingredient, i)=>{
       return(
         <div key={i} className='ingredient'>
-        <p >{ingredient.name}</p>
-        <button onClick={()=> setEnableBotons(!enableBotons)}>
-        {enableBotons?
-        <p>{(ingredient.kcal100gr/100) * (ingredient.amountIngredientDay.amount)} kcal </p>
-        : 
-
-        {/* <IngredientButton /> */}
-        }
-        </button>
+          <p >{ingredient.nameIngredient}</p>
+          <p >{ingredient.amount}grs</p>
         </div>
       )
     })}
