@@ -1,5 +1,5 @@
 import {
-  GET_DAYS,
+  GET_WEEK,
   GET_RECIPES,
   GET_INGREDIENTS,
   GET_OBJETIVES,
@@ -11,18 +11,13 @@ import {
   } from './actions'
 
 
-  import {
-    organizarmeLoMio,
-    recetas,
-    week
-    } from './db'
   
 
 
   
   const initialState = {
     dataAlreadyLoad:false,   
-    fullWeek: [],
+    organiceWeek: [],
     actualDay:{},
     objective: 2000,
     recipes:[],
@@ -30,32 +25,21 @@ import {
     purchases:[],
     newPurchaseList:[],
     day: {},
-    week:week
+    calculadora:[]
   };
 
   const rootReducer = (state = initialState, action) => {
     switch(action.type) {
-      case GET_INGREDIENTS:
-        return {
-          ...state,
-          ingredients: action.payload
-      }
-      case GET_DAY:
-        return {
-          ...state,
-          day: action.payload
-      }
-      
-      
-      
-      
-      
-      
-
-
-
-
-      
+    case GET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.payload
+    }
+    case GET_DAY:
+      return {
+        ...state,
+        day: action.payload
+    }
     case CHANGE_AMOUNT:
       const [listID, nameIngredient, amount] = action.payload
       const changeAmounts = state.purchases.map(list=>{
@@ -73,22 +57,6 @@ import {
         ...state,
         purchases: changeAmounts
     }
-
-    //[
-      //   {
-      //     id: "blabla",
-      //     name: "Nombre de lista"
-      //     ingredients: [{name: "pollo", amount: 250}, {name: "lechuga", amount: 100} ]
-      //   },
-      //   {
-      //     id: "terotero",
-      //     name: "Compras"
-      //     ingredients:[{name: "cebolla", amount: 1}, {name: "tomate", amount: 2} ]
-      //   }
-      // ]
-
-
-
     case LISTS_PURCHASES:
       return {
         ...state,
@@ -102,13 +70,10 @@ import {
         ingredients: action.payload.ingredients,
         recipes: action.payload.recipes
     }
-
-    case GET_DAYS:
-      const lastDay = action.payload.filter(day => day.day === 'Tuesday')
+    case GET_WEEK:
       return {
         ...state,
-        fullWeek: action.payload,
-        actualDay: lastDay[1]
+        organiceWeek: action.payload
     }
     case GET_RECIPES:
       return {

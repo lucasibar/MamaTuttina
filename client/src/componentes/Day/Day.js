@@ -9,12 +9,7 @@ import {getWeek, getDay, getIngredients, getRecipes} from '../../redux/actions'
 
 
 function Day(props) {
-      //**TODO ESTO HAY QUE UNIRLO EN UNO SOLO */
-  const actualDay = useSelector(state=> state.actualDay)
-  const day = useSelector(state=> state.day)
-  const ingredients = useSelector(state=> state.ingredients)
-  const recipes = useSelector(state=> state.recipes)
- 
+  
   let dispatch = useDispatch() 
   useEffect(()=>{
     //**TODO ESTO HAY QUE UNIRLO EN UNO SOLO */
@@ -24,7 +19,11 @@ function Day(props) {
     dispatch(getRecipes())
   },[dispatch])
   
-
+  //**TODO ESTO HAY QUE UNIRLO EN UNO SOLO */
+  const actualDay = useSelector(state=> state.actualDay)
+  const day = useSelector(state=> state.day)
+  const recipes = useSelector(state=> state.recipes)
+  
 //-------------------------------------------------------------------------------------------------------------------
 
 //----EJERCICIO DE LOGICA---------------------------------------------------------------------------------------------------------------
@@ -34,58 +33,51 @@ function Day(props) {
 // yo lo hago asi nomas pero estaria bueno ver denuevo la clase y mejorar esta parte
 // console.log(recipes)
 // console.log(day)
+let dinnerIngredients=[]
+let lunchIngredients=[]
+let extraIngredients=[]
+let dinnerRecipes = []
+let extraRecipes = []
+let lunchRecipes = []
 
-const {dinnerIngredients, dinnerRecipes, extraIngredients, extraRecipes, lunchIngredients, lunchRecipes} = day
+if(day.day){
 
-//PONIENDO LAS RECETAS FORMATO ARRAY INGREDIENTES
-const dinnerRecipesIngredients = dinnerRecipes?.reduce((acc, recipe)=>{
-if(recipe.ingredients.length>0) return acc.concat(recipe.ingredients)
-},[])
+  //DINNER
+  if(day.dinnerIngredients.length>0){
+    dinnerIngredients  = [...dinnerIngredients, ...day.dinnerIngredients]
+  }
+  if(day.dinnerRecipes.length>0){
+    const ingredientExtract = day.dinnerRecipes?.reduce((acc, recipe)=>{
+      return acc.concat(recipe.ingredients)
+    },[])
+    dinnerRecipes= [...dinnerRecipes, ...ingredientExtract]
+  }
+
+  //EXTRA
+  if(day.extraIngredients.length>0){
+    extraIngredients  = [...extraIngredients, ...day.extraIngredients]
+  }
+  if(day.extraRecipes.length>0){
+    const ingredientExtract = day.extraRecipes?.reduce((acc, recipe)=>{
+      return acc.concat(recipe.ingredients)
+    },[])
+    extraRecipes= [...extraRecipes, ...ingredientExtract]
+  }
+
+  //LUNCH
+  if(day.lunchIngredients.length>0){
+    lunchIngredients  = [...lunchIngredients, ...day.lunchIngredients]
+  }
+  if(day.lunchRecipes.length>0){
+    const ingredientExtract = day.lunchRecipes?.reduce((acc, recipe)=>{
+      return acc.concat(recipe.ingredients)
+    },[])
+    lunchRecipes= [...lunchRecipes, ...ingredientExtract]
+  }
 
 
+}
 
-const extraRecipesIngredients = extraRecipes?.reduce((acc, recipe)=>{
-if(recipe.ingredients.length>0) return acc.concat(recipe.ingredients)
-},[])
-const lunchRecipesIngredients = lunchRecipes?.reduce((acc, recipe)=>{
-if(recipe.ingredients.length>0) return acc.concat(recipe.ingredients)
-},[])
-const KcalLunchRecipes = lunchRecipesIngredients?.map(e=>{
-  let KcalIngredient = ingredients?.filter(ingredient=> ingredient.nameIngredient ===e.nameIngredient)
-  console.log(KcalIngredient)
-  // let ingredientsGrams = e.amount*dinnerRecipes?.portions
-  // let KcalTotal = KcalIngredient.Kcal*ingredientsGrams
-  // return KcalTotal
-})
- console.log(KcalLunchRecipes)
-
-FUCK YOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
-
-//KCAL
-// const KcaldinnerIngredients = dinnerIngredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//     return 1+acc
-// },0) 
-// const KcaldinnerRecipes = dinnerRecipesIngredients?.ingredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//    return 1 +acc
-// },0) 
-// const KcalextraIngredients = extraIngredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//    return 1 +acc
-// },0) 
-// const KcalextraRecipes = extraRecipesIngredients?.ingredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//   return 1+acc
-// },0) 
-// const KcallunchIngredients = lunchIngredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//     return 1+acc
-// },0) 
-// const KcallunchRecipes = lunchRecipesIngredients?.ingredients?.reduce((acc, ingredient)=>{
-//   let ingredientBDD= ingredients?.find(ingredient.nameIngredient)
-//     return 1+acc
-// },0) 
 
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -93,13 +85,19 @@ FUCK YOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 
 
 
-
-
+const ingredientsList = [...dinnerIngredients, ...lunchIngredients, ...extraIngredients, ...dinnerRecipes, ...extraRecipes, ...lunchRecipes]
+// console.log(dinnerIngredients)
+// console.log(lunchIngredients)
+// console.log(extraIngredients)
+// console.log(dinnerRecipes)
+// console.log(extraRecipes)
+// console.log(lunchRecipes)
+// console.log(ingredientsList)
   return (
     <div style={{ backgroundColor: '#f2f2f2', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%',   overflow: 'auto'}}>
       <DayPagination day={day.day}/>
-      <Objetives/>
-      <DayHandlers day={day}/>
+      <Objetives ingredientsList={ingredientsList}/>
+      <DayHandlers extraIngredients={[...extraIngredients, ...extraRecipes]} lunchIngredients={[...lunchIngredients, ...lunchRecipes]} dinnerIngredients={[...dinnerIngredients, ...dinnerRecipes]} day={day}/>
       <Exercise/>
     </div>
   )

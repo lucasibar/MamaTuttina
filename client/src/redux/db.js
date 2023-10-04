@@ -1,45 +1,52 @@
 export const organizarmeLoMio = [
     {
       dayId:1,
+      day:"Lunes",
       lunch:'Ensalada Chaucha y Papa',
       dinner:'Bife con mixta',
-      extra:'Ensalada de Frutas'  
+      extra:''  
     },
     {
       dayId:2,
+      day:"Martes",
       lunch:'Pasta con verduras y salsa de soja(Pollo) ',
       dinner:'Paella',
       extra:'Mate y Pepas'  
     },
     {
       dayId:3,
-      lunchCategory:'Ensalada de Pollo, Tomate y Cebolla',
-      dinnerCategory:'Paella',
-      extraCategory:'Ensalada de Frutas'  
+      day:"Miecoles",
+      lunch:'Ensalada de Pollo, Tomate y Cebolla',
+      dinner:'Paella',
+      extra:'Ensalada de Frutas'  
     },
     {
       dayId:4,
-      lunchCategory:'Milanesa de Soja con ensalada verde',
-      dinnerCategory:'sardinas con Romero',
-      extraCategory:'Pinchos de aceituna, morron y queso fresco marinado'  
+      day:"Jueves",
+      lunch:'Milanesa de Soja con ensalada verde',
+      dinner:'sardinas con Romero',
+      extra:'Pinchos de aceituna, morron y queso fresco marinado'  
     }, 
     {
       dayId:5,
-      lunchCategory:'Arroz',
-      dinnerCategory:'Hamburguesa',
-      extraCategory:'CocaCola'  
+      day:"Viernes",
+      lunch:'Arroz',
+      dinner:'Hamburguesa',
+      extra:'CocaCola'  
     }, 
     {
       dayId:6,
-      lunchCategory:'Ensalada Cesar bien hecha;)',
-      dinnerCategory:'Pollo Fritas',
-      extraCategory:'Panaderia'  
+      day:"Sabado",
+      lunch:'Ensalada Cesar bien hecha;)',
+      dinner:'Pollo Fritas',
+      extra:'Panaderia'  
     }, 
     {
       dayId:7,
-      lunchCategory:'Pasta rellena',
-      dinnerCategory:'Asado',
-      extraCategory:'Torta'  
+      day:"Domingo",
+      lunch:'Pasta rellena',
+      dinner:'Asado',
+      extra:'Torta'  
     }
     ] 
 
@@ -392,7 +399,7 @@ export const recetas = [
 //CALORÍAS por cada 100 gramos
 export const ingredientes = [
 //VERDURAS Y HORTALIZAS    
-{activo: false, nameIngredient:"Aceitunas negras", Kcal: 349},
+{activo: false, nameIngredient:"Aceitunas negras", Kcal: 349, fat:35},
 {activo: false, nameIngredient:"Aceitunas verdes", Kcal: 132},
 {activo: false, nameIngredient:"Acelgas", Kcal: 33},
 {activo: false, nameIngredient:"Ajos", Kcal: 169},
