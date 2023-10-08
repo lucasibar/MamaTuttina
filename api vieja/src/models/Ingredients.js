@@ -26,12 +26,8 @@ module.exports = (sequelize) => {
      type: DataTypes.INTEGER
     },
     category: {
-      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos'),
-      default:'Permitidos'
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      default: true
+      type: DataTypes.STRING
+      // allowNull: false,
     }
   },
   {

@@ -41,25 +41,9 @@ const {
   PurchaseLists
 } = sequelize.models;
 
-// PurchaseLists.belongsToMany(Ingredients, {through: 'PurchaseListIngredients'});
-// Ingredients.belongsToMany(PurchaseLists, {through: 'PurchaseListIngredients'});
 
-// Days.belongsToMany(Recipes, {through: 'LunchRecipes', as: 'lunchRecipes'});
-// Recipes.belongsToMany(Days, {through: 'LunchRecipes', as: 'lunchDays'});
-// Days.belongsToMany(Recipes, {through: 'DinnerRecipes', as: 'dinnerRecipes'});
-// Recipes.belongsToMany(Days, {through: 'DinnerRecipes', as: 'dinnerDays'});
-// Days.belongsToMany(Recipes, {through: 'ExtraRecipes', as: 'extraRecipes'});
-// Recipes.belongsToMany(Days, {through: 'ExtraRecipes', as: 'extraDays'});
-
-// Days.belongsToMany(Ingredients, {through: 'LunchIngredients' , as: 'lunchIngredients'});
-// Ingredients.belongsToMany(Days, {through: 'LunchIngredients' , as: 'lunchDays'});
-// Days.belongsToMany(Ingredients, {through: 'DinnerIngredients', as: 'dinnerIngredients'});
-// Ingredients.belongsToMany(Days, {through: 'DinnerIngredients', as: 'dinnerDays'});
-// Days.belongsToMany(Ingredients, {through: 'ExtraIngredients' , as: 'extraIngredients'});
-// Ingredients.belongsToMany(Days, {through: 'ExtraIngredients' , as: 'extraDays'});
-
-// Recipes.belongsToMany(Ingredients, { through: 'RecipeIngredients' });
-// Ingredients.belongsToMany(Recipes, { through: 'RecipeIngredients' });
+Days.belongsToMany(Recipes, {through: 'DayRecipe', as: 'lunch'});
+Recipes.belongsToMany(Days, {through: 'LunchRecipes', as: 'lunchDays'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

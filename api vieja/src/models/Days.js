@@ -8,17 +8,10 @@ module.exports = (sequelize) => {
       autoIncrement: true,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-    },
-    number: {
-      type:DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-    },
-    actualDay: {
-      type: DataTypes.BOOLEAN,
-      default: false
+    day: {
+      type:DataTypes.STRING,
+      // allowNull: false,
+      // unique: true,
     }
   },
   {
