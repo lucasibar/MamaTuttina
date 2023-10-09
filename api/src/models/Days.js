@@ -4,17 +4,24 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   sequelize.define('Days', {
     id: {
-      type: DataTypes.INTEGER,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    name: {
+      type: DataTypes.STRING,
+    },
+    number: {
+      type:DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
     },
-    day: {
-      type:DataTypes.STRING,
-      allowNull: false,
-      // unique: true,
+    mealNumber: {
+      type:DataTypes.INTEGER,
+      defaultValue: 3
     },
-    totalKcal: {
-      type: DataTypes.INTEGER,
+    actualDay: {
+      type: DataTypes.BOOLEAN,
+      default: false
     }
   },
   {

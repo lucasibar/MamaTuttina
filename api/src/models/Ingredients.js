@@ -3,13 +3,17 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Ingredients', {
-    name: {
+    id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      // allowNull: false
     },
-    kcla100gr:{
+    name: {
+      type: DataTypes.STRING,
+      // allowNull: false,
+    },
+    kcal100gr:{
      type: DataTypes.INTEGER
     },
     carbs:{
@@ -20,8 +24,15 @@ module.exports = (sequelize) => {
     },
     fats:{
      type: DataTypes.INTEGER
+    },
+    category: {
+      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos'),
+      default:'Permitidos'
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      default: true
     }
-   
   },
   {
     timestamps: false,

@@ -1,21 +1,29 @@
-import { 
-  GET_DAYS
+import {
+  GET_DAYS,
+  GET_DAY_RECIPES
   } from './actions'
+
   const initialState = {
-    days: [],
+    days:[],
+    dayRecipes:[]
   };
-  
   const rootReducer = (state = initialState, action) => {
-  switch(action.type) {
+    switch(action.type) {
       case GET_DAYS:
         return {
           ...state,
-          days: action.payload       
+          days: action.payload
       }
+      case GET_DAY_RECIPES:
+        return {
+          ...state,
+          dayRecipes: action.payload
+      }
+
+
   default: return state
   };
   };
-  
+
   export default rootReducer;
-  
-  
+

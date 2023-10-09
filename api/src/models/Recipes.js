@@ -1,22 +1,20 @@
 const { DataTypes } = require('sequelize');
-// const {Days, Recipes, Ingredients } = require("../db");
-
 
 module.exports = (sequelize) => {
   sequelize.define('Recipes', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
     category:  {
-      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos')
+      type: DataTypes.ENUM ("None", 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos'),
+      default:'None' 
     }
+  
   },
   {
     timestamps: false,

@@ -1,32 +1,27 @@
-import React, {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import Link from 'react-router-dom'
-import {getDays} from '../redux/actions'
+import * as React from 'react';
+import { useEffect } from 'react'
+import { useDispatch} from 'react-redux';
 
-function Home() {
- 
+
+
+export default function Home() {
   let dispatch = useDispatch() 
   useEffect(()=>{
-    dispatch(getDays())
+    // dispatch(getIngredients())
+    // dispatch(getRecipes())
   },[dispatch])
-  const allDays = useSelector(state=> state.days)
-  
-  const clickOnDay= (id)=>{
-
-  }
   
   return (
-    <>
-    <h1>que onda way</h1>
-   {allDays?.map(d=>(
-    <div>
-      <button onClick={clickOnDay(d.id)}>{d.day}</button>
-      {/* <div id={d.id} style={{display: }}>
-      </div> */}
+  <>
+    <div style={{ backgroundColor: '#f2f2f2', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%',   overflow: 'auto'}}>
+    <h1>ME PARECE QUE LO MEJOR ACA SERIA LA CALCULADORA DE Kcal</h1>
+      {/* <Recipe /> */}
     </div>
-   ))}
-    </>
-  )
+
+
+  </>
+  );
 }
 
-export default Home;
+
+

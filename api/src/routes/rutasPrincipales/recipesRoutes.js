@@ -1,11 +1,10 @@
 const { Router } = require('express');
-const { getRecipe} = require("./controllers/getDays")
+const { getRecipes} = require("./controllers/Recipes/getRecipes")
 
 const recipesRoutes = Router();
 
 recipesRoutes.get('/', async (req, res)=>{
-    const idRecipe = req.params
-    try{res.status(200).json('await getRecipe(idRecipe)')}
+    try{res.status(200).json(await getRecipes())}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 

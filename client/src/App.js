@@ -1,19 +1,38 @@
 import React from 'react';
-import { Route , Switch} from "react-router-dom";
-import Encuesta from './componentes/Encuesta';
+import Planification from './componentes/Planification/Planification';
+import Day from './componentes/Diary/Day';
 import Home from './componentes/Home';
+import { Route , Switch} from "react-router-dom";
 
 function App() {
   return (
   <div className="App">
-  <Switch>        
-    {/* <Route path="/encuesta">
-      <Encuesta />
-    </Route> */}
-    <Route exact path="/">
-      <Home />
-    </Route>
-
+  <Switch>
+    <Route 
+      exact path="/planification"
+      component ={Planification}
+    />
+    <Route 
+      path= "/day/:id"
+      component={Day}
+    />
+    {/* 
+    <Route 
+    exact path="/"
+      component ={Survey}
+    /> */}
+    {/* <Route 
+    exact path="/purchase"
+    component ={Purchase}
+    />   */}
+    {/* <Route 
+    exact path="/purchase"
+    component ={Purchase}
+    />   */}
+    <Route 
+    exact path="/"
+      component ={Home}
+    />
   </Switch>   
   </div>
   )
