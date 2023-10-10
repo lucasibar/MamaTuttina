@@ -10,6 +10,7 @@ daysRoutes.get('/', async (req, res)=>{
     catch(error){res.status(400).json({Error: error.message})} 
 })
 daysRoutes.get('/:id', async (req, res)=>{
+    const {id} = req.params
     try{res.status(200).json(await getDayRecipes(id))}
     catch(error){res.status(400).json({Error: error.message})} 
 })

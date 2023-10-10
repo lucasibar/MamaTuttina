@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function DayPagination({day}) {
-
+   
    return (
       <div className='dayChange'>
         <button className='dayBeforeBotton'>{'<'}</button>

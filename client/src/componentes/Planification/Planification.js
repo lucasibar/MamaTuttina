@@ -39,8 +39,8 @@ export default function Planification() {
 
           <AccordionDetails>
 
-          {day.Recipes.map((recipe)=>
-            <HandleRecipe day={day.id} recipeName={recipe.name} category={recipe.category}/>
+          {day.Recipes.map((recipe, i)=>
+            <HandleRecipe key={i} day={day.id} dayname={day.name} recipeName={recipe.name} category={recipe.category}/>
           )}
 
 

@@ -13,9 +13,14 @@ function App() {
       component ={Planification}
     />
     <Route 
-      path= "/day/:id"
+      path= "/:dayName/:dayId"
       component={Day}
     />
+    {/* <Route quiero que esta ruta tire un mensaje de error "No se encontro el dia que se esta pidiendo" 
+      path= "/day"
+      component={ErrorDay}
+    /> */}
+    
     {/* 
     <Route 
     exact path="/"
