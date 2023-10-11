@@ -1,1 +1,19 @@
+const { DataTypes } = require("sequelize");
 
+module.exports = (sequelize) => {
+  sequelize.define(
+    "ListDayRecipes",
+    {
+      amount: {
+        type: DataTypes.INTEGER
+      },
+   unit: {
+        type: DataTypes.STRING
+      },
+
+    },
+    {
+      timestamps: false,
+    }
+  );
+};
