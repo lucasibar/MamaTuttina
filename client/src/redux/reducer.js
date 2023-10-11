@@ -1,11 +1,13 @@
 import {
   GET_DAYS,
-  GET_DAY_RECIPES
+  GET_DAY_RECIPES,
+  GET_INGREDIENTS
   } from './actions'
 
   const initialState = {
     days:[],
-    dayRecipes:[]
+    dayRecipes:[],
+    ingredients:[]
   };
   const rootReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -18,6 +20,11 @@ import {
         return {
           ...state,
           dayRecipes: action.payload
+      }
+      case GET_INGREDIENTS:
+        return {
+          ...state,
+          ingredients: action.payload
       }
 
 

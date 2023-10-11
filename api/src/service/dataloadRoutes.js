@@ -712,6 +712,10 @@ dataloadRoutes.get("/", async (req, res) => {
       category: 'Carne',
     })
     await Recipes.create({
+      name:"Leche con tostadas",
+      category: 'Carne',
+    })
+    await Recipes.create({
       name:"Almuerzo",
       category: 'None',
     })
@@ -765,26 +769,34 @@ dataloadRoutes.get("/", async (req, res) => {
     const sabado = await Days.findOne({where:{name: 'Sabado'}})
     const domingo = await Days.findOne({where:{name: 'Domingo'}})
     
-
+    
     const bifeconPure = await Recipes.findOne({where:{name: 'Bife con Pure'}})
+    const lecheTostadas = await Recipes.findOne({where:{name: 'Leche con tostadas'}})
     const Almuerzo = await Recipes.findOne({where:{name: 'Almuerzo'}})
     const Cena= await Recipes.findOne({where:{name: 'Cena'}})
     const Extra= await Recipes.findOne({where:{name: 'Extra'}})
 
-
+    // {activo: false, name:"Leche entera", kcal100gr:68},  
+    // {activo: false, name: "Pan de trigo blanco", kcal100gr: 255},
     const bife = await Ingredients.findOne({where:{name: "Leche descremada"}})
     const papas = await Ingredients.findOne({where:{name: "Papas cocidas"}})
     const leche = await Ingredients.findOne({where:{name: "Bife Ancho"}})
+    const lecheEntera = await Ingredients.findOne({where:{name: "Leche entera"}})
+    const tostadas = await Ingredients.findOne({where:{name: "Pan de trigo blanco"}})
 
     //LOS RELACIONO
     await bifeconPure.addIngredient(bife, { through: { amount: 350, unit: 'gr' } })
     await bifeconPure.addIngredient(papas, { through: { amount: 200, unit: 'gr' } })
     await bifeconPure.addIngredient(leche, { through: { amount: 150, unit: 'ml' } })
+    
+    await lecheTostadas.addIngredient(lecheEntera, { through: { amount: 300, unit: 'ml' } })
+    await lecheTostadas.addIngredient(tostadas, { through: { amount: 200, unit: 'gr' } })
 
 
     await martes.addRecipe(bifeconPure, { through: { meal: 'Almuerzo'} })
+    await martes.addRecipe(lecheTostadas, { through: { meal: 'Extra'} })
     await martes.addRecipe(Cena, { through: { meal: 'Cena'} })
-    await martes.addRecipe(Extra, { through: { meal: 'Extra'} })
+
     
     await lunes.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
     await lunes.addRecipe(Cena, { through: { meal: 'Cena'} })
