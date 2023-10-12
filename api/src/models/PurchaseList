@@ -1,1 +1,21 @@
 
+const { DataTypes } = require("sequelize");
+
+module.exports = (sequelize) => {
+  sequelize.define(
+    "PurchaseList",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      namePurchaseList: {
+        type: DataTypes.STRING
+      }
+    },
+    {
+      timestamps: false,
+    }
+  );
+};
