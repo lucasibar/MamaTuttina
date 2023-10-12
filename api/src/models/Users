@@ -26,13 +26,14 @@ module.exports = (sequelize) => {
     location:{
       type: DataTypes.ENUM("usuario", "administrador"),
       defaultValue: "usuario",
+      allowNull: false
     },
     kcalObjetive:{
       type: DataTypes.INTEGER
     },
-    active:{
+    admin:{
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: false
     }
 },
 {
