@@ -19,7 +19,7 @@ daysRoutes.post('/', async (req, res)=>{
     try{
         // ejemplo= {idDay:null, meal:"almuerzo", ingredient: idIngredient, recipe: null((idRecipe)) , amount: 3 , portions: null}
         const newMeal = req.body
-        res.status(200).json(await addMealToDay(idDay, newMeal))
+        res.status(200).json(await addMealItem(newMeal))
     }
     catch(error){res.status(400).json({Error: error.message})
     } 
@@ -33,7 +33,6 @@ daysRoutes.put('/', async (req, res)=>{
         //}
         
         const changesOfAmounts = req.body
-        const {idDay} = req.params   
         res.status(200).json(await changeAmount(idDaydayName))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
@@ -45,9 +44,8 @@ daysRoutes.delet('/', async (req, res)=>{
         // idIngredient: tanto3
         //}
         
-        const changesOfAmounts = req.body
-        const {idDay} = req.params   
-        res.status(200).json(await changeAmount(idDaydayName))}
+        const itemData = req.body
+        res.status(200).json(await deletMealItem(idDaydayName))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
