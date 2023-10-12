@@ -8,16 +8,9 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    name: {
-      type: DataTypes.STRING,
-    },
-    number: {
-      type:DataTypes.INTEGER,
-      autoIncrement: true,
-    },
-    mealNumber: {
-      type:DataTypes.INTEGER,
-      defaultValue: 3
+   date: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     actualDay: {
       type: DataTypes.BOOLEAN,
