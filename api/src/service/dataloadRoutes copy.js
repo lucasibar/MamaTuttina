@@ -1,77 +1,7 @@
 const { Router } = require("express");
-const { Op } = require("sequelize");
-const {Users, Days, Recipes, Ingredients, Meals} = require("../db");
+const {Days, Recipes, Ingredients} = require("../db");
 
 const dataloadRoutes = Router();
-
-
-dataloadRoutes.get("/", async (req, res) => {
-  try{
-    //CREACION DE EJEMPLOS
-    await Users.create({name:"Lucas",
-    email:"lucas@gmail.com",
-    location:"bosque",
-    kcalObjetivo: 2000,
-    password: "1234Kapo"})
-
-    await Days.create({
-      dayName:"Martes",
-      orderNumber:2
-    })    
-    await Days.create({
-      dayName:"Lunes",
-      orderNumber:1
-    })
-    const today = new Date();
-    await Days.create({
-      date: today
-    })
-    await Meals.create({
-      mealName: "Almuerzo"
-    })
-    await Meals.create({
-      mealName: "Cena"
-    })
-    await Meals.create({
-      mealName: "Extra"
-    })
-    await Ingredients.bulkCreate(ingredientes)
-    await Recipes.create({
-      name:"Bife con Pure",
-      category: 'Carne',
-    })
-    //LLAMADO DE EJEMPLOS
-    const lucas = await Users.findOne({where:{name:"Lucas"}})
-    const planificacionDias = Days.findAll({
-                                            where: {
-                                              dayName: {
-                                                [Op.is]: null
-                                              },
-                                            },
-                                          })
-
-
-    const diarioHoy = await Days.findOne({where:{date:today}})
-    const meals = await Meals.findAll()
-    
-    const bifeconPure = await Recipes.findOne({where:{name: 'Bife con Pure'}})
-    const lecheTostadas = await Recipes.findOne({where:{name: 'Leche con tostadas'}})
-    const bife = await Ingredients.findOne({where:{name: "Leche descremada"}})
-    const papas = await Ingredients.findOne({where:{name: "Papas cocidas"}})
-    const leche = await Ingredients.findOne({where:{name: "Bife Ancho"}})
-    const lecheEntera = await Ingredients.findOne({where:{name: "Leche entera"}})
-    const tostadas = await Ingredients.findOne({where:{name: "Pan de trigo blanco"}})
-    //RELACIONES ENTRE EJEMPLOS
-    
-    
-    
-    res.status(200).json("Data mock cargada")
-  }
-  catch(error){res.status(400).json({ Error: error.message })} 
-});
-
-module.exports = dataloadRoutes;
-
 
 const ingredientes = [
   //VERDURAS Y HORTALIZAS    
@@ -374,3 +304,524 @@ const ingredientes = [
   {activo: false, name: "Sofrito", kcal100gr: 116},
   {activo: false, name: "Vinagres", kcal100gr: 8}
 ]
+const organizarmeLoMio = [
+  {
+    dayId:1,
+    day:"Lunes",
+    lunch:{
+        id:"lunch1",
+        name:'Ensalada Chaucha y Papa',
+        category:"Legumbre",
+        ingredients:[
+            {
+            name:"papa",
+            amount:300,
+            unit:"grams"
+            },
+            {name:"chaucha",
+            amount:300,
+            unit:"grams"
+            }
+          ]
+    },
+    dinner:{
+        name:'Bife con mixta',
+        ingredients:[
+          {nameIngredient:"Bife angosto",
+          amount:300,
+          unit:"grams"
+          },
+          {nameIngredient:"lechuga",
+          amount:0.5,
+          unit:"units"
+          },
+          {nameIngredient:"tomate",
+          amount:1,
+          unit:"units"
+          },
+          {nameIngredient:"cebolla",
+          amount:0.5,
+          unit:"units"
+          }
+        ]
+    },
+    extra:''  
+  },
+  {
+    dayId:2,
+    day:"Martes",
+    lunch:'Pasta con verduras y salsa de soja(Pollo) ',
+    dinner:'Paella',
+    extra:'Mate y Pepas'  
+  },
+  {
+    dayId:3,
+    day:"Miecoles",
+    lunch:'Ensalada de Pollo, Tomate y Cebolla',
+    dinner:'Paella',
+    extra:'Ensalada de Frutas'  
+  },
+  {
+    dayId:4,
+    day:"Jueves",
+    lunch:'Milanesa de Soja con ensalada verde',
+    dinner:'sardinas con Romero',
+    extra:'Pinchos de aceituna, morron y queso fresco marinado'  
+  }, 
+  {
+    dayId:5,
+    day:"Viernes",
+    lunch:'Arroz',
+    dinner:'Hamburguesa',
+    extra:'CocaCola'  
+  }, 
+  {
+    dayId:6,
+    day:"Sabado",
+    lunch:'Ensalada Cesar bien hecha;)',
+    dinner:'Pollo Fritas',
+    extra:'Panaderia'  
+  }, 
+  {
+    dayId:7,
+    day:"Domingo",
+    lunch:'Pasta rellena',
+    dinner:'Asado',
+    extra:'Torta'  
+  }
+] 
+const recetas = [
+    
+  
+  {name:'Ensalada de Frutas',
+  ingredients:[
+    {nameIngredient:"banana",
+    amount:1,
+    unit:"units"
+    },
+    {nameIngredient:"Manzana",
+    amount:1,
+    unit:"units"
+    },
+    {nameIngredient:"Naranja",
+    amount:3,
+    unit:"units"
+    },
+    {nameIngredient:"cereza",
+    amount:250,
+    unit:"grams"
+    }
+  ]
+  },
+  {
+    name:'Pasta con verduras y salsa de soja(Pollo)',
+    ingredients:[
+      {nameIngredient:"pasta",
+      amount:0.2,
+      unit:"units"
+      },
+      {nameIngredient:"Berenjena",
+      amount:0.5,
+      unit:"units"
+      },
+      {nameIngredient:"Zapallito",
+      amount:2,
+      unit:"units"
+      },
+      {nameIngredient:"Zanahoria",
+      amount:0.5,
+      unit:"units"
+      },
+      {nameIngredient:"Cebolla",
+      amount:1,
+      unit:"units"
+      },
+      {nameIngredient:"Morron",
+      amount:0.25,
+      unit:"units"
+      },
+      {nameIngredient:"Salsa de soja",
+      amount:0.01,
+      unit:"units"
+      }
+    ]
+    },
+    {
+      name:'Mate y Pepas',
+      ingredients:[
+        {nameIngredient:"mate",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"pepas",
+        amount:1,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'Ensalada de Pollo, Tomate y Cebolla',
+      ingredients:[
+        {nameIngredient:"pollo",
+        amount:250,
+        unit:"grams"
+        },
+        {nameIngredient:"tomate",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"cebolla",
+        amount:0.5,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'Paella',
+      ingredients:[
+        {nameIngredient:"Arroz",
+        amount:150,
+        unit:"grams"
+        },
+        {nameIngredient:"Variado de mariscos",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"Tomate",
+        amount:1,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'Milanesa de Soja con ensalada verde',
+      ingredients:[
+        {nameIngredient:"Milanesa de Soja",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"Lechuga",
+        amount:0.5,
+        unit:"units"
+        },
+        {nameIngredient:"Rucula",
+        amount:1,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'sardinas con Romero',
+      ingredients:[
+        {nameIngredient:"Sardinas",
+        amount:2,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'Pinchos de aceituna, morron y queso fresco marinado',
+      ingredients:[
+        {nameIngredient:"Aceitunas",
+        amount:100,
+        unit:"grams"
+        },
+        {nameIngredient:"Morron",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"Queso fresco",
+        amount:300,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Arroz',
+      ingredients:[
+        {nameIngredient:"Arroz",
+        amount:300,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Hamburguesa',
+      ingredients:[
+        {nameIngredient:"Picada",
+        amount:500,
+        unit:"grams"
+        },
+        {nameIngredient:"Pan Artesanal",
+        amount:2,
+        unit:"units"
+        },
+        {nameIngredient:"Cheddar",
+        amount:1,
+        unit:"units"
+        }
+      ]
+      },
+      {name:'CocaCola',
+      ingredients:[
+        {nameIngredient:"CocaCola",
+        amount:300,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Ensalada Cesar bien hecha;)',
+      ingredients:[
+        {nameIngredient:"Lechuga",
+        amount:1,
+        unit:"units"
+        },
+        {nameIngredient:"Leche",
+        amount:100,
+        unit:"mililitres"
+        },
+        {nameIngredient:"Queso untable",
+        amount:150,
+        unit:"grams"
+        },
+        {nameIngredient:"Anchoas",
+        amount:0.50,
+        unit:"units"
+        },
+        
+        {nameIngredient:"Ajo",
+        amount:0.50,
+        unit:"units"
+        },
+        {nameIngredient:"Parmesano",
+        amount:100,
+        unit:"grams"
+        },
+        {nameIngredient:"Pollo",
+        amount:150,
+        unit:"grams"
+        },
+        {nameIngredient:"Pan",
+        amount:100,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Pollo Fritas',
+      ingredients:[
+        {nameIngredient:"Pollo",
+        amount:300,
+        unit:"grams"
+        },
+        {nameIngredient:"Papa",
+        amount:300,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Panqueques con Dulce de Leche',
+      ingredients:[
+        {nameIngredient:"Leche",
+        amount:250,
+        unit:"mililiters"
+        },
+        {nameIngredient:"Harina",
+        amount:150,
+        unit:"grams"
+        },
+        {nameIngredient:"Huevo",
+        amount:1,
+        unit:"grams"
+        },
+        {nameIngredient:"Dulce de Leche",
+        amount:150,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Pasta rellena',
+      ingredients:[
+        {nameIngredient:"Pasta rellena",
+        amount:300,
+        unit:"grams"
+        }
+      ]
+      },
+      {nameIngredient:'Asado',
+      ingredients:[
+        {nameIngredient:"Asado",
+        amount:500,
+        unit:"grams"
+        }
+      ]
+      },
+      {name:'Torta',
+      ingredients:[
+        {nameIngredient:"Torta",
+        amount:1,
+        unit:"units"
+        }
+      ]
+      }
+]
+const week = [ 
+      {day:'Lunes',
+      dayId:1,
+      lunchCategory:'Legumbre',
+      dinnerCategory:'Carne',
+      extraCategory:'Lacteo'  
+      },
+      {day:'Martes',
+      dayId:2,
+      lunchCategory:'Pasta',
+      dinnerCategory:'Pescado',
+      extraCategory:'Panificado'  
+      }, 
+      {day:'Miercoles',
+      dayId:3,
+      lunchCategory:'Carne',
+      dinnerCategory:'Arroz',
+      extraCategory:'Fruta'  
+      }, 
+      {day:'Jueves',
+      dayId:4,
+      lunchCategory:'Legumbre',
+      dinnerCategory:'Pescado',
+      extraCategory:'Lacteo'  
+      }, 
+      {day:'Viernes',
+      dayId:5,
+      lunchCategory:'Arroz',
+      dinnerCategory:'Carne',
+      extraCategory:'Permitidos'  
+      },
+      {day:'Sabado',
+      dayId:6,
+      lunchCategory:'Pescado',
+      dinnerCategory:'Pollo',
+      extraCategory:'Panificado'  
+      },
+      {day:'Domingo',
+      dayId:7,
+      lunchCategory:'Pasta',
+      dinnerCategory:'Carne',
+      extraCategory:'Permitidos'  
+      }
+]
+
+dataloadRoutes.get("/", async (req, res) => {
+  try{
+    //MOCK INFO
+    await Ingredients.bulkCreate(ingredientes)
+
+    await Recipes.create({
+      name:"Bife con Pure",
+      category: 'Carne',
+    })
+    await Recipes.create({
+      name:"Leche con tostadas",
+      category: 'Carne',
+    })
+    await Recipes.create({
+      name:"Almuerzo",
+      category: 'None',
+    })
+    await Recipes.create({
+      name:"Cena",
+      category: 'None',
+    })    
+    await Recipes.create({
+      name:"Extra",
+      category: 'None',
+    })
+
+    await Days.create({
+      name:"Lunes",
+      number:1
+    })
+    await Days.create({
+      name:"Martes",
+      number:2,
+      actualDay: true,
+    })
+    await Days.create({
+      name:"Miercoles",
+      number:3,
+
+    })
+    await Days.create({
+      name:"Jueves",
+      number:4,
+    })
+    await Days.create({
+      name:"Viernes",
+      number:5,
+    })
+    await Days.create({
+      name:"Sabado",
+      number:6,
+    })
+    await Days.create({
+      name:"Domingo",
+      number:7,
+    })
+    
+
+    //TRAIGO LOS COMPONENTES
+    const martes = await Days.findOne({where:{name: 'Martes'}})
+    const lunes = await Days.findOne({where:{name: 'Lunes'}})
+    const miercoles = await Days.findOne({where:{name: 'Miercoles'}})
+    const jueves = await Days.findOne({where:{name: 'Jueves'}})
+    const viernes = await Days.findOne({where:{name: 'Viernes'}})
+    const sabado = await Days.findOne({where:{name: 'Sabado'}})
+    const domingo = await Days.findOne({where:{name: 'Domingo'}})
+    
+    
+    const bifeconPure = await Recipes.findOne({where:{name: 'Bife con Pure'}})
+    const lecheTostadas = await Recipes.findOne({where:{name: 'Leche con tostadas'}})
+    const Almuerzo = await Recipes.findOne({where:{name: 'Almuerzo'}})
+    const Cena= await Recipes.findOne({where:{name: 'Cena'}})
+    const Extra= await Recipes.findOne({where:{name: 'Extra'}})
+
+    // {activo: false, name:"Leche entera", kcal100gr:68},  
+    // {activo: false, name: "Pan de trigo blanco", kcal100gr: 255},
+    const bife = await Ingredients.findOne({where:{name: "Leche descremada"}})
+    const papas = await Ingredients.findOne({where:{name: "Papas cocidas"}})
+    const leche = await Ingredients.findOne({where:{name: "Bife Ancho"}})
+    const lecheEntera = await Ingredients.findOne({where:{name: "Leche entera"}})
+    const tostadas = await Ingredients.findOne({where:{name: "Pan de trigo blanco"}})
+
+    //LOS RELACIONO
+    await bifeconPure.addIngredient(bife, { through: { amount: 350, unit: 'gr' } })
+    await bifeconPure.addIngredient(papas, { through: { amount: 200, unit: 'gr' } })
+    await bifeconPure.addIngredient(leche, { through: { amount: 150, unit: 'ml' } })
+    
+    await lecheTostadas.addIngredient(lecheEntera, { through: { amount: 300, unit: 'ml' } })
+    await lecheTostadas.addIngredient(tostadas, { through: { amount: 200, unit: 'gr' } })
+
+
+    await martes.addRecipe(bifeconPure, { through: { meal: 'Almuerzo'} })
+    await martes.addRecipe(lecheTostadas, { through: { meal: 'Extra'} })
+    await martes.addRecipe(Cena, { through: { meal: 'Cena'} })
+
+    
+    await lunes.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await lunes.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await lunes.addRecipe(Extra, { through: { meal: 'Extra'} })
+    await miercoles.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await miercoles.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await miercoles.addRecipe(Extra, { through: { meal: 'Extra'} })
+    await jueves.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await jueves.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await jueves.addRecipe(Extra, { through: { meal: 'Extra'} })
+    await viernes.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await viernes.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await viernes.addRecipe(Extra, { through: { meal: 'Extra'} })
+    await sabado.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await sabado.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await sabado.addRecipe(Extra, { through: { meal: 'Extra'} })
+    await domingo.addRecipe(Almuerzo, { through: { meal: 'Almuerzo'} })
+    await domingo.addRecipe(Cena, { through: { meal: 'Cena'} })
+    await domingo.addRecipe(Extra, { through: { meal: 'Extra'} })
+    
+    res.status(200).json("Data mock cargada")
+  }
+  catch(error){res.status(400).json({ Error: error.message })} 
+});
+
+module.exports = dataloadRoutes;
+
+

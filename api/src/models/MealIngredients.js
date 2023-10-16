@@ -1,12 +1,9 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-sequelize.define('DayIngredients', {
-  meal:{
-    type: DataTypes.STRING
-  },
+sequelize.define('MealIngredients', {
   amount:{
-    type: DataTypes.INTIGER
+    type: DataTypes.INTEGER
   },
   unit:{
     type: DataTypes.STRING

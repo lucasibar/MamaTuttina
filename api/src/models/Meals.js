@@ -1,25 +1,15 @@
 const { DataTypes } = require('sequelize');
 
-
 module.exports = (sequelize) => {
-  sequelize.define('Days', {
+  sequelize.define('Meals', {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
     },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    dayName: {
+    mealName: {
       type: DataTypes.STRING,
-      allowNull: true,
-    },
-    orderNumber: {
-      type: DataTypes.INTEGER,
-      default: true
-    }
+    }  
   },
   {
     timestamps: false,

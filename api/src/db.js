@@ -28,18 +28,44 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 const { 
+  Users,
+  UserDays,
   Days,
+  DaysMeals, 
+  Meals,
+  MealsIngredients,
+  MealsRecipes,
   Recipes,
   Ingredients,
-  DayRecipes,
-  RecipeIngredients
-} = sequelize.models;
+  RecipeIngredients,
+  PurchaseList,
+} = sequelize.models; 
+ 
 
-Days.belongsToMany(Recipes, {through: 'DayRecipes'});
-Recipes.belongsToMany(Days, {through: 'DayRecipes'});
+Users.belongsToMany(Days, {through: 'UserDays'});
+Days.belongsToMany(Users, {through: 'UserDays'});
+
+Days.belongsToMany(Meals, {through: 'DaysMeals'});
+Meals.belongsToMany(Days, {through: 'DaysMeals'});
+
+Meals.belongsToMany(Recipes, {through: 'MealsRecipes'});
+Recipes.belongsToMany(Meals, {through: 'MealsRecipes'});
+
+Meals.belongsToMany(Ingredients, {through: 'MealsIngredients'});
+Ingredients.belongsToMany(Meals, {through: 'MealsIngredients'}); 
+
+
+Users.belongsToMany(Ingredients, {through: 'PurchaseList'});
+Ingredients.belongsToMany(Users, {through: 'PurchaseList'});
+
 Recipes.belongsToMany(Ingredients, {through: 'RecipeIngredients'});
 Ingredients.belongsToMany(Recipes, {through: 'RecipeIngredients'});
 
+
+
+
+Users.belongsToMany(Ingredients, {through: 'PurchaseList'});
+Ingredients.belongsToMany(Users, {through: 'PurchaseList'});
 
 module.exports = {
   ...sequelize.models,

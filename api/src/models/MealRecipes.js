@@ -1,9 +1,9 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('DayRecipes', {
-    meal: {
-      type: DataTypes.STRING,
+  sequelize.define('MealRecipes', {
+    portions: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

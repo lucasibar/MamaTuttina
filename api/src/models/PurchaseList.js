@@ -3,12 +3,15 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "PurchaseListsIngredients",
+    "PurchaseList",
     {
       amount: {
         type: DataTypes.INTEGER
       },      
       unit: {
+        type: DataTypes.STRING
+      },
+      purchaseListName:{
         type: DataTypes.STRING
       }
     },

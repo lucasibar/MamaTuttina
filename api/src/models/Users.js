@@ -24,9 +24,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     location:{
-      type: DataTypes.ENUM("usuario", "administrador"),
-      defaultValue: "usuario",
-      allowNull: false
+      type: DataTypes.STRING
     },
     kcalObjetive:{
       type: DataTypes.INTEGER
