@@ -1,3 +1,3 @@
 module.exports = {
- llave:"miclaveultrasecreta123*"
+ keyToken:"miclaveultrasecreta123*"
 }

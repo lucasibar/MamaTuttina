@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const dataloadRoutes = require ('../service/dataloadRoutes')
-
+const authRoutes = require ('./Auth/authRoutes')
 const diaryDateRoutes = require ('./Diary/diaryDateRoutes')
 const planificationDaysRoutes = require ('./Planification/planificationDaysRoutes')
 
@@ -13,6 +13,8 @@ const planificationDaysRoutes = require ('./Planification/planificationDaysRoute
 
 const router = Router();
 router.use('/dataload', dataloadRoutes)
+router.use('/auth', authRoutes)
+
 
 router.use('/diaryDate', diaryDateRoutes)
 router.use('/planificationDays', planificationDaysRoutes)

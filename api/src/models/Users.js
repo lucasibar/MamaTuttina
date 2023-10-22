@@ -4,9 +4,9 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   sequelize.define('Users', {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -29,9 +29,9 @@ module.exports = (sequelize) => {
     kcalObjetive:{
       type: DataTypes.INTEGER
     },
-    admin:{
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    rol:{
+      type: DataTypes.ENUM ('administrador', 'usuario', 'nutricionista', 'personal trainer'),
+      default:'usuario'
     }
 },
 {
