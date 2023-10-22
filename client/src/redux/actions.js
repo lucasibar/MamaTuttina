@@ -1,3 +1,31 @@
+//ACA TE MUESTRO UN EJEMPLO DE COMO MANDAR EL TOKEN EN EL HEADER
+
+//import axios from 'axios';
+
+// export const getIngredients = () => (dispatch, getState) => {
+//   const token = getState().auth.token; // Asegúrate de ajustar la ruta para obtener tu token desde el estado adecuado.
+
+//   const config = {
+//     headers: {
+//       'Authorization': `Bearer ${token}`,
+//       // Otros encabezados si es necesario
+//     }
+//   };
+
+//   return axios.get('http://localhost:3001/ingredients', config)
+//     .then((response) => {
+//       dispatch({ type: GET_INGREDIENTS, payload: response.data });
+//     })
+//     .catch((error) => {
+//       // Manejo de errores
+//     });
+// };
+
+
+
+
+
+
 import axios from 'axios'
 export const GET_DAYS= "GET_DAY"
 export const GET_DAY_RECIPES= "GET_DAY_RECIPES" 

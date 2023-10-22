@@ -27,11 +27,11 @@ module.exports = (sequelize) => {
     },
     category: {
       type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos'),
-      default:'Permitidos'
+      defaultValue:'Permitidos'
     },
     active: {
       type: DataTypes.BOOLEAN,
-      default: true
+      defaultValue: true
     }
   },
   {

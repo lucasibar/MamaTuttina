@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
     },
     orderNumber: {
       type: DataTypes.INTEGER,
-      default: true
+      defaultValue: true
     }
   },
   {

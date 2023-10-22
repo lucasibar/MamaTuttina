@@ -24,14 +24,16 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     location:{
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true
     },
     kcalObjetive:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 2000
     },
     rol:{
       type: DataTypes.ENUM ('administrador', 'usuario', 'nutricionista', 'personal trainer'),
-      default:'usuario'
+      defaultValue:'usuario'
     }
 },
 {

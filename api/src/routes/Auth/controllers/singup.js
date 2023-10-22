@@ -1,6 +1,7 @@
-const {Users, Days, Recipes, Ingredients, Meals} = require("../../../db");
+const {Users} = require("../../../db");
 const encryptPassword = require("../utilsAuth/encryptPassword")
 const jwt = require("jsonwebtoken")
+const {SECRET} = require("../../../../config")
 
 
 
@@ -10,13 +11,13 @@ const singup = async (req, res)=>{
         const {name, password, email, rol, location } = req.body
 
         const [user, created] = await Users.findOrCreate({where: { email }});
-        // if(!created) res.status(200).json("Ya se genero una cuenta con este mail")
+        if(!created) res.status(200).json("Ya se genero una cuenta con este mail")
         
         const newUser={
             name,
             password: await encryptPassword(password),
-            location: location||null,
-            rol: rol|| null
+            location: location,
+            rol: rol
         }
 
         const userGeneraed = await Users.update(newUser, {
@@ -25,9 +26,10 @@ const singup = async (req, res)=>{
 
         const userToToken = await Users.findOne({where: { email }});
 
-console.log(userToToken)
+        const token =jwt.sign({id: userToToken.id, rol: userToToken.rol}, SECRET)
 
-        res.status(200).json(userToToken)
+
+        res.status(200).json({token})
     }
     catch(error){
         res.status(400).json({Error: error.message})
