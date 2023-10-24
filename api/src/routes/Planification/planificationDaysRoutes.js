@@ -1,50 +1,40 @@
 const { Router } = require('express');
-// const { getDays } = require('../rutasPrincipales/controllers/Day/getDays')
-// const { getDayRecipes } = require('../rutasPrincipales/controllers/Day/getDayRecipes')
-// const { postNewDay } = require('./controllers/Day/postNewDay')
+const { getPlanification } = require('./controllers/getPlanification')
+const { postNewDay } = require('./controllers/postNewDay')
+const { deleteDay } = require('./controllers/deleteDay')
+const { changesAmounts } = require('./controllers/changesAmounts')
+
 
 
 const planificationDaysRoutes = Router();
 
 planificationDaysRoutes.get('/', async (req, res)=>{
-    // const {idDay} = req.params
-    try{res.status(200).json("await getDayRecipes(idDay)")}
+    const { userId }= req
+    try{res.status(200).json(await getPlanification(userId))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
-// planificationDaysRoutes.post('/', async (req, res)=>{
-//     try{
-//         // ejemplo= {idDay:null, meal:"almuerzo", ingredient: idIngredient, recipe: null((idRecipe)) , amount: 3 , portions: null}
-//         const newMeal = req.body
-//         res.status(200).json(await addMealItem(newMeal))
-//     }
-//     catch(error){res.status(400).json({Error: error.message})
-//     } 
-// })
-// planificationDaysRoutes.put('/', async (req, res)=>{
-//     try{
-//         //{
-//         //idDay:ejemplo,
-//         //recipes:[{idRecipe: tanto, porcions:6}, {idRecipe: tanto2, porcions:6}],
-//         // ingredients:[{idIngredient: tanto, amount:6}, {idIngredient: tanto2, amount:6}]
-//         //}
-        
-//         const changesOfAmounts = req.body
-//         res.status(200).json(await changeAmount(idDaydayName))}
-//     catch(error){res.status(400).json({Error: error.message})} 
-// })
-// planificationDaysRoutes.delet('/', async (req, res)=>{
-//     try{
-//         //{
-//         // idDay: tanto ,
-//         // idRecipe: null,
-//         // idIngredient: tanto3
-//         //}
-        
-//         const itemData = req.body
-//         res.status(200).json(await deletMealItem(idDaydayName))}
-//     catch(error){res.status(400).json({Error: error.message})} 
-// })
 
+planificationDaysRoutes.post('/newDay', async (req, res)=>{
+    const { userId }= req
+    const { nameDay } = req.body
+    try{res.status(200).json(await postNewDay(userId, nameDay))}
+    catch(error){res.status(400).json({Error: error.message})} 
+})
+
+//Agregar a meal una receta o ingrediente o cambiar sus cantitdades
+planificationDaysRoutes.put('/', async (req, res)=>{
+    try{
+        const changesOfAmounts = req.body
+        res.status(200).json(await changesAmounts(changesOfAmounts))}
+    catch(error){res.status(400).json({Error: error.message})} 
+})
+
+planificationDaysRoutes.delete('/deletDay', async (req, res)=>{
+    try{
+        const { idDay } = req.body
+        res.status(200).json(await deleteDay(idDay))}
+    catch(error){res.status(400).json({Error: error.message})} 
+})
 
 
 module.exports = planificationDaysRoutes;

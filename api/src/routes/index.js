@@ -17,7 +17,8 @@ router.use('/dataload', dataloadRoutes)
 router.use('/auth', authRoutes)
 
 
-router.use('/diaryDate', verifyToken, diaryDateRoutes)
+// router.use('/diaryDate', verifyToken, diaryDateRoutes)
+router.use('/diaryDate', diaryDateRoutes)
 router.use('/planificationDays', planificationDaysRoutes)
 
 // router.use('/recipes', recipesRoutes)

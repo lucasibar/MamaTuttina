@@ -33,8 +33,8 @@ const {
   Days,
   DaysMeals, 
   Meals,
-  MealsIngredients,
-  MealsRecipes,
+  MealIngredients,
+  MealRecipes,
   Recipes,
   Ingredients,
   RecipeIngredients,
@@ -48,11 +48,11 @@ Days.belongsToMany(Users, {through: 'UserDays'});
 Days.belongsToMany(Meals, {through: 'DaysMeals'});
 Meals.belongsToMany(Days, {through: 'DaysMeals'});
 
-Meals.belongsToMany(Recipes, {through: 'MealsRecipes'});
-Recipes.belongsToMany(Meals, {through: 'MealsRecipes'});
+Meals.belongsToMany(Recipes, {through: 'MealRecipes'});
+Recipes.belongsToMany(Meals, {through: 'MealRecipes'});
 
-Meals.belongsToMany(Ingredients, {through: 'MealsIngredients'});
-Ingredients.belongsToMany(Meals, {through: 'MealsIngredients'}); 
+Meals.belongsToMany(Ingredients, {through: 'MealIngredients'});
+Ingredients.belongsToMany(Meals, {through: 'MealIngredients'}); 
 
 
 Users.belongsToMany(Ingredients, {through: 'PurchaseList'});

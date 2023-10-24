@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define('MealRecipes', {
     portions: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+
     },
   },
   {
