@@ -13,7 +13,8 @@ const recipeName = await Recipes.create({
 name: recipe.name,
 category: recipe.category
 })
-  
+
+await User.addRecipes(recipeName)
   for (let i=0; i<recipe.length; i++){
     const ingredient = recipe[i]
     await RecipeIngredient.create({
