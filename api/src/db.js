@@ -45,6 +45,9 @@ const {
 Users.belongsToMany(Days, {through: 'UserDays'});
 Days.belongsToMany(Users, {through: 'UserDays'});
 
+Users.belongsToMany(Recipes, {through: 'UserRecipes'});
+Recipes.belongsToMany(Users, {through: 'UserRecipes'});
+
 Days.belongsToMany(Meals, {through: 'DaysMeals'});
 Meals.belongsToMany(Days, {through: 'DaysMeals'});
 
