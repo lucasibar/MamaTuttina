@@ -14,7 +14,7 @@ name: recipe.name,
 category: recipe.category
 })
 
-await User.addRecipes(recipeName)
+await user.addRecipes(recipeName)
   for (let i=0; i<recipe.length; i++){
     const ingredient = recipe[i]
     await RecipeIngredient.create({
@@ -24,12 +24,9 @@ await User.addRecipes(recipeName)
     unit: ingredient.unit
     }) 
   }
-   
-  
-  const newRecipe = await Days.create(recipe)
-  
+    
 
-  return newRecipe
+  return recipeName
 }
 module.exports = { postNewRecipe };
 
