@@ -29,10 +29,10 @@ recipesRoutes.put('/', async (req, res)=>{
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
-recipesRoutes.delete('/deletDay', async (req, res)=>{
+recipesRoutes.delete('/deletRecipes', async (req, res)=>{
     try{
         const { idDay } = req.body
-        res.status(200).json(await deleteDay(idDay))}
+        res.status(200).json(await deletRecipes(idRecpe))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
