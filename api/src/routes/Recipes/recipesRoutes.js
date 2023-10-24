@@ -14,8 +14,10 @@ recipesRoutes.get('/', async (req, res)=>{
 })
 
 recipesRoutes.post('/newRecipe', async (req, res)=>{
+
+    const idUser= req.idUser
     const { recipe } = req.body
-    try{res.status(200).json(await postNewRecipe(recipe))}
+    try{res.status(200).json(await postNewRecipe({recipe, idUser}))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
