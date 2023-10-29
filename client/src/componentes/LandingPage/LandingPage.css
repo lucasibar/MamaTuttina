@@ -1,0 +1,20 @@
+
+.landingPage {
+  /* Fondo azul */
+  background-color: blue;
+  
+  /* Ocupar toda la pantalla */
+  width: 100vw;
+  height: 100vh;
+  
+  /* Centrar el contenido vertical y horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para el texto */
+.landingPage h1 {
+  color: white; /* Texto en color blanco */
+  text-align: center; /* Alineación horizontal del texto al centro */
+}

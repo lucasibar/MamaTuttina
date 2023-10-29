@@ -1,40 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import './Objetives.css'
+
 // import { useSelector } from 'react-redux';
 // import kcalXingredient from '../../../utils/kcalXingredient'
 
-export default function Objetives() {
-//   const ingredients = useSelector(state=> state.ingredients)
+export default function Objetives({dayMealsDiary}) {
+  const objetiveKcal = useSelector(state=> state.objetive)
 
-//   // kcalXingredient(ingredientsList, ingredients)
+  const [parameters, setParameters] =useState({
+    totalKcalDay: 0,
+    carbs:0,
+    prot:0,
+    fat:0
 
-// let Kcal = 0;
+  })
 
-// ingredientsList.forEach(({ nameIngredient, amount }) => {
-//   const alimento = ingredients.find((ingrediente) => ingrediente.nameIngredient === nameIngredient);
-//   if (alimento) {
-//     const calorias = (alimento.Kcal * amount) / 100;
-//     Kcal = Kcal + calorias
-//   }
-// });
+
+  useEffect(()=>{
+    const ingredietsPerMeal = dayMealsDiary?.map(meal=>{
+      if(meal.Recipe){
+
+        let recipesIngredients = meal.Recipes[0]?.Ingredients
+        return [...meal.Ingredients, ...recipesIngredients]
+      }else{
+        return []
+      }
+    })
+
+    let ingredients = ingredietsPerMeal.flat();
+
+    if(ingredients && ingredients.length>0) ingredients.map(ingredient=>{
+      setParameters(prevState=> {
+        return {totalKcalDay: prevState.totalKcalDay + ingredient.kcal100gr/100*ingredient.amount,
+        carbs: prevState.carbs + ingredient.carbs,
+        prot: prevState.prot + ingredient.proteins,
+        fat: prevState.fat + ingredient.fats}
+      })
+      return ingredient
+    })
+
+
+  },[dayMealsDiary])
+
 
   return (
-    <div className='macrosCircles'>
-        <div className='kcalCircle'> 
-        <h3 className='subtitle'>{"Kcal"}</h3>
-        <h6 className='subtitle'>kilo calorias</h6>
+    <div className='parameters'>
+        {parameters.totalKcalDay<objetiveKcal?
+        <div > 
+
+        <h3 >{Math.round(objetiveKcal-parameters.totalKcalDay)}</h3>
+        <h6 className='subtitleParameters'> Faltan <br/>kcal</h6>
         </div>
-        <div className='protCircle'> 
-        <h3 className='subtitle'>20%</h3>
-        <h6 className='subtitle'>kilo calorias</h6>
+        :
+        <div > 
+
+        <h3 >{Math.round(-(objetiveKcal-parameters.totalKcalDay))}</h3>
+        <h6 className='subtitleParameters'>Sobran <br/>kcal</h6>
         </div>
-        <div className='carbCircle'> 
-        <h3 className='subtitle'>50%</h3>
-        <h6 className='subtitle'>kilo calorias</h6>
+        }
+
+        
+        <div className='macroNutrients'> 
+          <h3 >{Math.round(parameters.fat/parameters.totalKcalDay*100)||0}%</h3>
+          <h6 className='subtitleParameters'>grasas 
+          <br/>
+          20% ideal</h6>
         </div>
-        <div className='fatCircle'> 
-        <h3 className='subtitle'>%30</h3>
-        <h6 className='subtitle'>kilo calorias</h6>
+
+        <div className='macroNutrients'> 
+          <h3 >{Math.round(parameters.carbs/parameters.totalKcalDay*100)||0}%</h3>
+          <h6 className='subtitleParameters'>carbohidratos  <br/> 50% ideal</h6>
+        </div>
+        <div className='macroNutrients'> 
+          <h3 >{Math.round(parameters.prot/parameters.totalKcalDay*100)||0}%</h3>
+          <h6 className='subtitleParameters'>proteinas  <br/> 30% ideal</h6>
         </div>
     </div>
 

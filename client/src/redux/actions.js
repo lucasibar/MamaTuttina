@@ -28,21 +28,50 @@
 
 import axios from 'axios'
 export const GET_DAYS= "GET_DAY"
-export const GET_DAY_RECIPES= "GET_DAY_RECIPES" 
+export const GET_DIARY_DAY= "GET_DIARY_DAY" 
 export const GET_INGREDIENTS= "GET_INGREDIENTS"
+export const DAY_AFTER= "DAY_AFTER"
+export const DAY_BEFORE= "DAY_BEFORE"
+
+
+const config = {
+  headers: {
+    Authorization: `Bearer 978a711d-1453-4348-941e-2302bcbaf567 `,
+  },
+};
+
+
+
+
+
+export const dayAfter = () => dispatch => {
+    return dispatch({type: DAY_AFTER})
+}
+export const dayBefore = () => dispatch => {
+    return dispatch({type: DAY_BEFORE})
+}
+
+
+
+
+
 
 //DAY CRUD
 export const getDays = () => dispatch => {
   return axios.get(`http://localhost:3001/days`)
   .then(data => {
     dispatch({type: GET_DAYS, payload: data.data })
-  })
+  }
+  ) 
 }
 
-export const getDayRecipes = (id) => dispatch => {
-  return axios.get(`http://localhost:3001/days/${id}`)
+export const getDiaryDay = (date) => dispatch => {
+  return axios.get(`http://localhost:3001/diaryDate/${date}`, config)
   .then(data => {
-    dispatch({type: GET_DAY_RECIPES, payload: data.data })
+    dispatch({type: GET_DIARY_DAY, payload: data.data })
+  })  
+  .catch(e=> {
+    dispatch({type: GET_DIARY_DAY, payload: e})
   })
 }
 

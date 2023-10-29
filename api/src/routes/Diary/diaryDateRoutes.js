@@ -1,15 +1,22 @@
 const { Router } = require('express');
-const { getDay } = require('./controllers/getDay')
+const { getDayDiary } = require('./controllers/getDayDiary')
+const { dayNotExist } = require('./controllers/dayNotExist')
 const { changesAmounts } = require('./controllers/changesAmounts')
 
 
 const diaryDateRoutes = Router();
 
-diaryDateRoutes.get('/', async (req, res)=>{
-    const { userId }= req
-    const date = req.body
-    try{res.status(200).json(await getDay({userId, date}))}
-    catch(error){res.status(400).json({Error: error.message})} 
+diaryDateRoutes.get('/:date', async (req, res)=>{
+    const {date} = req.params
+    const userId = req.headers["authorization"].split(" ")[1];
+    try{res.status(200).json(await getDayDiary({userId, date}))
+    }catch (error) {
+        try {
+            res.status(200).json(await dayNotExist({userId, date}));
+        } catch (dbError) {
+            res.status(400).json({ error: "Error en la base de datos" });
+        }
+    } 
 })
 
 diaryDateRoutes.put('/', async (req, res)=>{

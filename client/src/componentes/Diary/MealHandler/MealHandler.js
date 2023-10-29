@@ -2,38 +2,61 @@ import './MealHandler.css'
 import * as React from 'react';
 import { useEffect, useState } from 'react'
 import InputFoodHandler from "./InputFoodHandler/InputFoodHandler"
+import Button from '@mui/material/Button';
 
-function MealHandler({mealName, recipe, sumKcal}) {
-  const [kcal, setKcal] = useState(0)
+function MealHandler({mealName, recipes, ingredients }) {
+  const [totalKcalMeal, setTotalKcalMeal] = useState(0)
+  useEffect(()=>{
+    setTotalKcalMeal(0)
+  },[recipes, ingredients])
+
+  useEffect(()=>{
+    const kCalRecipes = recipes[0]?.Ingredients?.reduce((acc, ingredient) => {
+      return acc + (ingredient.kcal100gr/100 * ingredient.amount)
+    },0);
+    const kCalIngredients =ingredients?.reduce((acc, ingredient) => {
+      return acc + (ingredient.kcal100gr/100 * ingredient.amount)
+    },0);
+
+
+    if(kCalRecipes)setTotalKcalMeal(prevState=> prevState + kCalRecipes)
+    if(kCalIngredients)setTotalKcalMeal(prevState=> prevState + kCalIngredients)
+
+  },[recipes, ingredients])
   
-  useEffect(() => {
-  const kcalMeal = recipe.reduce((acc, ingredient) => {
-    let kcal = (ingredient.kcal100gr / 100)* ingredient.RecipeIngredients.amount
-    return acc + kcal
-  },0);
-  setKcal( kcalMeal);
-  sumKcal( kcalMeal);
-  }, [recipe]);
-
 return (
   <>
 
-      <div className='ingredient'>
+      <div className='mealtitle'>
       <h4>{mealName}</h4>
-      <h4> {Math.round(kcal)} kcal</h4>
-
+      <h4> {Math.round(totalKcalMeal)||0} kcal</h4>
 
       </div>
-      {recipe.length>0 ? recipe.map((ingredient, i)=>
-        <div key={i} >
+      {recipes.length>0 ? recipes.map((recipe, i)=>
+        <div key={i} className='meal'>
+          <p >{recipe.name}</p>
+          <p >{recipe.portion} portions</p>
+        </div>
+      ):null}
+
+      {ingredients.length>0 ? ingredients.map((ingredient, i)=>
+        <div key={i} className='meal'>
           <p >{ingredient.name}</p>
-          <p >{ingredient.RecipeIngredients.amount}{ingredient.RecipeIngredients.unit}</p>
+          <p >{ingredient.amount} {ingredient.unit}</p>
         </div>
       ):null}
 
 
       <div className='handlers'>
-        <InputFoodHandler />
+        <Button variant="text" style={{      
+          display: 'flex',
+          justifyContent: 'left',
+          alignItems: 'center',
+          marginLeft: '10px',
+          }}
+        >
+        AGREGAR ALIMENTO
+        </Button>
       </div>
     </>
   )

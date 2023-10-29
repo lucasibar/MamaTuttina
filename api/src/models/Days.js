@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true,
     },
     dayName: {
@@ -17,8 +17,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     orderNumber: {
-      type: DataTypes.INTEGER,
-      defaultValue: true
+      type: DataTypes.INTEGER
     }
   },
   {

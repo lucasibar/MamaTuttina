@@ -1,51 +1,19 @@
-/* .kcalCircle{
-  display:flex;
-  width: 55px;
-  height: 55px;
-  border-radius: 100%;
-  border: solid;
-  border-width: 10px;
-  border-color: #007bff;
-  justify-content: center;
-  align-items: center;
-} */
-.subtitle{
-  display: block;
-}
-/* .protCircle{
-  display:flex;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  border: solid;
-  border-width: 10px;
-  border-color: #ff0000;
-  justify-content: center;
-  align-items: center;
-}
-.carbCircle{
-  display:flex;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  border: solid;
-  border-width: 10px;
-  border-color: #ffaa00;
-  justify-content: center;
-  align-items: center;
-}
-.fatCircle{
-  display:flex;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  border: solid;
-  border-width: 10px;
-  border-color: #9d00ff;
-  justify-content: center;
-  align-items: center;
-}*/
-.macrosCircles{
+.parameters{
   display:flex;
   justify-content:space-between ;
+  padding: 10px;
+  align-items: center;
+} 
+
+.macroNutrients{
+  display: block;
+  justify-content:space-between ;
+  padding: 10px;
+  align-items: center;
+}
+.subtitleParameters{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 } 

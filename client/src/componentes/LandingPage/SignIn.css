@@ -1,0 +1,59 @@
+/* Estilos para el fondo azul */
+.landingPage {
+  background-color: blue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para el texto "Iniciar Sesión" */
+h1 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 1cm; /* Separación desde la parte superior */
+}
+
+/* Estilos para el formulario */
+form {
+  width: 100%;
+  max-width: 400px; /* Establece un ancho máximo para el formulario */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para los campos de entrada */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+/* Estilos para el botón "Iniciar Sesión" */
+button {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  position: relative;
+  margin-bottom: 10px;
+  background-color: white;
+  color: blue;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+
+ 
+}
+
+.inputContainer {
+  margin-bottom: 16px; /* Espacio entre campos de entrada */
+}
+
+.signInButton {
+  position: absolute;
+  bottom: 0;
+}

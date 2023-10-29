@@ -1,13 +1,24 @@
 const { Router } = require("express");
 const { Op } = require("sequelize");
-const {Users, Days, Recipes, Ingredients, Meals} = require("../db");
+const {
+  UserDays, 
+  UserRecipes, 
+  DayMeals, 
+  MealRecipes, 
+  MealIngredients, 
+  RecipeIngredients,
+  Users, 
+  Days, 
+  Recipes, 
+  Ingredients, 
+  Meals} = require("../db");
 
 const dataloadRoutes = Router();
 
 
 dataloadRoutes.get("/", async (req, res) => {
   try{
-    //CREACION DE EJEMPLOS
+
     await Users.create({name:"Lucas",
     email:"lucas@gmail.com",
     location:"bosque",
@@ -18,52 +29,93 @@ dataloadRoutes.get("/", async (req, res) => {
       dayName:"Martes",
       orderNumber:2
     })    
-    await Days.create({
-      dayName:"Lunes",
-      orderNumber:1
-    })
-    const today = new Date();
-    await Days.create({
-      date: today
-    })
-    await Meals.create({
-      mealName: "Almuerzo"
-    })
-    await Meals.create({
-      mealName: "Cena"
-    })
-    await Meals.create({
-      mealName: "Extra"
-    })
+     await Days.create({
+       dayName:"Lunes",
+       orderNumber:1
+     })
+
+     await Meals.create({
+       mealName: "Almuerzo"
+      })
+      await Meals.create({
+        mealName: "Cena"
+      })
+      await Meals.create({
+        mealName: "Extra"
+      })
     await Ingredients.bulkCreate(ingredientes)
     await Recipes.create({
       name:"Bife con Pure",
       category: 'Carne',
     })
+    await Recipes.create({
+      name:"Leche con tostadas",
+      category: 'Lacteo',
+    })
     //LLAMADO DE EJEMPLOS
-    const lucas = await Users.findOne({where:{name:"Lucas"}})
-    const planificacionDias = Days.findAll({
-                                            where: {
-                                              dayName: {
-                                                [Op.is]: null
-                                              },
-                                            },
-                                          })
-
-
-    const diarioHoy = await Days.findOne({where:{date:today}})
+    
+    
+    
     const meals = await Meals.findAll()
     
     const bifeconPure = await Recipes.findOne({where:{name: 'Bife con Pure'}})
     const lecheTostadas = await Recipes.findOne({where:{name: 'Leche con tostadas'}})
-    const bife = await Ingredients.findOne({where:{name: "Leche descremada"}})
+    
+    const leche = await Ingredients.findOne({where:{name: "Leche descremada"}})
     const papas = await Ingredients.findOne({where:{name: "Papas cocidas"}})
-    const leche = await Ingredients.findOne({where:{name: "Bife Ancho"}})
+    const bife = await Ingredients.findOne({where:{name: "Bife Ancho"}})
     const lecheEntera = await Ingredients.findOne({where:{name: "Leche entera"}})
     const tostadas = await Ingredients.findOne({where:{name: "Pan de trigo blanco"}})
+
+    
+
+
+
+
+    const lucas = await Users.findOne({where:{name:"Lucas"}})
+    const nuevoDIa= await Days.create({date: new Date()})
+    const planificacionDias = await Days.findAll({where: {dayName: {[Op.ne]: null}}})
+
     //RELACIONES ENTRE EJEMPLOS
+    nuevoDIa.addUsers(lucas)
+
+    planificacionDias.map(async day=> {
+     await day.addUsers(lucas)
+     await day.addMeals(meals[0])
+     await day.addMeals(meals[1])
+     await day.addMeals(meals[2])
+ 
+    })
+    
+    await nuevoDIa.addMeals(meals[0])
+    await nuevoDIa.addMeals(meals[1])
+    await nuevoDIa.addMeals(meals[2])
+
+
+    
+    await meals[0].addRecipes(bifeconPure, { through: { portions: 1 } })
+    await meals[1].addRecipes(lecheTostadas, { through: { portions: 1 } })
+    await meals[2].addIngredients(leche, { through: { amount: 1, unit: "ml" } })
+    await meals[2].addIngredients(tostadas, { through: { amount: 2, unit: "unit" } })
+    //-------------------------------------------------------------------------------------------------
+    // PROBAR LOS NULL await meals[2].addIngredients(tostadas)
+//-------------------------------------------------------------------------------------------------
+    
+    await bifeconPure.addIngredients(papas, { through: { amount: 200, unit: "grs" } })
+    await bifeconPure.addIngredients(lecheEntera, { through: { amount: 200, unit: "ml" } })
+    await bifeconPure.addIngredients(papas, { bife: { amount: 300, unit: "grs" } })
+
+    await lecheTostadas.addIngredients(leche, { through: { amount: 1, unit: "ml" } })
+    await lecheTostadas.addIngredients(tostadas, { through: { amount: 2, unit: "unit" } })
+    
+
     
     
+    
+    // Relaciones extraordinarias: Usuario/Recipe Usuario/Ingredient
+    await lucas.addRecipes(bifeconPure)
+    await lucas.addRecipes(lecheTostadas)
+    await lucas.addIngredients([papas, lecheEntera, bife])
     
     res.status(200).json("Data mock cargada")
   }

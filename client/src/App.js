@@ -1,8 +1,12 @@
 import React from 'react';
 import Planification from './componentes/Planification/Planification';
 import Day from './componentes/Diary/Day';
-import Home from './componentes/Home';
+import LandingPage from './componentes/LandingPage/LandingPage';
+import SignIn from './componentes/LandingPage/SignIn';
+import SignUp from './componentes/LandingPage/SignUp';
 import { Route , Switch} from "react-router-dom";
+
+
 
 function App() {
   return (
@@ -13,30 +17,20 @@ function App() {
       component ={Planification}
     />
     <Route 
-      path= "/:dayName/:dayId"
+      path= "/day"
       component={Day}
     />
-    {/* <Route quiero que esta ruta tire un mensaje de error "No se encontro el dia que se esta pidiendo" 
-      path= "/day"
-      component={ErrorDay}
-    /> */}
-    
-    {/* 
+        <Route 
+      path="/signin"
+      component ={SignIn}
+    />
+      <Route 
+      path="/signup"
+      component ={SignUp}
+    />
     <Route 
-    exact path="/"
-      component ={Survey}
-    /> */}
-    {/* <Route 
-    exact path="/purchase"
-    component ={Purchase}
-    />   */}
-    {/* <Route 
-    exact path="/purchase"
-    component ={Purchase}
-    />   */}
-    <Route 
-    exact path="/"
-      component ={Home}
+      path="/"
+      component ={LandingPage}
     />
   </Switch>   
   </div>

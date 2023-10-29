@@ -26,8 +26,8 @@ module.exports = (sequelize) => {
      type: DataTypes.INTEGER
     },
     category: {
-      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos'),
-      defaultValue:'Permitidos'
+      type: DataTypes.ENUM ('Verduleria', 'Carniceria', 'Pescaderia', 'Panaderia', 'Almacen', 'Fiambreria', 'Limpieza'),
+      defaultValue:'Almacen'
     },
     active: {
       type: DataTypes.BOOLEAN,
