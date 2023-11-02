@@ -1,0 +1,83 @@
+/* .botonRecipePlanification {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+.buttonContainer {
+  display: flex; 
+  justify-content: space-between; 
+  padding: 0 10px;
+  width: 20%;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  border-radius: 10px; /* Esquinas redondeadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombreado */
+  width: 100%;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Clases de estilo para las categorías */
+.legumbreButton {
+  border: solid;
+  border-color: #006400; /* Verde oscuro */
+}
+
+.verduraButton {
+  border: solid;
+  border-color: #90ee90; /* Verde limón */
+}
+
+.carneButton {
+  border: solid;
+  border-color: #ff0000; /* Rojo */
+}
+
+.polloButton {
+  border: solid;
+  border-color: #ffa500; /* Naranja */
+}
+
+.pastaButton {
+  border: solid;
+  border-color: #ffffe0; /* Amarillo claro */
+}
+
+.pescadoButton {
+  border: solid;
+  border-color: #87ceeb; /* Celeste */
+}
+
+.arrozButton {
+  border: solid;
+  border-color: #808080; /* Gris */
+}
+
+.lacteoButton {
+  border: solid;
+  border-color: #d3d3d3; /* Blanco grisáceo */
+}
+
+.frutaButton {
+  border: solid;
+  border-color: #8a2be2; /* Azul violáceo */
+}
+
+.panificadoButton {
+  border: solid;
+  border-color: #8b4513; /* Marrón */
+}
+
+.permitidosButton {
+  border: solid;
+  border-color: #9400d3; /* Violeta */
+}
+
+.defaultButton {
+  border: solid;
+  border-color: #808080; /* Gris para botones sin categoría */
+}

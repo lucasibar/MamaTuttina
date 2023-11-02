@@ -8,9 +8,11 @@ const { changesAmounts } = require('./controllers/changesAmounts')
 
 const planificationDaysRoutes = Router();
 
+
 planificationDaysRoutes.get('/', async (req, res)=>{
-    const { userId }= req
-    try{res.status(200).json(await getPlanification(userId))}
+    const userId = req.headers["authorization"].split(" ")[1];
+
+    try{res.status(200).json(await getPlanification({userId}))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
 
