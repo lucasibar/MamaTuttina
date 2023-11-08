@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import InputFoodHandler from "./InputFoodHandler/InputFoodHandler"
 import RecipeHandler from "../../RecipeHandler/RecipeHandler"
 import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
 
 function MealHandler({mealName, recipes, ingredients }) {
   const [totalKcalMeal, setTotalKcalMeal] = useState(0)
@@ -53,7 +54,9 @@ return (
           marginLeft: '10px',
           }}
         >
+        <NavLink to="/addFood">
         AGREGAR ALIMENTO
+        </NavLink>
         </Button>
       </div>
     </>

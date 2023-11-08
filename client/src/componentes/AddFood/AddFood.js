@@ -18,6 +18,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import {getIngredients} from '../../redux/actions'
+import { useHistory } from 'react-router-dom';
 
 
 import './AddFood.css';
@@ -42,6 +43,15 @@ function AddFood() {
   const [value, setValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
 
+
+
+
+
+  const history = useHistory();
+
+  const handleGoBack = () => {
+    history.goBack(); // Esto llevará al usuario a la página anterior.
+  }
   return (
     <div>
       <AppBar sx={{ position: 'fixed' }}>
@@ -80,6 +90,22 @@ function AddFood() {
           <Typography variant="subtitle1">{"Cantidad"}</Typography>
         </button>
       </List>
+
+
+        <Button variant="text" style={{      
+          display: 'flex',
+          justifyContent: 'left',
+          alignItems: 'center',
+          }}
+          onClick={handleGoBack}
+        >
+          AGREGAR
+        </Button>
+
+
+
+
+
     </div>
   );
 }
