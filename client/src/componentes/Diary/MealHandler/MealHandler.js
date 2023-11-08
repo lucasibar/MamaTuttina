@@ -2,6 +2,7 @@ import './MealHandler.css'
 import * as React from 'react';
 import { useEffect, useState } from 'react'
 import InputFoodHandler from "./InputFoodHandler/InputFoodHandler"
+import RecipeHandler from "../../RecipeHandler/RecipeHandler"
 import Button from '@mui/material/Button';
 
 function MealHandler({mealName, recipes, ingredients }) {
@@ -23,7 +24,7 @@ function MealHandler({mealName, recipes, ingredients }) {
     if(kCalIngredients)setTotalKcalMeal(prevState=> prevState + kCalIngredients)
 
   },[recipes, ingredients])
-  
+// console.log(recipes, ingredients)
 return (
   <>
 
@@ -33,10 +34,7 @@ return (
 
       </div>
       {recipes.length>0 ? recipes.map((recipe, i)=>
-        <div key={i} className='meal'>
-          <p >{recipe.name}</p>
-          <p >{recipe.portion} portions</p>
-        </div>
+      <RecipeHandler key={i} recipe= {recipe}/>
       ):null}
 
       {ingredients.length>0 ? ingredients.map((ingredient, i)=>

@@ -13,6 +13,20 @@ const config = {
 };
 
 
+
+export const getIngredients = () => dispatch => {
+  return axios.get(`http://localhost:3001/ingredients`)
+  .then(data => {
+    // console.log(data.data)
+    dispatch({type: GET_INGREDIENTS, payload: data.data })
+  })
+}
+
+
+
+
+
+
 export const getPlanification = () => dispatch => {
   return axios.get(`http://localhost:3001/planificationDays`, config)
   .then(data => {
@@ -43,12 +57,6 @@ export const getDiaryDay = (date) => dispatch => {
   })  
   .catch(e=> {
     dispatch({type: GET_DIARY_DAY, payload: e})
-  })
-}
-export const getIngredients = () => dispatch => {
-  return axios.get(`http://localhost:3001/ingredients`)
-  .then(data => {
-    dispatch({type: GET_INGREDIENTS, payload: data.data })
   })
 }
 

@@ -1,0 +1,11 @@
+.meal{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    justify-content: space-between;
+  }
+  .button-text{
+    color:black
+  }
