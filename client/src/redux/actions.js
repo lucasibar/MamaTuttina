@@ -8,7 +8,7 @@ export const DAY_BEFORE= "DAY_BEFORE"
 
 const config = {
   headers: {
-    Authorization: `Bearer 978a711d-1453-4348-941e-2302bcbaf567`,
+    Authorization: `Bearer 4e86d8b4-b488-4dd2-a966-b3734f467dbc `,
   },
 };
 

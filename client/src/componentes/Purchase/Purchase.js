@@ -30,9 +30,9 @@ const Purchase = () => {
   }, {});
 
   return (
-    <Box>
+    <Box sx={{ width: "100%", bgcolor: 'background.paper' }}>
       <Tabs
-        sx={{ width: "100%", bgcolor: 'background.paper' }}
+
         value={value}
         onChange={handleChange}
         variant="scrollable"
@@ -40,7 +40,7 @@ const Purchase = () => {
         aria-label="scrollable auto tabs example"
       >
         {Object.keys(ingredientGroups).map((market, index) => (
-          <Tab key={index} label={market} sx={{ width: 100, bgcolor: 'background.paper' }} />
+          <Tab key={index} label={market} />
         ))}
       </Tabs>
       {Object.entries(ingredientGroups).map(([market, ingredients], index) => (
@@ -48,6 +48,7 @@ const Purchase = () => {
           {value === index && (
             <ul>
               {ingredients.map((ingredient, i) => (
+                
                 <li key={i}>{ingredient.name}</li>
               ))}
             </ul>

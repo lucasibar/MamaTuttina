@@ -35,7 +35,7 @@ export default function RecipeHandler({recipe}) {
     <React.Fragment>
         <button className='meal' onClick={handleClickOpen}>
           <Typography className="button-text" variant="subtitle1"> {recipe.name}</Typography>
-          <Typography className="button-text" variant="subtitle1"> portions {recipe.portions}</Typography>
+          <Typography className="button-text" variant="subtitle1"> portions {recipe.portion}</Typography>
         </button>
       <Dialog
         fullScreen
@@ -84,7 +84,7 @@ export default function RecipeHandler({recipe}) {
               <Typography variant="subtitle1"> {recipe.name}</Typography>
             </button>
             <button>
-              <Typography variant="subtitle1"> portions {recipe.portions}</Typography>
+              <Typography variant="subtitle1"> portions {recipe.portion}</Typography>
             </button>
         </div>
         </List>

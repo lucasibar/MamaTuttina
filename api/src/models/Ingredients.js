@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
     },
     market: {
       type: DataTypes.STRING,
+      defaultValue:'Supermercado'
     }
   },
   {

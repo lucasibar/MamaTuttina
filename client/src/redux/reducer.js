@@ -7,7 +7,7 @@ import {
   } from './actions'
 
   const initialState = {   
-    today:"2023-10-29",
+    today:"2023-11-09",
     objetive: 0,
     dayMealsDiary:[],
     
