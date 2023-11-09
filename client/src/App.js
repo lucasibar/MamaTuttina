@@ -5,6 +5,7 @@ import LandingPage from './componentes/LandingPage/LandingPage';
 import SignIn from './componentes/LandingPage/SignIn';
 import SignUp from './componentes/LandingPage/SignUp';
 import AddFood from './componentes/AddFood/AddFood';
+import Purchase from './componentes/Purchase/Purchase';
 import { Route , Switch} from "react-router-dom";
 
 
@@ -14,6 +15,10 @@ function App() {
   <div className="App">
   <Switch>
   <Route 
+      exact path="/purchase"
+      component ={Purchase}
+    />
+      <Route 
       exact path="/addFood"
       component ={AddFood}
     />

@@ -127,13 +127,13 @@ module.exports = dataloadRoutes;
 
 const ingredientes = [
   //VERDURAS Y HORTALIZAS    
-  {activo: false, name:"Aceitunas negras", kcal100gr: 349, fat:35},
-  {activo: false, name:"Aceitunas verdes", kcal100gr: 132},
-  {activo: false, name:"Acelgas", kcal100gr: 33},
-  {activo: false, name:"Ajos", kcal100gr: 169},
-  {activo: false, name:"Alcachofas", kcal100gr: 64},
-  {activo: false, name:"Apio", kcal100gr: 20},
-  {activo: false, name:"Berenjena", kcal100gr: 29},
+  {activo: false, name:"Aceitunas negras", kcal100gr: 349, fat:35, market:"Almacen"},
+  {activo: false, name:"Aceitunas verdes", kcal100gr: 132, market:"Carniceria"},
+  {activo: false, name:"Acelgas", kcal100gr: 33, market:"Verdularia"},
+  {activo: false, name:"Ajos", kcal100gr: 169, market:"Pescaderia"},
+  {activo: false, name:"Alcachofas", kcal100gr: 64, market:"Fiambreria"},
+  {activo: false, name:"Apio", kcal100gr: 20, market:"Panaderia"},
+  {activo: false, name:"Berenjena", kcal100gr: 29, market:"Deliveri"},
   {activo: false, name:"Berros", kcal100gr: 21},
   {activo: false, name:"Brócoli", kcal100gr: 31},
   {activo: false, name:"Calabacín", kcal100gr: 31},
