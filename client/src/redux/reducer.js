@@ -3,18 +3,18 @@ import {
   GET_DIARY_DAY,
   GET_INGREDIENTS,
   DAY_AFTER,
-  DAY_BEFORE
+  DAY_BEFORE,
+  CHANGE_PORTION
   } from './actions'
 
   const initialState = {   
     today:"2023-11-09",
     objetive: 0,
+
     dayMealsDiary:[],
-    
-    
-    
     planificationDays:[],
-    dayRecipes:[],
+
+
     ingredients:[]
   };
 
@@ -23,6 +23,53 @@ import {
 
   const rootReducer = (state = initialState, action) => {
     switch(action.type) {
+      
+      
+      case CHANGE_PORTION:
+        let {mealId, recipeId, portion}= action.payload
+        if(state.dayMealsDiary.find(item => item.id === mealId)){
+          const dayChanged = state.dayMealsDiary.map(meal=> {
+            if(meal.Recipes.find(meal => meal.id === mealId)){
+              const recipesChanged = meal.Recipes.map(recipe=> {
+                if(recipe.id=== recipeId){
+                  recipe.portion= portion
+                  return recipe
+                }else{
+                  return recipe
+                }
+            })
+            return recipesChanged
+            }
+            return meal
+          })
+        
+        
+        return {
+            ...state,
+            dayMealsDiary: dayChanged
+          }
+      }else{
+
+      return state
+      
+      
+      
+      
+      
+      
+      }
+
+
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
       case GET_PLANIFICATION:
         return {
           ...state,

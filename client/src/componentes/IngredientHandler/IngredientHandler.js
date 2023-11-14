@@ -34,12 +34,10 @@ export default function IngredientHandler({ingredient}) {
 
   return (
     <React.Fragment>
-        <button className='meal' onClick={handleClickOpen}>
-          <ListItem button  sx={{ position: 'relative'}}>
-            <ListItemText primary={ingredient.name} secondary={`${ingredient.amount} ${ingredient.unit}`} />
-          </ListItem>
-        </button>
-          <Divider />
+        <div className='meal' onClick={handleClickOpen}>
+          <p >{ingredient.name}</p>
+          <p >{ingredient.amount} {ingredient.unit}</p>
+        </div>
       <Dialog
         fullScreen
         open={open}
@@ -48,21 +46,22 @@ export default function IngredientHandler({ingredient}) {
       >
         <AppBar sx={{ position: 'fixed' }}>
           <Toolbar>
+
+            <Typography sx={{ ml: 1, flex: 40}} variant="h6">
+              {ingredient.name}
+            </Typography>
             <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
               aria-label="close"
-              sx={{ position: 'fixed' }}
+              sx={{ flex:5, justifyItems:'right' }}
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
-              {ingredient.name}
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            {/* <Button autoFocus color="inherit" onClick={handleClose}>
               save
-            </Button>
+            </Button> */}
           </Toolbar>
         </AppBar>
 

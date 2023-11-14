@@ -5,6 +5,7 @@ const diaryDateRoutes = require ('./Diary/diaryDateRoutes')
 const planificationDaysRoutes = require ('./Planification/planificationDaysRoutes')
 const recipesRoutes = require ('./Recipes/recipesRoutes')
 const ingredientsRoutes = require ('./Ingredients/ingredientsRoutes')
+const mealsRoutes = require ('./Meals/mealsRoutes')
 
 const {verifyToken} = require ('../middleware/verifyToken')
 
@@ -23,5 +24,5 @@ router.use('/planificationDays', planificationDaysRoutes)
 router.use('/recipes', recipesRoutes)
 router.use('/ingredients', ingredientsRoutes)
 
-
+router.use('/meals', mealsRoutes)
 module.exports = router;

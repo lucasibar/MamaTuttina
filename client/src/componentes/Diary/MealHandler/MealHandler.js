@@ -3,10 +3,11 @@ import * as React from 'react';
 import { useEffect, useState } from 'react'
 import InputFoodHandler from "./InputFoodHandler/InputFoodHandler"
 import RecipeHandler from "../../RecipeHandler/RecipeHandler"
+import IngredientHandler from "../../IngredientHandler/IngredientHandler"
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 
-function MealHandler({mealName, recipes, ingredients }) {
+function MealHandler({mealName, recipes, ingredients, mealId }) {
   const [totalKcalMeal, setTotalKcalMeal] = useState(0)
   useEffect(()=>{
     setTotalKcalMeal(0)
@@ -25,7 +26,7 @@ function MealHandler({mealName, recipes, ingredients }) {
     if(kCalIngredients)setTotalKcalMeal(prevState=> prevState + kCalIngredients)
 
   },[recipes, ingredients])
-// console.log(recipes, ingredients)
+
 return (
   <>
 
@@ -35,14 +36,11 @@ return (
 
       </div>
       {recipes.length>0 ? recipes.map((recipe, i)=>
-      <RecipeHandler key={i} recipe= {recipe}/>
+      <RecipeHandler key={i} title={mealName} mealId={mealId} recipe= {recipe}/>
       ):null}
 
       {ingredients.length>0 ? ingredients.map((ingredient, i)=>
-        <div key={i} className='meal'>
-          <p >{ingredient.name}</p>
-          <p >{ingredient.amount} {ingredient.unit}</p>
-        </div>
+        <IngredientHandler key={i} ingredient={ingredient}/>
       ):null}
 
 

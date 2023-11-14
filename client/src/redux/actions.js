@@ -4,13 +4,29 @@ export const GET_DIARY_DAY= "GET_DIARY_DAY"
 export const GET_INGREDIENTS= "GET_INGREDIENTS"
 export const DAY_AFTER= "DAY_AFTER"
 export const DAY_BEFORE= "DAY_BEFORE"
-
+export const CHANGE_PORTION= "CHANGE_PORTION"
 
 const config = {
   headers: {
     Authorization: `Bearer 4e86d8b4-b488-4dd2-a966-b3734f467dbc `,
   },
 };
+
+export const changePortionsRecipe = (portionsParams) => dispatch => {
+  return axios.put(`http://localhost:3001/meals`, portionsParams, config)
+  .then(() => {
+    dispatch({type: CHANGE_PORTION, payload: portionsParams })
+  })
+}
+
+
+
+
+
+
+
+
+
 
 
 

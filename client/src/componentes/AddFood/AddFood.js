@@ -56,12 +56,13 @@ function AddFood() {
     <div>
       <AppBar sx={{ position: 'fixed' }}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="close" sx={{ position: 'fixed' }}>
+        
+          <Typography sx={{ ml: 1, flex: 40}}  variant="h6">
+          Busqueda  
+          </Typography>
+          <IconButton edge="start" color="inherit" aria-label="close" sx={{ flex:5, justifyItems:'right' }}>
             <CloseIcon />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
-            AGREGAR INGREDIENTE/RECETA
-          </Typography>
         </Toolbar>
       </AppBar>
 

@@ -26,7 +26,7 @@ return (
       <DayPagination day={today}/>
       <Objetives dayMealsDiary={dayMealsDiary}/>
       {dayMealsDiary?.map((meal, i)=>
-      <MealHandler key={i} mealName={meal.mealName} recipes={meal.Recipes} ingredients={meal.Ingredients}/>
+      <MealHandler key={i} mealName={meal.mealName} mealId={meal.id} recipes={meal.Recipes} ingredients={meal.Ingredients} />
       )}
       {/* <Exercise/> */}
     </div>
