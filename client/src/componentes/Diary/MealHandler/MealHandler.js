@@ -9,6 +9,9 @@ import { NavLink } from 'react-router-dom';
 
 function MealHandler({mealName, recipes, ingredients, mealId }) {
   const [totalKcalMeal, setTotalKcalMeal] = useState(0)
+
+
+  
   useEffect(()=>{
     setTotalKcalMeal(0)
   },[recipes, ingredients])

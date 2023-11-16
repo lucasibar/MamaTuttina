@@ -27,46 +27,16 @@ import {
       
       case CHANGE_PORTION:
         let {mealId, recipeId, portion}= action.payload
-        if(state.dayMealsDiary.find(item => item.id === mealId)){
-          const dayChanged = state.dayMealsDiary.map(meal=> {
-            if(meal.Recipes.find(meal => meal.id === mealId)){
-              const recipesChanged = meal.Recipes.map(recipe=> {
-                if(recipe.id=== recipeId){
-                  recipe.portion= portion
-                  return recipe
-                }else{
-                  return recipe
-                }
-            })
-            return recipesChanged
-            }
-            return meal
-          })
-        
+        const dayChange = state.dayMealsDiary
+        const dayINDEXToChange= dayChange.findIndex( meal => meal.id === mealId )
+        const recipeINDEXToChange  = dayChange[dayINDEXToChange].Recipes.findIndex(recipe=> recipe.id===recipeId)
+
+        dayChange[dayINDEXToChange].Recipes[recipeINDEXToChange].portion = portion
         
         return {
             ...state,
-            dayMealsDiary: dayChanged
+            dayMealsDiary: dayChange
           }
-      }else{
-
-      return state
-      
-      
-      
-      
-      
-      
-      }
-
-
- 
-      
-      
-      
-      
-      
-      
       
       
       

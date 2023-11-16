@@ -1,4 +1,4 @@
-const { MealRecipe, Ingredients, Recipes} = require("../../../db");
+const { MealRecipes, Ingredients, Recipes} = require("../../../db");
 const {Op} = require('sequelize');
 
 const changesAmounts = async function (changesOfAmounts) {
@@ -12,13 +12,10 @@ const changesAmounts = async function (changesOfAmounts) {
 // }
 
 if(changesOfAmounts.recipeId){
-  console.log(changesOfAmounts.recipeId)
   
   let {mealId, recipeId, portion}= changesOfAmounts
 
-  try {
-    // Buscar el registro específico que quieres actualizar
-    const mealRecipe = await MealRecipe.findOne({
+    const mealRecipe = await MealRecipes.findOne({
       where: {
         MealId: mealId,
         RecipeId: recipeId,
@@ -35,18 +32,37 @@ if(changesOfAmounts.recipeId){
 
 
     return 'Registro actualizado con éxito'
-  } catch (error) {
-    return error;
-  }
+
+
+
+}else if(changesOfAmounts.ingredietId){
+    
+  let {mealId, ingredientId, amount, unit}= changesOfAmounts
+
+    const mealRecipe = await MealRecipes.findOne({
+      where: {
+        MealId: mealId,
+        RecipeId: ingredientId,
+      },
+    });
+
+    if (!mealRecipe) {
+      return 'Registro no encontrado';
+    }
+
+    await mealRecipe.update({
+      amount: amount,
+      unit: unit
+    });
+
+
+    return 'Registro actualizado con éxito'
+
 
 
 }
 
-// if(changesOfAmounts.ingredietId){
-  
-// }
-
-  return "Se cambiaron correctamente las porciones y cantidades";
+return new Error
 }
 module.exports = { changesAmounts };
 
