@@ -14,7 +14,10 @@ import Slide from '@mui/material/Slide';
 
 import PortionHandler from './PortionHandler/PortionHandler'
 import IngredientHandler from '../IngredientHandler/IngredientHandler'
+import RecipeNameHandler from './RecipeNameHandler/RecipeNameHandler'
+import CategoryHandler from './CategoryHandler/CategoryHandler'
 import ChangeMealHandler from './ChangeMealHandler/ChangeMealHandler'
+
 import './RecipeHandler.css'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -28,12 +31,13 @@ export default function RecipeHandler({recipe, title, mealId}) {
   const handleClickOpen = () => {setOpen(true)};
   const handleClose = () => {setOpen(false)};
 
+  
   return (
     <React.Fragment>
 
         <div className='meal' onClick={handleClickOpen}>
           <p >{recipe.name}</p>
-          <p >porciones {recipe.portion}</p>
+          <p >porciones {recipe.portions}</p>
         </div>
           <Divider variant="middle" />
       <Dialog
@@ -66,17 +70,11 @@ export default function RecipeHandler({recipe, title, mealId}) {
         
         
         
-        <PortionHandler portionBDD={recipe.portion} mealId={mealId} recipeId={recipe.id}/>
-        <ChangeMealHandler />
-        <div className='meal'>
-          <p >Categoria</p>
-          <p style={{ color: "blue" }} onClick={handleClickOpen} >{recipe.category}</p>
-        </div>
-        <div className='meal'>
-          <p >Nombre</p>
-          <p style={{ color: "blue" }} onClick={handleClickOpen} >{recipe.name}</p>
-        </div>
-
+        <PortionHandler portionBDD={recipe.portions} mealId={mealId} recipeId={recipe.id} returnToDay={handleClose}/>
+        <ChangeMealHandler returnToDay={handleClose} recipeID={recipe.id} mealId={mealId}/>
+        <RecipeNameHandler recipeName={recipe.name} mealId={mealId} recipeId={recipe.id} returnToDay={handleClose}/>
+        <CategoryHandler recipeCategory={recipe.category} mealId={mealId} recipeId={recipe.id} returnToDay={handleClose}/>
+       
         
         <Divider variant="middle" style={{ marginTop: "100px" }}/>
         <div className='mealtitle'>

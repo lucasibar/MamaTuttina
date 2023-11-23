@@ -8,16 +8,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {changePortionsRecipe} from '../../../redux/actions'
+import {changeNameFood} from '../../../redux/actions'
 
 
-export default function PortionHandler({returnToDay, portionBDD, mealId, recipeId}) {
+export default function RecipeNameHandler({mealId, recipeName, recipeId, returnToDay}) {
   const [open, setOpen] = useState(false);
-  const [portion, setPortion] = useState("");
+  const [name, setName] = useState("");
 
   
   useEffect(()=>{
-    setPortion(portionBDD)
+    setName(recipeName)
    },[])
 
 
@@ -25,7 +25,7 @@ export default function PortionHandler({returnToDay, portionBDD, mealId, recipeI
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    setPortion(e.target.value);
+    setName(e.target.value);
   };
 
   const handleClickOpen = () => {
@@ -40,25 +40,25 @@ export default function PortionHandler({returnToDay, portionBDD, mealId, recipeI
 
 
   const handleSave = () => {
-    dispatch(changePortionsRecipe({mealId, recipeId, portion}))
+    dispatch(changeNameFood({mealId, recipeId, newName: name}))
     handleClose()
   }
   return (
     <React.Fragment>
       <div className='meal' style={{ marginTop: "50px" }} >
-          <p >Porciones</p>
-          <p style={{ color: "blue" }} onClick={handleClickOpen} >{portionBDD}</p>
+          <p >Nombre</p>
+          <p style={{ color: "blue" }} onClick={handleClickOpen} >{name}</p>
         </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Porciones</DialogTitle>
+        <DialogTitle>Nombre</DialogTitle>
         <DialogContent>
           <TextField
-            value={portion}
+            value={name}
             onChange={handleOnChange}
             autoFocus
             margin="dense"
             id="name"
-            label="numero de porciones"
+            label="nombre de receta"
             type="email"
             fullWidth
             variant="standard"

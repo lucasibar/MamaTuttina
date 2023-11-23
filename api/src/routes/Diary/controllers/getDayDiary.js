@@ -50,32 +50,34 @@ const getDayDiary = async function ({userId, date}) {
   
   
   answer.Meals.map(meal=>{
-    delete meal.DayMeals
+  // ---------------------------------------------------------------------------------
+  //   delete meal.DayMeals
   
   
 
-    meal.Recipes.map(recipe=>{
-      recipe.portion = recipe.MealRecipes.portions
-      delete recipe.MealRecipes
+  //   meal.Recipes.map(recipe=>{
+  //     recipe.portion = recipe.MealRecipes.portions
+  //     delete recipe.MealRecipes
 
-      recipe.Ingredients.map(ingredient=>{
-        ingredient.amount = ingredient.RecipeIngredients.amount
-        ingredient.unit = ingredient.RecipeIngredients.unit
-        delete ingredient.RecipeIngredients
-        delete ingredient.active
-      })
+  //     recipe.Ingredients.map(ingredient=>{
+  //       ingredient.amount = ingredient.RecipeIngredients.amount
+  //       ingredient.unit = ingredient.RecipeIngredients.unit
+  //       delete ingredient.RecipeIngredients
+  //       delete ingredient.active
+  //     })
 
-    })
+  //   })
 
 
 
-    meal.Ingredients.map(ingredient=>{
-      ingredient.amount = ingredient.MealIngredients.amount
-      ingredient.unit = ingredient.MealIngredients.unit
-      delete ingredient.MealIngredients
-      delete ingredient.active
+  //   meal.Ingredients.map(ingredient=>{
+  //     ingredient.amount = ingredient.MealIngredients.amount
+  //     ingredient.unit = ingredient.MealIngredients.unit
+  //     delete ingredient.MealIngredients
+  //     delete ingredient.active
 
-    })
+  //   })
+  // ---------------------------------------------------------------------------------
 
   })
 

@@ -28,6 +28,12 @@ recipesRoutes.put('/', async (req, res)=>{
         res.status(200).json(await changesAmountsIngredients(changesOfAmounts))}
     catch(error){res.status(400).json({Error: error.message})} 
 })
+recipesRoutes.put('/changeName', async (req, res)=>{
+    try{
+        const changesOfAmounts = req.body
+        res.status(200).json(await getRecipes(changesOfAmounts))}
+    catch(error){res.status(400).json({Error: error.message})} 
+})
 
 recipesRoutes.delete('/deletRecipes', async (req, res)=>{
     try{

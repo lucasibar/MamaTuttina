@@ -14,7 +14,7 @@ function Day(props) {
   const [mealsDiary, setMealsDiary] = useState()
   const [dayMealsDiary, setDayMealsDiary] = useState([])
   const dayMealsDiaryReducer = useSelector(state=> state.dayMealsDiary)
-
+  
   let dispatch = useDispatch() 
   useEffect(()=>{
     dispatch(getDiaryDay(today))

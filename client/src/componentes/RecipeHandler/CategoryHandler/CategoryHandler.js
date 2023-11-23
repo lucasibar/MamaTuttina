@@ -15,7 +15,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import { changueFoodMeal} from '../../../redux/actions'
+import { changueCategoryRecipe} from '../../../redux/actions'
 
 
 function SimpleDialog(props) {
@@ -30,31 +30,18 @@ function SimpleDialog(props) {
   };
 
 
-  const [mealsIdName, setMealsIdName] = useState([])
-  const dayMealsDiary = useSelector(state=> state.dayMealsDiary)
+  const categories = ["None", 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos', 'Verdura']
 
-  useEffect(()=>{
-      const idName = dayMealsDiary.map(meal=> {
-      return {mealId:meal.id, mealName:meal.mealName}})
-      setMealsIdName(idName)
-  },[dayMealsDiary])
+
 
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Comidas</DialogTitle>
+      <DialogTitle>Categoria</DialogTitle>
       <List sx={{ pt: 0 }}>
-      {mealsIdName.map((meal, i)=>
-        <h1 key ={i} style={{backgroundColor: "blue"}} onClick={() => handleListItemClick(meal)}>{meal.mealName}</h1>
+      {categories.map((category, i)=>
+        <h1 key ={i} style={{backgroundColor: "blue"}} onClick={() => handleListItemClick(category)}>{category}</h1>
       )}
-        {/* {mealsNameId?.map((meal) => (
-          <ListItem disableGutters key={meal.id}>
-            <ListItemButton onClick={() => handleListItemClick(meal)}>
-              <ListItemText primary={meal.name} />
-            </ListItemButton>
-          </ListItem>
-        ))} */}
-
       </List>
     </Dialog>
   );
@@ -70,23 +57,23 @@ function SimpleDialog(props) {
 
 
 
-export default function ChangeMealHandler({returnToDay, recipeID, mealId}) {
+export default function ChangeMealHandler({recipeCategory, returnToDay, recipeId, mealId}) {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState({});
+  const [selectedValue, setSelectedValue] = React.useState("");
+
+  
       
       const handleClickOpen = () => {
         setOpen(true);
       };
       
     let dispatch = useDispatch()
+
     const handleClose = (value) => {
+
       setOpen(false);
       setSelectedValue(value);
-      dispatch(changueFoodMeal({
-                                recipeId: recipeID,
-                                mealId: mealId,
-                                chosenMeal: value.mealId   
-                                  }))
+      dispatch(changueCategoryRecipe({ mealId, recipeId, category: value}))
       
   };
 
@@ -94,8 +81,8 @@ export default function ChangeMealHandler({returnToDay, recipeID, mealId}) {
     <div>
 
       <div className='meal'>
-          <p >Comida</p>
-          <p style={{ color: "blue" }} onClick={handleClickOpen} >{"Almuerzo"}</p>
+          <p >Categoria</p>
+          <p style={{ color: "blue" }} onClick={handleClickOpen} >{recipeCategory}</p>
         </div>
       <SimpleDialog
         selectedValue={selectedValue}
