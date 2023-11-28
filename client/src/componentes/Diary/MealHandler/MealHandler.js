@@ -52,7 +52,7 @@ return (
           marginLeft: '10px',
           }}
         >
-        <NavLink to="/addFood">
+        <NavLink to="/">
         AGREGAR ALIMENTO
         </NavLink>
         </Button>

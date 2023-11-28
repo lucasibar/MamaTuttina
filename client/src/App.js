@@ -4,7 +4,7 @@ import Day from './componentes/Diary/Day';
 import LandingPage from './componentes/LandingPage/LandingPage';
 import SignIn from './componentes/LandingPage/SignIn';
 import SignUp from './componentes/LandingPage/SignUp';
-import AddFood from './componentes/AddFood/AddFood';
+import Home from './componentes/Home/Home';
 import Purchase from './componentes/Purchase/Purchase';
 import { Route , Switch} from "react-router-dom";
 
@@ -17,10 +17,6 @@ function App() {
   <Route 
       exact path="/purchase"
       component ={Purchase}
-    />
-      <Route 
-      exact path="/addFood"
-      component ={AddFood}
     />
         <Route 
       exact path="/planification"
@@ -38,8 +34,12 @@ function App() {
       path="/signup"
       component ={SignUp}
     />
+      <Route 
+      exact path="/"
+      component ={Home}
+    />
     <Route 
-      path="/"
+      path="/landingPage"
       component ={LandingPage}
     />
   </Switch>   

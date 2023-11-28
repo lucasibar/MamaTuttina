@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {changePortionsRecipe} from '../../../redux/actions'
 
 
-export default function PortionHandler({portionBDD, mealId, recipeId}) {
+export default function HandelAmounts({returnToDay, portionBDD, mealId, recipeId}) {
   const [open, setOpen] = useState(false);
   const [portion, setPortion] = useState("");
 
@@ -34,6 +34,7 @@ export default function PortionHandler({portionBDD, mealId, recipeId}) {
 
   const handleClose = () => {
     setOpen(false);
+    returnToDay()
   };
 
 

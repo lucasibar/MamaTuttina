@@ -31,7 +31,6 @@ export default function RecipeHandler({recipe, title, mealId}) {
   const handleClickOpen = () => {setOpen(true)};
   const handleClose = () => {setOpen(false)};
 
-  
   return (
     <React.Fragment>
 
