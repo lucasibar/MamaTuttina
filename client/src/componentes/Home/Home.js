@@ -10,6 +10,7 @@ import {getIngredients} from '../../redux/actions'
 import OptionsBar from "./OptionsBar/OptionsBar"
 import SearchBar from "./SearchBar/SearchBar"
 import ItemList from "./ItemList/ItemList"
+import Kcals from "./Kcals/Kcals"
 
 
 
@@ -17,7 +18,7 @@ function Home() {
   const ingredients = useSelector((state) => state.ingredients);
   const [options, setOptions] = useState([]);
   const[foodSelection, setFoodSelection] = useState([]);
-
+  
 
   let dispatch = useDispatch();
   useEffect(() => {
@@ -33,11 +34,12 @@ function Home() {
  
 
   const handelSelection = (foodName) => {
-    const found = ingredients.find((ingr) => ingr.name === foodName);
-    setFoodSelection([...foodSelection, found])
+    if(foodName){
+      const found = ingredients.find((ingr) => ingr.name === foodName);
+      setFoodSelection([...foodSelection, found])
+    }
   }
 
-console.log(foodSelection)
 
   return (
     <div>
@@ -50,7 +52,8 @@ console.log(foodSelection)
       </AppBar>
   <SearchBar options={options} handelSelection={handelSelection}/>
   <ItemList list={foodSelection}/>
-  <OptionsBar />
+  <Kcals list={foodSelection}/>
+  <OptionsBar list={foodSelection}/>
     </div>
   );
 }

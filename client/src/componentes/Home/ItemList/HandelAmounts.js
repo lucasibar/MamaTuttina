@@ -1,31 +1,33 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {changePortionsRecipe} from '../../../redux/actions'
+import Divider from '@mui/material/Divider';
+import './HandelAmounts.css'
 
 
-export default function HandelAmounts({returnToDay, portionBDD, mealId, recipeId}) {
+export default function HandelAmounts({ingredient}) {
   const [open, setOpen] = useState(false);
-  const [portion, setPortion] = useState("");
-
-  
+  const [ingredientItem, setIngredientItem] = useState("");
+  const [unit, setUnit] = useState(0);
+  const [amount, setAmount] = useState("gr");
   useEffect(()=>{
-    setPortion(portionBDD)
-   },[])
+    setIngredientItem(ingredient)
+   },[ingredient])
 
+ 
 
-  let dispatch = useDispatch() 
-
-  const handleOnChange = (e) => {
+  const handleOnChangeUnit = (e) => {
     e.preventDefault();
-    setPortion(e.target.value);
+    setUnit(e.target.value);
+  };
+  const handleOnChangeAmount = (e) => {
+    e.preventDefault();
+    setAmount(e.target.value);
   };
 
   const handleClickOpen = () => {
@@ -34,27 +36,39 @@ export default function HandelAmounts({returnToDay, portionBDD, mealId, recipeId
 
   const handleClose = () => {
     setOpen(false);
-    returnToDay()
   };
 
 
 
   const handleSave = () => {
-    dispatch(changePortionsRecipe({mealId, recipeId, portion}))
+
+    // dispatch(changePortionsRecipe({mealId, recipeId, portion}))
     handleClose()
   }
   return (
     <React.Fragment>
-      <div className='meal' style={{ marginTop: "50px" }} >
-          <p >Porciones</p>
-          <p style={{ color: "blue" }} onClick={handleClickOpen} >{portionBDD}</p>
+       <div className='meal' onClick={handleClickOpen}>
+          <p >{ingredientItem.name}</p>
+          <p >{amount} {unit}</p>
         </div>
+          <Divider variant="middle" />
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Porciones</DialogTitle>
+        <DialogTitle>{ingredientItem.name}</DialogTitle>
         <DialogContent>
-          <TextField
-            value={portion}
-            onChange={handleOnChange}
+        <TextField
+            value={unit}
+            onChange={handleOnChangeUnit}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="numero de porciones"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+                    <TextField
+            value={amount}
+            onChange={handleOnChangeAmount}
             autoFocus
             margin="dense"
             id="name"

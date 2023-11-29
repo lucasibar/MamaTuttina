@@ -2,7 +2,7 @@ import React from 'react';
 import './HandleMealRecipe.css';
 
 export default function HandleMealRecipe({ mealId, recipe }) {
-  const categories = ['None', 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos', 'Verdura'];
+  // const categories = ['None', 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos', 'Verdura'];
 
   // Clases de estilo basadas en la categoría de la receta
   const getCategoryStyle = (category) => {

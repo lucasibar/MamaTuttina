@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {getDiaryDay, getIngredients} from '../../redux/actions'
+import {getDiaryDay} from '../../redux/actions'
 import './Day.css'
 import DayPagination from './DayPagination/DayPagination';
 import Objetives from './Objetives/Objetives'
-import Exercise from './Exercise/Exercise'
+// import Exercise from './Exercise/Exercise'
 import MealHandler from './MealHandler/MealHandler'
 
 
-function Day(props) {
+function Day() {
   const today = useSelector(state=> state.today)
 
-  const [mealsDiary, setMealsDiary] = useState()
+  // const [mealsDiary, setMealsDiary] = useState()
   const [dayMealsDiary, setDayMealsDiary] = useState([])
   const dayMealsDiaryReducer = useSelector(state=> state.dayMealsDiary)
   
