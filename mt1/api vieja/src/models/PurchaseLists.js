@@ -1,19 +1,18 @@
 const { DataTypes } = require('sequelize');
 
+
 module.exports = (sequelize) => {
-  sequelize.define('Recipes', {
+  sequelize.define('PurchaseLists', {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      // allowNull: false
     },
     name: {
       type: DataTypes.STRING,
-    },
-    category:  {
-      type: DataTypes.ENUM ("None", 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos', 'Verdura'),
+      // allowNull: false,
     }
-  
   },
   {
     timestamps: false,

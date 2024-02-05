@@ -1,0 +1,279 @@
+const Ingredient = sequelize.define('Ingredient', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  calories: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  protein: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  carbohydrates: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  fats: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+});
+-------------------------------------------------
+const Recipe = sequelize.define('Recipe', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    totalCalories: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+  });
+  
+  Recipe.belongsTo(Ingredient);
+
+
+
+  ----------------------------------------------------
+  const Day = sequelize.define('Day', {
+    totalCalories: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+  });
+  
+  Day.belongsTo(Recipe, { as: 'lunch', foreignKey: 'lunchId' });
+  Day.belongsTo(Recipe, { as: 'dinner', foreignKey: 'dinnerId' });
+  Day.belongsTo(Recipe, { as: 'extra', foreignKey: 'extraId' });
+  ------------------------------------------------------------------------
+  // Crear un ingrediente
+const ingredient = await Ingredient.create({
+    name: 'Pollo',
+    calories: 100,
+    protein: 20,
+    carbohydrates: 0,
+    fats: 2,
+  });
+  
+  // Crear una receta con un ingrediente
+  const recipe = await Recipe.create({
+    name: 'Pollo a la parrilla',
+  });
+  
+  await recipe.setIngredient(ingredient);
+  
+  // Crear un día con tres recetas
+  const day = await Day.create();
+  
+  const lunch = await Recipe.create({
+    name: 'Ensalada de pollo',
+  });
+  
+  await lunch.setIngredient(ingredient);
+  
+  const dinner = await Recipe.create({
+    name: 'Sopa de pollo',
+  });
+  
+  await dinner.setIngredient(ingredient);
+  
+  const extra = await Recipe.create({
+    name: 'Pollo frito',
+  });
+  
+  await extra.setIngredient(ingredient);
+  
+  await day.setLunch(lunch);
+  await day.setDinner(dinner);
+  await day.setExtra(extra);
+  
+  // Calcular las calorías totales del día
+  const recipes = await day.getRecipes();
+  
+  const totalCalories = recipes.reduce((sum, recipe) =>
+  ---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//EJEMPLO 2
+  const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
+
+const Days = sequelize.define('days', {
+  day: Sequelize.STRING
+});
+
+const Recipes = sequelize.define('recipes', {
+  name: Sequelize.STRING,
+  calories: Sequelize.INTEGER
+});
+
+const Meals = sequelize.define('meals', {
+  type: Sequelize.ENUM('lunch', 'dinner', 'extra')
+});
+
+const Ingredients = sequelize.define('ingredients', {
+  name: Sequelize.STRING,
+  calories: Sequelize.INTEGER,
+  protein: Sequelize.INTEGER,
+  carbohydrates: Sequelize.INTEGER,
+  fats: Sequelize.INTEGER
+});
+-----------------------------------------------------------------------------
+Meals.belongsTo(Days);
+Days.hasMany(Meals);
+
+Recipes.belongsToMany(Ingredients, { through: 'recipe_ingredient' });
+Ingredients.belongsToMany(Recipes, { through: 'recipe_ingredient' });
+
+Meals.belongsTo(Recipes);
+Recipes.hasMany(Meals);
+
+Meals.belongsToMany(Ingredients, { through: 'meal_ingredient' });
+Ingredients.belongsToMany(Meals, { through: 'meal_ingredient' });
+----------------------------------------------------------------------------------
+Days.findOne({ where: { day: 'Lunes' }, include: Meals })
+  .then((day) => {
+    const totalCalories = day.meals.reduce((acc, meal) => {
+      return acc + meal.recipe.calories;
+    }, 0);
+    console.log(`El total de calorías del lunes es: ${totalCalories}`);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//RELACION ENTRE RECETA E INGREDIENTE Y QUE AL MISMO TUIEMPO SUME LAS KCAL EN UN GETTER VIRTUAL
+const Recipe = sequelize.define('recipe', {
+    name: DataTypes.STRING,
+    // otras propiedades de la tabla Recipe
+  }, {
+    getterMethods: {
+      totalCalories() {
+        return this.ingredients.reduce((total, ingredient) => {
+          return total + ingredient.kcal;
+        }, 0);
+      }
+    }
+  });
+  
+  const Ingredient = sequelize.define('ingredient', {
+    name: DataTypes.STRING,
+    kcal: DataTypes.INTEGER,
+    // otras propiedades de la tabla Ingredient
+  });
+  
+  const RecipeIngredient = sequelize.define('recipe_ingredient', {
+    // otras propiedades de la tabla RecipeIngredient
+  });
+  
+  Recipe.belongsToMany(Ingredient, { through: RecipeIngredient });
+  Ingredient.belongsToMany(Recipe, { through: RecipeIngredient });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //LO MISMO QUE ARRIBA PERO MEJOR HECHO
+  //TABLA INTERMEDIA SQL
+
+  RecipeIngredient
+---------------
+id (primary key)
+recipeId (foreign key to Recipe)
+ingredientId (foreign key to Ingredient)
+amount (the amount of the ingredient used in the recipe)
+--------------------------------------------------------------------------------
+const recipe = await Recipe.findByPk(recipeId, {
+  include: [{
+    model: Ingredient,
+    attributes: ['caloriesPer100g']
+    through: {
+      attributes: ['amount']
+    }
+  }]
+});
+
+const totalCalories = recipe.ingredients.reduce((sum, ingredient) => {
+  const caloriesPer100g = ingredient.caloriesPer100g;
+  const amount = ingredient.RecipeIngredient.amount;
+  return sum + (caloriesPer100g * amount / 100);
+}, 0);
+
+recipe.totalCalories = totalCalories;
+await recipe.save();
+----------------------------------------------------------------------------------------------
+const Recetas = sequelize.define('Recetas', {
+  nombre: DataTypes.STRING,
+  // ... otras columnas
+  kcal_totales: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return this.getIngredients().then(ingredients => {
+        return ingredients.reduce((sum, ingredient) => {
+          const caloriesPer100g = ingredient.calorias; // asumiendo que la columna de calorías en la tabla Ingredientes se llama "calorias"
+          const amount = ingredient.RecetaIngrediente.amount;
+          const calories = caloriesPer100g * amount / 100;
+          return sum + calories;
+        }, 0);
+      });
+    }
+  }
+});

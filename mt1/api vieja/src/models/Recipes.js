@@ -1,4 +1,6 @@
 const { DataTypes } = require('sequelize');
+// const {Days, Recipes, Ingredients } = require("../db");
+
 
 module.exports = (sequelize) => {
   sequelize.define('Recipes', {
@@ -11,8 +13,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     category:  {
-      type: DataTypes.ENUM ("None", 'Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos', 'Verdura'),
-    }
+      type: DataTypes.ENUM ('Legumbre', 'Carne', 'Pollo', 'Pasta', 'Pescado', 'Arroz', 'Lacteo', 'Fruta', 'Panificado', 'Permitidos')
+     }
   
   },
   {

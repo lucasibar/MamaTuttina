@@ -26,7 +26,6 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-
 const { 
   Users,
   UserDays,
@@ -57,15 +56,11 @@ Recipes.belongsToMany(Meals, {through: 'MealRecipes'});
 Meals.belongsToMany(Ingredients, {through: 'MealIngredients'});
 Ingredients.belongsToMany(Meals, {through: 'MealIngredients'}); 
 
-
 Users.belongsToMany(Ingredients, {through: 'PurchaseList'});
 Ingredients.belongsToMany(Users, {through: 'PurchaseList'});
 
 Recipes.belongsToMany(Ingredients, {through: 'RecipeIngredients'});
 Ingredients.belongsToMany(Recipes, {through: 'RecipeIngredients'});
-
-
-
 
 Users.belongsToMany(Ingredients, {through: 'PurchaseList'});
 Ingredients.belongsToMany(Users, {through: 'PurchaseList'});
@@ -73,5 +68,4 @@ Ingredients.belongsToMany(Users, {through: 'PurchaseList'});
 module.exports = {
   ...sequelize.models,
   conn: sequelize,
-
 };

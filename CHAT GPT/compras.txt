@@ -1,0 +1,60 @@
+
+Desayuno:
+Avena: 50g
+Plátanos: 150g
+Nueces: 30g
+Miel: 15g
+Leche desnatada: 200ml
+Tostadas integrales: 50g
+Aguacate: 100g
+Huevos: 2
+Almuerzo:
+Quinoa: 150g
+Pechugas de pollo: 200g
+Espinacas: 100g
+Tomates: 150g
+Aguacate: 100g
+Manzanas: 150g
+Arroz integral: 150g
+Filete de pavo: 150g
+Vegetales al vapor: 200g
+Pescado: 200g
+Brócoli: 150g
+Ensalada de garbanzos: 200g
+Atún enlatado: 100g
+Pepino: 100g
+Aderezo de aceite de oliva: 15ml
+Pasta integral: 100g
+Albóndigas de pavo: 150g
+Sopa de lentejas: 250ml (preparada)
+Verduras variadas (para la sopa): 100g
+Merienda:
+Yogur natural: 150g
+Arándanos: 50g
+Almendras: 20g
+Batido de proteínas: 1 porción
+Fresas: 100g
+Zanahorias baby: 100g
+Hummus: 50g
+Nueces: 20g
+Cena:
+Salmón: 200g
+Batatas: 150g
+Kiwi: 100g
+Naranjas: 150g
+Fresas: 100g
+Pescado: 200g
+Brócoli: 150g
+Quinoa: 150g
+Ensalada verde: 100g
+Aceite de oliva: 15ml
+Espárragos: 100g
+Frutas (kiwi, pera, uvas): 150g
+Mango: 100g
+Batatas asadas: 150g
+Ensalada de frutas (piña, mango, uvas): 150g
+Ensalada de frutas (kiwi, pera, uvas): 150g
+Queso cottage: 100g
+Pera: 150g
+Verduras salteadas: 150g
+Ensalada de frutas (piña, fresas, kiwi): 150g
